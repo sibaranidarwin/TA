@@ -11,5 +11,6 @@ class Wisatawan extends Model
 
     protected $table = 'wisatawan';
 
+
     protected $guarded = [];
 }

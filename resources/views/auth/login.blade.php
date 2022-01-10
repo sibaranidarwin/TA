@@ -3,59 +3,48 @@
     <title>Login</title>
 @endsection
 @section('content')
-    <div class="login-box">
-        <div class="login-logo">
-            {{-- <a href="../../index2.html"><b>Admin</b>LTE</a> --}}
-        </div>
-        <!-- /.login-logo -->
-        <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
-
-                <form action="{{ route('login') }}" method="post">
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+    <main class="login-container">
+        <div class="container">
+            <div class="row page-login d-flex align-items-center">
+                <div class="section-left col-12 col-md-6">
+                    <h1 class="mbb-4"> We explore the new <br /> life much better</h1>
+                    <img src="frontend/images/login-images.png" alt="" class="w-75 d-none d-sm-flex">
+                </div>
+                <div class="section-right col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img src="frontend/images/logo.png" alt="" class="w-50 mb-4">
                             </div>
+                            <form method="post" action="{{ route('login') }}">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" placeholder="Enter email">
+                                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                                        placeholder="Password">
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                                </div> <br>
+                                <button type="submit" class="btn btn-login btn-block font-weight-bold">Sign in</button>
+                                <a href="{{ route('register') }}"
+                                    class="btn btn-danger text-white font-weight-bold btn-block">Sign Up</a>
+                                <p class="text-center mt-4">
+                                    <a href="{{ route('password.request') }}"> Saya lupa password</a>
+                                </p>
+                            </form>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
-
-                <p class="mb-1">
-                    <a href="{{ route('password.request') }}">I forgot my password</a>
-                </p>
-                <p class="mb-0">
-                    <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-                </p>
+                </div>
             </div>
-            <!-- /.login-card-body -->
         </div>
-    </div>
-    <!-- /.login-box -->
+
+    </main>
 @endsection

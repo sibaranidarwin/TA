@@ -15,10 +15,8 @@ class CreateGalleriesTable extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
-            $table->integer('paket_id');
-            $table->string('title');
-            $table->string('gambar');
-            $table->text('deskripsi');
+            $table->integer('artikel_id');
+            $table->string('file_gambar');
             $table->timestamps();
         });
     }

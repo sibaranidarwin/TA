@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+
 
 class OrderController extends Controller
 {
@@ -13,7 +16,24 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $detail = DB::table('transaction_details')
+            ->leftJoin('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
+            ->leftJoin('products', 'transaction_details.product_id', '=', 'products.id')
+            ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
+            ->select(
+                'transaction_details.*',
+                'transactions.total_harga',
+                'transactions.status',
+                'transactions.start_date',
+                'users.name',
+                'products.nama_produk',
+                'products.total_kursi',
+                'products.tipe_rental',
+                'products.tipe_driver',
+                'products.jam_rental',
+            )
+            ->get();
+        return view('admin.pesanan.index', compact('detail'));
     }
 
     /**
@@ -68,7 +88,8 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+
     }
 
     /**
@@ -79,6 +100,5 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }

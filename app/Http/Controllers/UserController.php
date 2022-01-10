@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -13,7 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        // dd($users);
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -68,7 +73,40 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (empty($request->input('password'))) {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email',
+                // 'password' => 'required|confirmed',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+            }
+            $user = User::find($id);
+            $user->update([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required|confirmed',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+            }
+            $user = User::find($id);
+            $user->update([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
+
+            ]);
+        }
+        return back()->with('toast_success', 'User berhasil diupdate');
     }
 
     /**
@@ -79,6 +117,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return back()->with('toast_success', 'User berhasil dihapus');
     }
 }
