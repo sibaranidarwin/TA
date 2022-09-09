@@ -21,8 +21,8 @@
     <!-- https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp -->
     <div class="container">
         <nav class="row navbar navbar-expand-lg navbar-light bg-white">
-            <a class="navbar-brand" href="index.html">
-                <img src="frontend/images/logo.png" alt="" />
+            <a class="navbar-brand" href="/">
+                <img src="{{ asset('frontend/images/logo.png') }}" alt="" />
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
                 <span class="navbar-toggler-icon"></span>
@@ -66,7 +66,11 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                            @if (Auth::user()->role == 'admin')
+                                <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                            @else
+                                <a class="dropdown-item" href="{{ route('dashboard.pelanggan') }}">Dashboard</a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

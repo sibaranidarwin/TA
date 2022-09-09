@@ -19,6 +19,7 @@ class TransaksiController extends Controller
         $transaction = DB::table('transactions')
             ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
             ->select('transactions.*', 'users.name')
+            ->orderBy('id', 'DESC')
             ->get();
 
         return view('admin.pembayaran.index', compact('transaction'));
@@ -90,7 +91,7 @@ class TransaksiController extends Controller
             'start_date' => $request->input('start_date'),
         ]);
 
-        return redirect()->route('pesanan.index')->with('toast_success', 'Data berhasil diupdate');
+        return redirect()->route('transaksi.index')->with('toast_success', 'Data berhasil diupdate');
     }
 
     /**

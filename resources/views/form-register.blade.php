@@ -23,7 +23,7 @@
     <div class="container">
         <nav class="row navbar navbar-expand-lg navbar-light bg-white">
             <div class="navbar-nav ml-auto mr-auto mr-sm-auto mr-lg-0 mr-md-auto">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="/">
                     <img src="{{ asset('frontend/images/logo.png') }}" alt="" />
                 </a>
             </div>
@@ -63,8 +63,8 @@
                                     <label class="sr-only" for="haritanggal">
                                         Hari Tanggal</label>
                                     <div class="input-group mb-2 mr-sm-2">
-                                        <input type="date" name="tanggal" class="form-control datepicker"
-                                            id="haritanggal" placeholder="Hari, Tanggal" required />
+                                        <input type="date" name="tanggal" class="form-control datepicker" id="txtDate"
+                                            required />
                                     </div>
 
                                     <label class="sr-only" class="mr-2" for="durasi">Preference</label>
@@ -161,6 +161,7 @@
             </div>
         </div>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="{{ asset('frontend/libraries/gijgo/js/gijgo.min.js') }}"></script>
     <script src="{{ asset('frontend/libraries/retina/retina.js') }}"></script>
     <script src="{{ asset('frontend/libraries/jquery/jquery-3.4.1.min.js') }}"></script>
@@ -175,13 +176,28 @@
                 Xoffset: 15
             });
 
-            $('.datepicker').datepicker({
-                uiLibrary: 'bootstrap4',
-                icons: {
-                    rightIcon: '<img src="URL:to('
-                    frontend / images / ic_doe.png ')" alt="" />'
-                }
-            });
+            // $('.datepicker').datepicker({
+            //     uiLibrary: 'bootstrap4',
+            //     icons: {
+            //         rightIcon: '<img src="URL:to('
+            //         frontend / images / ic_doe.png ')" alt="" />'
+            //     }
+            // });
+        });
+        $(function() {
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var maxDate = year + '-' + month + '-' + day;
+            // alert(maxDate);
+            $('#txtDate').attr('min', maxDate);
         });
     </script>
 </body>

@@ -13,6 +13,6 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'total_harga',
-        'status', 'kode', 'start_date'
+        'status', 'kode', 'start_date', 'end_date'
     ];
 }

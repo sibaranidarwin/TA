@@ -25,13 +25,17 @@ class CheckoutController extends Controller
             ->select('products.id', 'products.harga')
             ->where('user_id', Auth::user()->id)
             ->get();
+        $start_date = $request->input('start_date');
+        $end_date = date('Y-m-d', strtotime($start_date . ' + 1 days'));
+        // dd($end_date);
 
         $transaction = Transaction::create([
             'user_id' => Auth::user()->id,
             'total_harga' => (int) $request->total_harga,
             'status' => 'PENDING',
             'kode' => $code,
-            'start_date' => $request->input('start_date')
+            'start_date' => $start_date,
+            // 'end_date' => $end_date
         ]);
 
 
@@ -43,12 +47,19 @@ class CheckoutController extends Controller
                 'product_id' => $item->id,
                 'price_id' => (int) $item->harga,
                 'kode_transaksi' => $trx,
+                'created_at' => $start_date,
+                'updated_at' => $end_date,
+            ]);
+            DB::table('products')->where('id', $item->id)->update([
+                'stock' => 0,
+                'created_at' => $start_date,
+                'updated_at' => $end_date,
             ]);
         }
 
         DB::table('carts')->where('user_id', Auth::user()->id)->delete();
 
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-bSc8R5EPgW-ZFsIgtVdRBupi';
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-r6RVfyj18TmTAyW310WJEoh1';
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = false;
         // Set sanitization on (default)
@@ -78,7 +89,7 @@ class CheckoutController extends Controller
 
             // Redirect to Snap Payment Page
             return redirect($paymentUrl);
-            return redirect()->route('success');
+            // return redirect()->route('success');
             // header('Location: ' . $paymentUrl);
         } catch (Exception $e) {
             echo $e->getMessage();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class OrderController extends Controller
@@ -32,8 +33,21 @@ class OrderController extends Controller
                 'products.tipe_driver',
                 'products.jam_rental',
             )
+            ->orderBy('id', 'DESC')
             ->get();
         return view('admin.pesanan.index', compact('detail'));
+    }
+
+    public function get_pesanan()
+    {
+        $transaction = DB::table('transactions')
+            ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
+            ->select('transactions.*', 'users.name')
+            ->where('users.id', Auth::user()->id)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('admin.pelanggan_pesanan.index', compact('transaction'));
     }
 
     /**

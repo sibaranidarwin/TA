@@ -23,7 +23,7 @@
     <div class="container">
         <nav class="row navbar navbar-expand-lg navbar-light bg-white">
             <div class="navbar-nav ml-auto mr-auto mr-sm-auto mr-lg-0 mr-md-auto">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="/">
                     <img src="{{ asset('frontend/images/logo.png') }}" alt="" />
                 </a>
             </div>
@@ -68,7 +68,7 @@
                             <div class="attendee">
                                 <table class="table table-responsive-sm">
                                     <tbody>
-                                        @foreach ($mobil as $item)
+                                        @forelse ($mobil as $item)
                                             <tr>
                                                 <td>
                                                     <img src="{{ Storage::url('public/products/' . $item->gambar) }}"
@@ -76,22 +76,31 @@
                                                 </td>
                                                 <td class="align-middle">
                                                     <h2>{{ $item->nama_produk }}</h2>
-                                                    <P>• {{ $item->total_kursi }} seat </P>
+                                                    <P> {{ $item->total_kursi }} seat </P>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <h2>IDR {{ number_format($item->harga, 2, ',', '.') }}</h2>
+                                                    <h2>IDR {{ number_format($item->harga, 2, ',', '.') }}
+                                                    </h2>
                                                     <form action="{{ route('detail-add', $item->id) }}"
                                                         method="post">
                                                         @csrf
                                                         <input type="hidden" name="tanggal"
                                                             value="{{ $tanggal }}">
-                                                        <button type="submit" class="btn btn-add-now mb-2 px-4">
+                                                       @if (!$item->stock == 1)
+                                                           <span>Sudah dibooking</span>
+                                                       @else
+                                                            <button type="submit" class="btn btn-add-now mb-2 px-4">
                                                             Pilih
                                                         </button>
+                                                       @endif
                                                     </form>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td class="text-center">Tidak Ada Data</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

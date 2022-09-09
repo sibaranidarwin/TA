@@ -63,7 +63,10 @@ header .btn-get-started {
 header .btn-get-started:hover {
   color: #fff;
 }
-
+nav {
+    background-color: #21f857;
+    color: white !important;
+}
 .section-stats {
   margin-top: -60px;
 }

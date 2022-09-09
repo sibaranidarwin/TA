@@ -16,11 +16,14 @@
 <body>
 
     <div class="container">
-        <nav class="row navbar navbar-expand-lg navbar-light bg-white">
+        <nav class="row navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('frontend/images/logo.png') }}" alt="">
+                {{-- <img src="{{ asset('frontend/images/logo.png') }}" alt=""> --}}
+                <h6>Website Pembelian</h6>
+                <h6>Tiket Wisata Desa Trinsing</h6>
             </a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navb">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -31,7 +34,7 @@
                         <a class="nav-link active" href="/">Home</a>
                     </li>
                     <li class="nav-item mx-md-2">
-                        <a class="nav-link" href="{{ route('paket.travel') }}">Paket Travel</a>
+                        <a class="nav-link" href="{{ route('paket.travel') }}">Tiket Wisata</a>
                     </li>
                     <li class="nav-item mx-md-2">
                         <a class="nav-link" href="#">Gallery</a>
@@ -58,13 +61,17 @@
                     <div class="dropdown show">
                         <img height="30px" src="{{ asset('admin/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
                             alt="User Image">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                            @if (Auth::user()->role == 'admin')
+                                <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                            @else
+                                <a class="dropdown-item" href="{{ route('dashboard.pelanggan') }}">Dashboard</a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -81,16 +88,7 @@
 
     <!-- text center header -->
     <header class="text-center">
-        <h1>
-            Woi Travel Jogja Group
-            <br />
-            As Easy One Click
-        </h1>
-        <p class="mt-3">
-            antar jemput bandara jogja, rental mobil,
-            <br />
-            tour jogja
-        </p>
+        <h1> Wisata Desa Trinsing</h1>
     </header>
 
     @yield('content')

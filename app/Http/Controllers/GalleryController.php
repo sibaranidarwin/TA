@@ -19,6 +19,7 @@ class GalleryController extends Controller
     {
         $gallery = DB::table('galleries')
             ->leftJoin('articles', 'galleries.artikel_id', '=', 'articles.id')
+            ->select('galleries.*', 'articles.judul')
             ->get();
         $artikel = DB::table('articles')->get();
         return view('admin.gallery.index', compact('gallery', 'artikel'));
@@ -81,7 +82,7 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        //
+        // 
     }
 
     /**
@@ -93,6 +94,7 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'artikel_id' => 'required',
             // 'file_gambar' => 'required',
@@ -102,17 +104,18 @@ class GalleryController extends Controller
         if ($validator->fails()) {
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
-        $gallery = Gallery::find($id);
 
-        if (empty($request->file('file_gambar'))) {
+        if (empty($request->hasFile('file_gambar'))) {
+            $gallery = Gallery::findOrFail($id);
             $gallery->update([
                 'artikel_id' => $request->input('artikel_id'),
                 'is_default' => $request->input('is_default'),
             ]);
         } else {
+            $gallery = Gallery::findOrFail($id);
             $image = $request->file('file_gambar');
             $image->storeAs('public/wisata', $image->hashName());
-            $image->update([
+            $gallery->update([
                 'artikel_id' => $request->input('artikel_id'),
                 'is_default' => $request->input('is_default'),
                 'file_gambar' => $image->hashName(),
@@ -130,6 +133,8 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $gallery = Gallery::find($id);
+        $gallery->delete();
+        return back()->with('toast_success', 'Data berhasil dihapus');
     }
 }

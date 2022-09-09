@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Home;
 
+use DateTime;
+use DateTimeZone;
 use App\Models\Category;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +18,11 @@ class RentalMobilController extends Controller
     public function get_mobil()
     {
         $kategori = Category::orderBy('nama_kategori', 'ASC')->get();
+        $date = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+        $end_date = $date->format('Y-m-d');
+        DB::table('products')->whereDate('updated_at', $end_date)->update([
+            'stock' => 1
+        ]);
         return view('form-register', compact('kategori'));
     }
 
@@ -25,15 +34,45 @@ class RentalMobilController extends Controller
         $id_kategori = $request->input('id_kategori');
         $tipe_rental = $request->input('tipe_rental');
         $tipe_driver = $request->input('tipe_driver');
+        // dd($set);
+        $date = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+        $end_date = $date->format('Y-m-d');
+        // dd($date);
+
         $mobil = DB::table('products')
             ->where('jam_rental', 'LIKE', '%' . $jam . '%')
-            ->orWhere('id_kategori', 'LIKE', '%' . $id_kategori . '%')
-            ->orWhere('tipe_rental', 'LIKE', '%' . $tipe_rental . '%')
-            ->orWhere('tipe_driver', 'LIKE', '%' . $tipe_driver . '%')
+            ->Where('id_kategori', 'LIKE', '%' . $id_kategori . '%')
+            ->Where('tipe_rental', 'LIKE', '%' . $tipe_rental . '%')
+            ->Where('tipe_driver', 'LIKE', '%' . $tipe_driver . '%')
+            // ->whereIn('end_date', $end_date)
             ->get();
+        $transaction = DB::table('transaction_details')
+            // ->where('product_id', )
+            ->where('created_at', '=', $end_date)
+            ->get();
+        // dd($transaction);
+        // $array =[];
+        // foreach ($transaction as $t)
+        // {
+        //     $array[] = DB::table('products')->where('id', $t->product_id)->get();
+        // }
+        // // dd($array);
+
+
+        // foreach ($transaction as $value) {
+        // }
         // dd($mobil);
 
-        return view('list-mobil', compact('mobil', 'jam', 'id_kategori', 'tipe_rental', 'tipe_driver', 'tanggal'));
+        return view('list-mobil', compact(
+            'mobil',
+            'jam',
+            'id_kategori',
+            'tipe_rental',
+            'tipe_driver',
+            'tanggal',
+            // 'transaction',
+            'end_date'
+        ));
     }
 
     public function add(Request $request, $id)

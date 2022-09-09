@@ -17,7 +17,7 @@
     <div class="container">
         <nav class="row navbar navbar-expand-lg navbar-light bg-white">
             <div class="navbar-nav ml-auto mr-auto mr-sm-auto mr-lg-0 mr-md-auto">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="/">
                     <img src="{{ asset('frontend/images/logo.png') }}" alt="" />
                 </a>
             </div>
@@ -183,8 +183,7 @@
                                     </p>
                                 </div>
                                 <div class="join-container">
-                                    <button type="submit" formtarget="_blank"
-                                        class="btn btn-block btn-join-now mt-3 py-2">
+                                    <button type="submit" class="btn btn-block btn-join-now mt-3 py-2">
                                         Lanjutkan Ke Pembayaran</button>
                                 </div>
                             </form>
@@ -276,7 +275,7 @@
                 },
                 success: function() {
                     // console.log("it Works");
-                    window.location.reload();
+                    window.location.assign("{{ route('paket.travel') }}");
                 }
             });
 

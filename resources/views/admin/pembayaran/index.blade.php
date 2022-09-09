@@ -106,7 +106,8 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('pesanan.update', $item->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('transaksi.update', $item->id) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <input type="hidden" value="{{ $item->user_id }}" name="user_id">

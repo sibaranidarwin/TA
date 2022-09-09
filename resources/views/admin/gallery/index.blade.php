@@ -143,4 +143,60 @@
             </div>
         </div>
     </div>
+
+    @foreach ($gallery as $item)
+        <div class="modal fade" id="edit-gallery{{ $item->id }}" role="dialog"
+            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Gallery</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('gallery.update', $item->id) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">Paket</label>
+                                <select name="artikel_id" class="form-control" id="">
+                                    @foreach ($artikel as $a)
+                                        <option @if ($item->artikel_id == $a->id) value="{{ $a->id }}" @else value="{{ $a->id }}" @endif>{{ $a->judul }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Gambar</label>
+                                <input type="file" class="form-control" name="file_gambar">
+                                <img src="{{ Storage::url('public/wisata/' . $item->file_gambar) }}" width="150px"
+                                    class="mt-3 rounded" alt="" srcset="">
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="1" name="is_default"
+                                        id="exampleRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        Default Gambar
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="0" name="is_default"
+                                        id="exampleRadios2" value="option2">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        Tidak
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection

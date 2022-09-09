@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Registration Page</title>
+    <title>Register</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -20,7 +20,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            {{-- <a href="../../index2.html"><b>Admin</b>LTE</a> --}}
+            <img src="{{ asset('frontend/images/logo.png') }}" alt="" srcset="">
         </div>
 
         <div class="card rounded-md">
@@ -61,9 +61,11 @@
                             </div>
                         </div>
                     </div>
+                    <label for="">Tanggal Lahir</label>
                     <div class="input-group mb-3">
                         <input type="date" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir">
                     </div>
+                    <label for="">Jenis Kelamin</label>
                     <div class="input-group mb-3">
                         <select name="jenis_kelamin" class="form-control">
                             <option value="L">Laki-Laki</option>

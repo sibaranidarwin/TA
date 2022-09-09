@@ -29,9 +29,9 @@ Route::get('details/{slug}', [HomeController::class, 'get_detail'])->name('blog.
 
 Route::get('/rental-mobil', [RentalMobilController::class, 'get_mobil'])->name('paket.travel');
 Route::get('/cari-mobil', [RentalMobilController::class, 'cari_mobil'])->name('cari.mobil')->middleware('auth');
-Route::post('/rental-mobil/{id}', [RentalMobilController::class, 'add'])->name('detail-add');
-Route::get('cart', [CartController::class, 'index'])->name('cart');
-Route::DELETE('cart/{id}', [CartController::class, 'cancel_booking'])->name('cart.delete');
+Route::post('/rental-mobil/{id}', [RentalMobilController::class, 'add'])->name('detail-add')->middleware('auth');
+Route::get('cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
+Route::DELETE('cart/{id}', [CartController::class, 'cancel_booking'])->name('cart.delete')->middleware('auth');
 
 // midtrans route
 Route::post('checkout', [CheckoutController::class, 'proccess'])->name('checkout');
@@ -57,4 +57,12 @@ Route::middleware(['admin', 'auth'])->group(function () {
 
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard-pelanggan', function () {
+        return view('admin.index');
+    })->name('dashboard.pelanggan');
+
+    Route::get('/pemesanan', [OrderController::class, 'get_pesanan'])->name('pelanggan.transaksi');
 });
