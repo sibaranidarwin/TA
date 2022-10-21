@@ -47,6 +47,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Kategori</th>
                                         <th>Judul</th>
                                         <th>Deskripsi</th>
                                         <th>Gambar</th>
@@ -57,11 +58,17 @@
                                     @foreach ($artikel as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->category->nama_kategori }}</td>
                                             <td>{{ $item->judul }}</td>
                                             <td>{{ Str::substr($item->deskripsi, 0, 35) }} ...</td>
                                             <td>
-                                                <img src="{{ Storage::url('public/blog/' . $item->gambar) }}"
-                                                    height="100px" class="rounded" alt="" srcset="">
+                                                @if ($item->gambar == '')
+                                                    <img src="smiley.gif" height="100px" class="rounded" alt=""
+                                                        srcset="">
+                                                @else
+                                                    <img src="{{ Storage::url('public/blog/' . $item->gambar) }}"
+                                                        height="100px" class="rounded" alt="" srcset="">
+                                                @endif
                                             </td>
                                             <td>
                                                 <form action="{{ route('article.destroy', $item->id) }}" method="post">
@@ -106,6 +113,15 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
+                            <label for="">Kategori Wisata</label>
+                            <select name="category_id" class="form-control">
+                                <option value="">--Pilih--</option>
+                                @foreach ($kategori as $k)
+                                    <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="">Judul</label>
                             <input type="text" class="form-control" name="judul">
                         </div>
@@ -141,10 +157,23 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('article.update', $item->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('article.update', $item->id) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">Kategori</label>
+                                <select name="category_id" class="form-control">
+                                    @foreach ($kategori as $k)
+                                        @if ($item->category_id == $k->id)
+                                            <option value="{{ $k->id }}" selected>{{ $k->nama_kategori }}</option>
+                                        @else
+                                            <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="">Judul</label>
                                 <input type="text" class="form-control" value="{{ $item->judul }}" name="judul">
@@ -153,12 +182,12 @@
                                 <label for="">Gambar</label>
                                 <input type="file" class="form-control" name="gambar">
                                 <img height="200px" class="mt-3 rounded-lg"
-                                    src="{{ Storage::url('public/blog/' . $item->gambar) }}" alt="" srcset="">
+                                    src="{{ Storage::url('public/blog/' . $item->gambar) }}" alt=""
+                                    srcset="">
                             </div>
                             <div class="form-group">
                                 <label for="">Deskripsi</label>
-                                <textarea name="deskripsi" class="form-control" id="" cols="30"
-                                    rows="5">{{ $item->deskripsi }}</textarea>
+                                <textarea name="deskripsi" class="form-control" id="" cols="30" rows="5">{{ $item->deskripsi }}</textarea>
                             </div>
                         </div>
                         <div class="modal-footer">

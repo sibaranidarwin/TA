@@ -44,7 +44,7 @@
                                         <th>Nama</th>
                                         <th>Harga</th>
                                         <th>Status</th>
-                                        <th>Tanggal Sewa</th>
+                                        <th>Tanggal Kunjungan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -67,14 +67,14 @@
                                                         class="btn btn-danger btn-sm rounded">{{ $item->status }}</button>
                                                 @endif
                                             </td>
-                                            <td>{{ $item->start_date }}</td>
+                                            <td>{{ $item->tgl_wisata }}</td>
                                             <td>
                                                 {{-- <form action="{{ route('gallery.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE') --}}
                                                 <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
-                                                    data-target="#edit-pesan{{ $item->id }}"><i
-                                                        class="fas fa-edit"></i> Edit</a>
+                                                    data-target="#edit-pesan{{ $item->id }}"><i class="fas fa-edit"></i>
+                                                    Edit</a>
                                                 {{-- <button type="submit" class="btn btn-danger btn-sm"><i
                                                             class="fa fa-trash"></i> Delete</button> --}}
                                                 {{-- </form> --}}
@@ -106,7 +106,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('transaksi.update', $item->id) }}" method="post"
+                    <form action="{{ route('transaction.update', $item->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -114,7 +114,8 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">ORDER ID</label>
-                                <input type="text" class="form-control" value="{{ $item->kode }}" name="kode" readonly>
+                                <input type="text" class="form-control" value="{{ $item->kode }}" name="kode"
+                                    readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">NAMA</label>
@@ -126,8 +127,8 @@
                                     name="total_harga" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="">Tanggal Sewa</label>
-                                <input type="date" class="form-control" value="{{ $item->start_date }}"
+                                <label for="">Tanggal Pesanan</label>
+                                <input type="date" class="form-control" value="{{ $item->tgl_wisata }}"
                                     name="start_date">
                             </div>
                             <div class="form-group">

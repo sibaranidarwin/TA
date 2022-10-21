@@ -17,13 +17,12 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('nama_produk');
             $table->integer('harga');
-            $table->integer('id_kategori');
-            $table->string('gambar');
-            $table->string('total_kursi');
-            $table->string('jam_rental');
-            $table->string('tipe_rental');
-            $table->string('tipe_driver');
+            $table->unsignedBigInteger('category_id');
+            $table->string('gambar')->nullable();
+            $table->text('link_maps')->nullable();
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

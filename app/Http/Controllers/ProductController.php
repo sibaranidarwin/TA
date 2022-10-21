@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -17,10 +18,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = DB::table('products')->get();
+        $product = Product::latest()->get();
         $category = Category::all();
 
-        return view('admin.produk_rental.index', compact('product', 'category'));
+        return view('admin.produk.index', compact('product', 'category'));
     }
 
     /**
@@ -41,33 +42,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             'nama_produk' => 'required',
             'harga' => 'required',
-            'gambar' => 'required',
-            'id_kategori' => 'required',
-            'total_kursi' => 'required',
-            'jam_rental' => 'required',
-            'tipe_rental' => 'required',
-            'tipe_driver' => 'required',
+            'file_gambar' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'link_maps' => 'required',
         ]);
 
         // dd($validator);
         if ($validator->fails()) {
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
-        $image = $request->file('gambar');
+        $image = $request->file('file_gambar');
         $image->storeAs('public/products', $image->hashName());
-        DB::table('products')->insert([
+        Product::create([
             'nama_produk' => $request->input('nama_produk'),
             'harga' => $request->input('harga'),
             'gambar' => $image->hashName(),
-            'id_kategori' => $request->input('id_kategori'),
-            'total_kursi' => $request->input('total_kursi'),
-            'jam_rental' => $request->input('jam_rental'),
-            'tipe_rental' => $request->input('tipe_rental'),
-            'tipe_driver' => $request->input('tipe_driver')
+            'category_id' => $request->input('category_id'),
+            'link_maps' => $request->input('link_maps'),
         ]);
 
         return redirect()->route('product.index')->with('toast_success', 'Data berhasil disimpan!');
@@ -106,40 +101,29 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_produk' => 'required',
             'harga' => 'required',
-            // 'gambar' => 'required',
-            'id_kategori' => 'required',
-            'total_kursi' => 'required',
-            'jam_rental' => 'required',
-            'tipe_rental' => 'required',
-            'tipe_driver' => 'required',
+            'category_id' => 'required',
+            'link_maps' => 'required',
         ]);
-
-        // dd($validator);
         if ($validator->fails()) {
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
-        if (!empty($request->file('gambar'))) {
-            $image = $request->file('gambar');
-            $image->storeAs('public/products', $image->hashName());
-            DB::table('products')->where('id', $id)->update([
+        $product = Product::findOrFail($id);
+        if (!empty($request->hasFile('file_gambar'))) {
+            $image = $request->file('file_gambar');
+            $image->storeAs('public/product', $image->hashName());
+            $product->update([
                 'nama_produk' => $request->input('nama_produk'),
                 'harga' => $request->input('harga'),
                 'gambar' => $image->hashName(),
-                'id_kategori' => $request->input('id_kategori'),
-                'total_kursi' => $request->input('total_kursi'),
-                'jam_rental' => $request->input('jam_rental'),
-                'tipe_rental' => $request->input('tipe_rental'),
-                'tipe_driver' => $request->input('tipe_driver')
+                'category_id' => $request->input('category_id'),
+                'link_maps' => $request->input('link_m aps'),
             ]);
         } else {
-            DB::table('products')->where('id', $id)->update([
+            $product->update([
                 'nama_produk' => $request->input('nama_produk'),
                 'harga' => $request->input('harga'),
-                'id_kategori' => $request->input('id_kategori'),
-                'total_kursi' => $request->input('total_kursi'),
-                'jam_rental' => $request->input('jam_rental'),
-                'tipe_rental' => $request->input('tipe_rental'),
-                'tipe_driver' => $request->input('tipe_driver')
+                'category_id' => $request->input('category_id'),
+                'link_maps' => $request->input('link_maps'),
             ]);
         }
 
@@ -154,7 +138,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('products')->where('id', $id)->delete();
+        $product = Product::find($id);
+
+        if (is_null($product)) {
+            return back()->with('toast_error', 'Data tidak ada');
+        }
+        $product->delete();
 
         return back()->with('toast_success', 'Data berhasil dihapus');
     }

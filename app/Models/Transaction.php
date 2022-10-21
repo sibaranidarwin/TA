@@ -10,9 +10,10 @@ class Transaction extends Model
     use HasFactory;
 
     protected $table = 'transactions';
+
     protected $fillable = [
         'user_id',
         'total_harga',
-        'status', 'kode', 'start_date', 'end_date'
+        'status', 'kode', 'tgl_wisata'
     ];
 }

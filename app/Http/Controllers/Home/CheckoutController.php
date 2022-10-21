@@ -2,70 +2,59 @@
 
 namespace App\Http\Controllers\Home;
 
+use Exception;
+use Midtrans\Snap;
+use App\Models\Cart;
+use Midtrans\Config;
+use App\Models\Product;
 use App\Models\Transaction;
+
 use Illuminate\Http\Request;
+use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
-use Exception;
-use Midtrans\Config;
-use Midtrans\Snap;
 
 class CheckoutController extends Controller
 {
     public function proccess(Request $request)
     {
-
-        //proses checkout
-        $code = "RENTAL-" . mt_rand(000, 999);
-        $carts = DB::table('carts')
+        $code = "Wisata-" . mt_rand(000, 999);
+        $carts = Cart::select('products.id', 'products.harga')
             ->leftJoin('products', 'carts.product_id', '=', 'products.id')
-            ->leftJoin('users', 'carts.user_id', '=', 'users.id')
-            ->select('products.id', 'products.harga')
             ->where('user_id', Auth::user()->id)
             ->get();
-        $start_date = $request->input('start_date');
-        $end_date = date('Y-m-d', strtotime($start_date . ' + 1 days'));
-        // dd($end_date);
-
+        $tgl_wisata = $request->tgl_wisata;
         $transaction = Transaction::create([
             'user_id' => Auth::user()->id,
             'total_harga' => (int) $request->total_harga,
             'status' => 'PENDING',
             'kode' => $code,
-            'start_date' => $start_date,
-            // 'end_date' => $end_date
+            'tgl_wisata' => $tgl_wisata,
         ]);
 
 
         foreach ($carts as  $item) {
             $trx = "TRS-" . mt_rand(000, 999);
 
-            DB::table('transaction_details')->insert([
+            TransactionDetail::create([
                 'transaction_id' => $transaction->id,
                 'product_id' => $item->id,
-                'price_id' => (int) $item->harga,
+                'harga' => (int) $item->harga,
                 'kode_transaksi' => $trx,
-                'created_at' => $start_date,
-                'updated_at' => $end_date,
-            ]);
-            DB::table('products')->where('id', $item->id)->update([
-                'stock' => 0,
-                'created_at' => $start_date,
-                'updated_at' => $end_date,
+                'tgl_wisata' => $tgl_wisata,
             ]);
         }
 
-        DB::table('carts')->where('user_id', Auth::user()->id)->delete();
+        Cart::where('user_id', Auth::user()->id)->delete();
 
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-r6RVfyj18TmTAyW310WJEoh1';
+        \Midtrans\Config::$serverKey = 'Mid-server-Wq637A8W-SPMLSpXexz2Vf_o';
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
         // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$isSanitized = env('MIDTRANS_IS_SANITIZED');
         // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
+        \Midtrans\Config::$is3ds = env('MIDTRANS_ID_3DS');
 
         // buat array midtrans
         $midtrans = [
@@ -83,19 +72,15 @@ class CheckoutController extends Controller
             'vtweb' => []
         ];
         try {
-            // Get Snap Payment Page URL
-            // $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+
             $paymentUrl = \Midtrans\Snap::createTransaction($midtrans)->redirect_url;
 
             // Redirect to Snap Payment Page
             return redirect($paymentUrl);
-            // return redirect()->route('success');
-            // header('Location: ' . $paymentUrl);
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
-
     public function callback()
     {
         $notification = new \Midtrans\Notification();

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -17,9 +19,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $artikel = DB::table('articles')->get();
+        $artikel = Article::with('category')->latest()->get();
+        $kategori = Category::latest()->get();
 
-        return view('admin.article.index', compact('artikel'));
+        return view('admin.article.index', compact('artikel', 'kategori'));
     }
 
     /**
@@ -42,24 +45,34 @@ class ArticleController extends Controller
     {
         // dd($request->all());
         $validator = Validator::make($request->all(), [
+            'category_id' => 'required|exists:categories,id',
             'judul' => 'required',
             'deskripsi' => 'required',
-            'gambar' => 'required|max:2048'
+            'gambar' => 'max:2048|mimes:png,jpg,jpeg'
         ]);
 
         if ($validator->fails()) {
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
-        $image = $request->file('gambar');
-        $image->storeAs('public/blog', $image->hashName());
-
-        DB::table('articles')->insert([
-            'judul' => $request->input('judul'),
-            'deskripsi' => $request->input('deskripsi'),
-            'slug' => Str::slug($request->input('judul'), '-'),
-            'gambar' => $image->hashName(),
-        ]);
-
+        // dd($request->file('gambar'));
+        if (!empty($request->file('gambar'))) {
+            $image = $request->file('gambar');
+            $image->storeAs('public/blog', $image->hashName());
+            Article::create([
+                'category_id' => $request->input('category_id'),
+                'judul' => $request->input('judul'),
+                'deskripsi' => $request->input('deskripsi'),
+                'slug' => Str::slug($request->input('judul'), '-'),
+                'gambar' =>  $image->hashName(),
+            ]);
+        } else {
+            Article::create([
+                'category_id' => $request->input('category_id'),
+                'judul' => $request->input('judul'),
+                'deskripsi' => $request->input('deskripsi'),
+                'slug' => Str::slug($request->input('judul'), '-'),
+            ]);
+        }
         return redirect()->route('article.index')->with('toast_success', 'Data berhasil disimpan!');
     }
 
@@ -97,29 +110,32 @@ class ArticleController extends Controller
         $validator = Validator::make($request->all(), [
             'judul' => 'required',
             'deskripsi' => 'required',
-            // 'gambar' => 'required|mimes:png,jpg,jpeg'
+            'category_id' => 'required',
         ]);
 
         if ($validator->fails()) {
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
-        if (empty($request->file('gambar'))) {
-            DB::table('articles')->where('id', $id)->update([
-                'judul' => $request->input('judul'),
-                'deskripsi' => $request->input('deskripsi'),
-                'slug' => Str::slug($request->input('judul'), '-'),
-            ]);
-        } else {
+        $artikel = Article::findOrFail($id);
+        if (!empty($request->file('gambar'))) {
             $image = $request->file('gambar');
             $image->storeAs('public/blog', $image->hashName());
-
-            DB::table('articles')->where('id', $id)->update([
+            $artikel->update([
+                'category_id' => $request->input('category_id'),
                 'judul' => $request->input('judul'),
                 'deskripsi' => $request->input('deskripsi'),
                 'slug' => Str::slug($request->input('judul'), '-'),
                 'gambar' => $image->hashName(),
             ]);
+        } else {
+            $artikel->update([
+                'category_id' => $request->input('category_id'),
+                'judul' => $request->input('judul'),
+                'deskripsi' => $request->input('deskripsi'),
+                'slug' => Str::slug($request->input('judul'), '-')
+            ]);
         }
+
         return redirect()->route('article.index')->with('toast_success', 'Data berhasil diupdate!');
     }
 
@@ -131,7 +147,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('articles')->where('id', $id)->delete();
+        Article::find($id)->delete();
         return back()->with('toast_success', 'Data berhasil dihapus');
     }
 }

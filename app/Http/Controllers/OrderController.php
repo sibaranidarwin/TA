@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\TransactionDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -17,31 +19,23 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $detail = DB::table('transaction_details')
-            ->leftJoin('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
+        $detail = TransactionDetail::leftJoin('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
             ->leftJoin('products', 'transaction_details.product_id', '=', 'products.id')
             ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
             ->select(
                 'transaction_details.*',
                 'transactions.total_harga',
                 'transactions.status',
-                'transactions.start_date',
                 'users.name',
                 'products.nama_produk',
-                'products.total_kursi',
-                'products.tipe_rental',
-                'products.tipe_driver',
-                'products.jam_rental',
             )
-            ->orderBy('id', 'DESC')
             ->get();
         return view('admin.pesanan.index', compact('detail'));
     }
 
     public function get_pesanan()
     {
-        $transaction = DB::table('transactions')
-            ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
+        $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')
             ->select('transactions.*', 'users.name')
             ->where('users.id', Auth::user()->id)
             ->orderBy('id', 'DESC')
@@ -49,7 +43,6 @@ class OrderController extends Controller
 
         return view('admin.pelanggan_pesanan.index', compact('transaction'));
     }
-
     /**
      * Show the form for creating a new resource.
      *

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class TransaksiController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaction = DB::table('transactions')
-            ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
+        $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')
             ->select('transactions.*', 'users.name')
             ->orderBy('id', 'DESC')
             ->get();
@@ -83,7 +82,8 @@ class TransaksiController extends Controller
         if ($validator->fails()) {
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
-        DB::table('transactions')->where('id', $id)->update([
+        $transaction = Transaction::findOrFail($id);
+        $transaction->update([
             'kode' => $request->input('kode'),
             'user_id' => $request->input('user_id'),
             'total_harga' => $request->input('total_harga'),
@@ -91,7 +91,7 @@ class TransaksiController extends Controller
             'start_date' => $request->input('start_date'),
         ]);
 
-        return redirect()->route('transaksi.index')->with('toast_success', 'Data berhasil diupdate');
+        return redirect()->route('transaction.index')->with('toast_success', 'Data berhasil diupdate');
     }
 
     /**

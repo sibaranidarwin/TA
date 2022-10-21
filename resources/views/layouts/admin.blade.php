@@ -19,7 +19,7 @@
 
         @include('includes.footer')
     </div>
-    
+
     @include('sweetalert::alert')
 
     @include('includes.script')

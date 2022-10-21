@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Home;
 
 use DateTime;
 use DateTimeZone;
+use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -39,17 +42,12 @@ class RentalMobilController extends Controller
         $end_date = $date->format('Y-m-d');
         // dd($date);
 
-        $mobil = DB::table('products')
-            ->where('jam_rental', 'LIKE', '%' . $jam . '%')
+        $mobil = Product::where('jam_rental', 'LIKE', '%' . $jam . '%')
             ->Where('id_kategori', 'LIKE', '%' . $id_kategori . '%')
             ->Where('tipe_rental', 'LIKE', '%' . $tipe_rental . '%')
             ->Where('tipe_driver', 'LIKE', '%' . $tipe_driver . '%')
-            // ->whereIn('end_date', $end_date)
             ->get();
-        $transaction = DB::table('transaction_details')
-            // ->where('product_id', )
-            ->where('created_at', '=', $end_date)
-            ->get();
+        $transaction = TransactionDetail::where('created_at', '=', $end_date)->get();
         // dd($transaction);
         // $array =[];
         // foreach ($transaction as $t)
@@ -84,7 +82,7 @@ class RentalMobilController extends Controller
             'start_date' => $request->tanggal,
         ];
 
-        DB::table('carts')->insert($data);
+        Cart::create($data);
 
         return redirect()->route('cart');
     }

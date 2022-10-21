@@ -42,8 +42,9 @@
                                         <th>#</th>
                                         <th>Kode Transaksi</th>
                                         <th>Nama Pelanggan</th>
+                                        <th>Wisata</th>
                                         <th>Harga</th>
-                                        <th>Sewa Jam</th>
+                                        <th>Tanggal Pesan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -54,7 +55,8 @@
                                             <td>{{ $item->kode_transaksi }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->nama_produk }}</td>
-                                            <td>{{ $item->jam_rental }} Jam</td>
+                                            <td>Rp. {{ $item->harga }}</td>
+                                            <td>{{ TanggalID($item->tgl_wisata) }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
                                                     data-target="#edit-pesan{{ $item->id }}"> <i
@@ -99,24 +101,9 @@
                                 <td>{{ $item->name }}</td>
                             </tr>
                             <tr>
-                                <td>Mobil</td>
+                                <td>Tujuan Wisata</td>
                                 <td>:</td>
                                 <td>{{ $item->nama_produk }}</td>
-                            </tr>
-                            <tr>
-                                <td>Kapasitas Kursi</td>
-                                <td>:</td>
-                                <td>{{ $item->total_kursi }} Kursi</td>
-                            </tr>
-                            <tr>
-                                <td>Jenis Mobil </td>
-                                <td>:</td>
-                                <td>{{ $item->tipe_rental }}</td>
-                            </tr>
-                            <tr>
-                                <td>Jenis Driver </td>
-                                <td>:</td>
-                                <td>{{ $item->tipe_driver }}</td>
                             </tr>
                             <tr>
                                 <td>TOTAL HARGA </td>
@@ -124,9 +111,9 @@
                                 <td>Rp.{{ $item->total_harga }}</td>
                             </tr>
                             <tr>
-                                <td>Tanggal Sewa </td>
+                                <td>Tanggal Kunjungan </td>
                                 <td>:</td>
-                                <td>{{ $item->start_date }}</td>
+                                <td>{{ $item->tgl_wisata }}</td>
                             </tr>
                         </table>
 

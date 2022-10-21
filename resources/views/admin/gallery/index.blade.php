@@ -57,12 +57,12 @@
                                     @foreach ($gallery as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->judul }}</td>
+                                            <td>{{ $item->article->judul }}</td>
                                             <td>
                                                 <img src="{{ Storage::url('public/wisata/' . $item->file_gambar) }}"
                                                     height="100px" class="rounded" alt="" srcset="">
                                             </td>
-                                            <td>{{ $item->is_default == 1 ? 'YA' : 'Tidak' }}</td>
+                                            <td>{{ $item->is_active == 1 ? 'YA' : 'Tidak' }}</td>
                                             <td>
                                                 <form action="{{ route('gallery.destroy', $item->id) }}" method="post">
                                                     @csrf
@@ -93,8 +93,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalLong" role="dialog" aria-labelledby="exampleModalLongTitle"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModalLong" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -107,8 +106,9 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="">Paket</label>
-                            <select name="artikel_id" class="form-control" id="">
+                            <label for="">Blog Wisata</label>
+                            <select name="article_id" class="form-control" id="">
+                                <option value="">--Pilih--</option>
                                 @foreach ($artikel as $item)
                                     <option value="{{ $item->id }}">{{ $item->judul }}</option>
                                 @endforeach
@@ -120,15 +120,15 @@
                         </div>
                         <div class="form-group">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="1" name="is_default" id="exampleRadios1"
-                                    value="option1" checked>
+                                <input class="form-check-input" type="radio" value="1" name="is_default"
+                                    id="exampleRadios1" value="option1" checked>
                                 <label class="form-check-label" for="exampleRadios1">
                                     Default Gambar
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="0" name="is_default" id="exampleRadios2"
-                                    value="option2">
+                                <input class="form-check-input" type="radio" value="0" name="is_default"
+                                    id="exampleRadios2" value="option2">
                                 <label class="form-check-label" for="exampleRadios2">
                                     Tidak
                                 </label>
@@ -145,8 +145,8 @@
     </div>
 
     @foreach ($gallery as $item)
-        <div class="modal fade" id="edit-gallery{{ $item->id }}" role="dialog"
-            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal fade" id="edit-gallery{{ $item->id }}" role="dialog" aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -155,15 +155,18 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('gallery.update', $item->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('gallery.update', $item->id) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">Paket</label>
-                                <select name="artikel_id" class="form-control" id="">
+                                <select name="article_id" class="form-control" id="">
                                     @foreach ($artikel as $a)
-                                        <option @if ($item->artikel_id == $a->id) value="{{ $a->id }}" @else value="{{ $a->id }}" @endif>{{ $a->judul }}</option>
+                                        <option
+                                            @if ($item->artikel_id == $a->id) value="{{ $a->id }}" @else value="{{ $a->id }}" @endif>
+                                            {{ $a->judul }}</option>
                                     @endforeach
                                 </select>
                             </div>

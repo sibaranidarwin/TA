@@ -40,7 +40,7 @@
                                         <th>Nama</th>
                                         <th>Harga</th>
                                         <th>Status</th>
-                                        <th>Tanggal Sewa</th>
+                                        <th>Tanggal Wisata</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,7 +62,7 @@
                                                         class="btn btn-danger btn-sm rounded">{{ $item->status }}</button>
                                                 @endif
                                             </td>
-                                            <td>{{ $item->start_date }}</td>
+                                            <td>{{ $item->tgl_wisata }}</td>
 
                                         </tr>
                                     @endforeach

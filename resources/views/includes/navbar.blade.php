@@ -13,7 +13,7 @@
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                {{ Auth::user()->name }}
+                {{-- {{ Auth::user()->name }} --}}
                 <img height="30px" src="{{ asset('admin/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
                     alt="User Image">
             </a>

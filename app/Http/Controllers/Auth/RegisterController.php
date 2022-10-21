@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'tgl_lahir' => ['required'],
             'alamat' => ['required'],
             'jenis_kelamin' => ['required', 'string'],
+            'role' => ['required', 'string'],
         ]);
     }
 
@@ -72,7 +73,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'pelanggan',
+            'role' => $data['role'],
             'tgl_lahir' => $data['tgl_lahir'],
             'alamat' => $data['alamat'],
             'jenis_kelamin' => $data['jenis_kelamin'],

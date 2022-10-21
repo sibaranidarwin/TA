@@ -33,14 +33,14 @@
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>{{ DB::table('transactions')->count() }}</h3>
+                                    <h3>{{ App\Models\Transaction::count() }}</h3>
 
                                     <p>Jumlah Pesanan</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="{{ route('pesanan.index') }}" class="small-box-footer">More info <i
+                                <a href="{{ route('order.index') }}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -49,9 +49,9 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>{{ DB::table('articles')->count() }}</h3>
+                                    <h3>{{ App\Models\Article::count() }}</h3>
 
-                                    <p>Artikel</p>
+                                    <p>Jumlah Artikel</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
@@ -81,9 +81,9 @@
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3>{{ DB::table('products')->count() }}</h3>
+                                    <h3>{{ App\Models\Product::count() }}</h3>
 
-                                    <p>Jumlah Produk Rental</p>
+                                    <p>Jumlah Paket Wisata</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
@@ -113,9 +113,7 @@
                     </div>
                 </div>
             </section>
-
         @endif
         <!-- /.content -->
     </div>
-
 @endsection

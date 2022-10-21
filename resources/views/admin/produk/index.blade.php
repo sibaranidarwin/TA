@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Paket Travel</h1>
+                        <h1>Paket Wisata</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Paket Travel</li>
+                            <li class="breadcrumb-item active">Paket Wisata</li>
                         </ol>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 <!-- SELECT2 EXAMPLE -->
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">Data Paket Travel</h3>
+                        <h3 class="card-title">Data Paket Wisata</h3>
                         <div class="float-right">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
@@ -47,10 +47,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Mobil</th>
+                                        <th>Kategori</th>
+                                        <th>Wisata</th>
                                         <th>Harga</th>
-                                        <th>Gambar</th>
-                                        <th>Kapasitas</th>
+                                        {{-- <th>Gambar</th> --}}
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -58,17 +58,20 @@
                                     @foreach ($product as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->category->nama_kategori }}</td>
                                             <td>{{ $item->nama_produk }}</td>
                                             <td>Rp. {{ number_format($item->harga, 2, ',', '.') }}</td>
-                                            <td>
-                                                <img src="{{ Storage::url('public/products/' . $item->gambar) }}"
+                                            {{-- <td>
+                                                <img src="{{ Storage::url('public/product/' . $item->gambar) }}"
                                                     height="100px" class="rounded" alt="" srcset="">
-                                            </td>
-                                            <td>{{ $item->total_kursi }}</td>
+                                            </td> --}}
                                             <td>
                                                 <form action="{{ route('product.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
+                                                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
+                                                        data-target="#show-product{{ $item->id }}"><i class="fa fa-eye"
+                                                            aria-hidden="true"></i> Show</a>
                                                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
                                                         data-target="#edit-product{{ $item->id }}"><i
                                                             class="fas fa-edit"></i> Edit</a>
@@ -108,15 +111,15 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="">Merek Mobil</label>
-                            <select name="id_kategori" class="form-control">
+                            <label for="">Kategori Wisata</label>
+                            <select name="category_id" class="form-control">
                                 @foreach ($category as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Nama Mobil</label>
+                            <label for="">Nama Wisata</label>
                             <input type="text" class="form-control" name="nama_produk">
                         </div>
                         <div class="form-group">
@@ -125,32 +128,11 @@
                         </div>
                         <div class="form-group">
                             <label for="">Gambar</label>
-                            <input type="file" class="form-control" name="gambar">
+                            <input type="file" class="form-control" name="file_gambar">
                         </div>
                         <div class="form-group">
-                            <label for="">Kapasitas</label>
-                            <input type="number" class="form-control" name="total_kursi">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Jam Rental</label>
-                            <select name="jam_rental" class="form-control">
-                                <option value="12">12 Jam</option>
-                                <option value="24">24 Jam</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Tipe Rental</label>
-                            <select name="tipe_rental" class="form-control">
-                                <option value="matic">Manual</option>
-                                <option value="manual">Matic</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Tipe Driver</label>
-                            <select name="tipe_driver" class="form-control" id="">
-                                <option value="lepas">Lepas Kunci</option>
-                                <option value="driver">Dengan Driver</option>
-                            </select>
+                            <label for="">Link Maps</label>
+                            <input type="text" class="form-control" name="link_maps">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -161,7 +143,58 @@
             </div>
         </div>
     </div>
+    {{-- show modal --}}
+    @foreach ($product as $p)
+        <div class="modal fade" id="show-product{{ $p->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Wisata {{ $p->nama_produk }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Kategori</td>
+                                    <td>:</td>
+                                    <td>{{ $p->category->nama_kategori }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Wisata</td>
+                                    <td>:</td>
+                                    <td>{{ $p->nama_produk }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Harga</td>
+                                    <td>:</td>
+                                    <td>Rp. {{ $p->harga }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Gambar</td>
+                                    <td>:</td>
+                                    <td>
+                                        <img src="{{ Storage::url('public/product/' . $p->gambar) }}" width="250px"
+                                            height="100%" alt="" srcset="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Link Maps</td>
+                                    <td>:</td>
+                                    <td>{{ $p->link_maps }}</td>
+                                </tr>
 
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
     <!-- Edit Modal -->
     @foreach ($product as $p)
         <div class="modal fade" id="edit-product{{ $p->id }}" tabindex="-1" role="dialog"
@@ -179,55 +212,31 @@
                         @method('PUT')
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Merek Mobil</label>
-                                <select name="id_kategori" class="form-control">
+                                <label for="">Kategori Wisata</label>
+                                <select name="category_id" class="form-control">
                                     @foreach ($category as $item)
                                         <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="">Nama Mobil</label>
-                                <input type="text" class="form-control" value="{{ $p->nama_produk }}"
-                                    name="nama_produk">
+                                <label for="">Nama Wisata</label>
+                                <input type="text" value="{{ old('nama_produk', $p->nama_produk) }}"
+                                    class="form-control" name="nama_produk">
                             </div>
                             <div class="form-group">
                                 <label for="">Harga</label>
-                                <input type="number" class="form-control" value="{{ $p->harga }}" name="harga"
-                                    placeholder="Rp.">
+                                <input type="number" value="{{ old('harga', $p->harga) }}" class="form-control"
+                                    name="harga" placeholder="Rp.">
                             </div>
                             <div class="form-group">
                                 <label for="">Gambar</label>
-                                <input type="file" class="form-control" name="gambar">
-                                <img src="{{ Storage::url('public/product/' . $p->gambar) }}" height="100px"
-                                    class="rounded" alt="" srcset="">
+                                <input type="file" class="form-control" name="file_gambar">
                             </div>
                             <div class="form-group">
-                                <label for="">Kapasitas</label>
-                                <input type="number" class="form-control" value="{{ $p->total_kursi }}"
-                                    name="total_kursi">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Jam Rental</label>
-                                <select name="jam_rental" class="form-control">
-                                    <option value="12">12 Jam</option>
-                                    <option value="24">24 Jam</option>
-                                </select>
-
-                            </div>
-                            <div class="form-group">
-                                <label for="">Tipe Rental</label>
-                                <select name="tipe_rental" class="form-control">
-                                    <option value="matic">Manual</option>
-                                    <option value="manual">Matic</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Tipe Driver</label>
-                                <select name="tipe_driver" class="form-control" id="">
-                                    <option value="lepas">Lepas Kunci</option>
-                                    <option value="driver">Dengan Driver</option>
-                                </select>
+                                <label for="">Link Maps</label>
+                                <input type="text" value="{{ old('link_maps', $p->link_maps) }}" class="form-control"
+                                    name="link_maps">
                             </div>
                         </div>
                         <div class="modal-footer">

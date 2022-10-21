@@ -11,5 +11,12 @@ class Gallery extends Model
 
     protected $table = 'galleries';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'article_id', 'file_gambar', 'is_active'
+    ];
+
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
 }

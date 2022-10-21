@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\Gallery;
 
 class HomeController extends Controller
@@ -19,9 +19,8 @@ class HomeController extends Controller
 
     public function get_detail($slug)
     {
-        $article = DB::table('articles')->where('slug', $slug)->get();
-        $gambar = Gallery::all();
-
-        return view('detail', compact('article', 'gambar'));
+        $article = Article::with('gallery')->where('slug', $slug)->first();
+        $gallery = Gallery::where('article_id', $article->id)->get();
+        return view('detail', compact('article', 'gallery'));
     }
 }

@@ -20,7 +20,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <img src="{{ asset('frontend/images/logo.png') }}" alt="" srcset="">
+            <img src="{{ asset('frontend/images/logo.png') }}" style="width: 200px" alt="" srcset="">
         </div>
 
         <div class="card rounded-md">
@@ -29,15 +29,29 @@
                 <form action="{{ route('register') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="name" placeholder="Full name">
+                        <input type="text" class="form-control" autocomplete="off" name="name"
+                            placeholder="Full name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
                     </div>
+
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="role" id="role1"
+                                value="wisatawan">
+                            <label class="form-check-label" for="inlineRadio1">Wisatawan</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="role" id="role2" value="umkm">
+                            <label class="form-check-label" for="inlineRadio2">Umkmm</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" autocomplete="off" name="email"
+                            placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -45,7 +59,8 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control" autocomplete="off" name="password"
+                            placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -54,7 +69,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" name="password_confirmation"
-                            placeholder="Retype password">
+                            placeholder="Konfirmasi Password" autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -82,8 +97,6 @@
                         <textarea name="alamat" class="form-control" id="" cols="30" rows="5"></textarea>
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-address-book"></span>
-                                {{-- <i class="fa fa-address-book" aria-hidden="true"></i> --}}
                             </div>
                         </div>
                     </div>
@@ -104,7 +117,7 @@
                     </div>
                 </form>
 
-                <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+                <a href="{{ route('login') }}" class="text-center">Sudah Punya Akun</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
