@@ -48,7 +48,7 @@ class CheckoutController extends Controller
 
         Cart::where('user_id', Auth::user()->id)->delete();
 
-        \Midtrans\Config::$serverKey = 'Mid-server-Wq637A8W-SPMLSpXexz2Vf_o';
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-Zeiz9VL5aPnf9KIuqCTgvAQL';
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
         // Set sanitization on (default)
