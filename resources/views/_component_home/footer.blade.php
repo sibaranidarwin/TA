@@ -21,10 +21,10 @@
                                <div class="col-12 col-lg-3">
                                    <h5>Get Connected</h5> <br>
                                    <ul class="list-unstyled">
-                                       <li>Daerah Istimewa Yogyakarta</li>
+                                       <li>Barito Utara</li>
                                        <li>Indonesia</li>
                                        <li>WA. 0888 9032 4234</li>
-                                       <li>wiata@gmail.com</li>
+                                       <li>wisata@gmail.com</li>
                                    </ul>
                                </div>
 

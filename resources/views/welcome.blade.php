@@ -7,17 +7,12 @@
     <main>
         <div class="container">
             <section class="section-stats row justify-content-center" id="stats">
-                <div class="col-5 col-md-3 stats-detail">
-                    <p>• Antar jemput sampai lokasi</p>
-                    <p>• Bebas biaya bagasi</p>
-                </div>
-                <div class="col-md-3 col-md-4 stats-detail">
-                    <p>• Layanan transportasi 24 jam</p>
-                    <p>• Tarif pelajar</p>
-                </div>
-                <div class="col-3 col-md-3 stats-detail">
-                    <p>• Driver Berpengalaman</p>
-                    <p>• Driver Muda</p>
+                <div class="col-5 col-md-12 stats-detail">
+                    <p>Wisata Desa Trinsing merupakan salah satu Lokasi wisata Barito Utara yang
+                        terbaru dan terhits
+                        lainnya adalah bendungan Trinsing. Bendungan yang berada di desa Trinsing ini dapat dijadikan
+                        lokasi untuk berenang dan memainkan aktifitas air lainnya. Anda dapat menyewa sepeda bebek agar
+                        dapat mengelilingi bendungan Trinsing.</p>
                 </div>
             </section>
         </div>
@@ -62,24 +57,22 @@
                     <div class="col-md-4">
                         <h2>Tentang Kami</h2>
                         <p>
-                            woi travel jogja group
+                            Wisata Desa Trinsing
                         </p>
                     </div>
                     <div class="col-md-8">
-                        <p>Woi travel jogja group merupakan salah satu perusahaan biro perjalanan yang berlokasi di
-                            Bantul, Daerah <br>
-                            Istimewa Yogyakarta. Perusahaan ini baru dirintis sekitar tahun 2020, dan berupaya
-                            menyelaraskan visi nya <br>
-                            dengan target Pemerintah Daerah untuk menjadikan Jogja menjadi destinasi kota pariwisata.
-                        </p>
-                        <!-- <img src="frontend/images/partner.png" class="img-patner" /> -->
+                        <p>Wisata Desa Trinsing merupakan salah satu Lokasi wisata Barito Utara yang terbaru dan terhits
+                            lainnya adalah bendungan Trinsing. Bendungan yang berada di desa Trinsing ini dapat dijadikan
+                            lokasi untuk berenang dan memainkan aktifitas air lainnya. Anda dapat menyewa sepeda bebek agar
+                            dapat mengelilingi bendungan Trinsing.</p>
+
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- testimoni wisatawan -->
-        <section class="section-testimonials-heading" id="testimonialsHeading">
+        {{-- <section class="section-testimonials-heading" id="testimonialsHeading">
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
@@ -92,8 +85,8 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="section-testimonials-content" id="testimonialsContent">
+        </section> --}}
+        {{-- <section class="section-testimonials-content" id="testimonialsContent">
             <div class="container">
                 <div class="section-popular-travel row justify-content-center match-height">
                     <div class="col-sm-6 col-md-6 col-lg-4">
@@ -148,6 +141,6 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
     </main>
 @endsection
