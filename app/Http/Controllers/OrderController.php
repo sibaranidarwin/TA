@@ -47,7 +47,7 @@ class OrderController extends Controller
         return view('admin.pelanggan_pesanan.index', compact('transaction'));
     }
 
-    public function saveTiket($id)
+    public function saveTiket(Request $request, $id)
     {
 
         $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')
@@ -83,12 +83,15 @@ class OrderController extends Controller
         $fileName = 'Tiket_' . ucwords($transaction->name) . '_' . $transaction->tgl_wisata . '.jpg';
         $path = public_path('image_tiket/' . $fileName);
         $img->save($path);
-
-        header("Content-Type: image/png");
-        header('Content-Disposition: attachment; filename=' . $fileName);
-        readfile(
-            $path
-        );
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . basename($path) . '"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($path));
+        flush();
+        readfile($path);
 
         return redirect()->back();
     }
