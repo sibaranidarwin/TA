@@ -84,7 +84,7 @@ class OrderController extends Controller
         $path = public_path('image_tiket/' . $fileName);
         $img->save($path);
 
-        // header("Content-type:application/pdf");
+        header("Content-Type: image/png");
         header('Content-Disposition: attachment; filename=' . $fileName);
         readfile(
             $path
