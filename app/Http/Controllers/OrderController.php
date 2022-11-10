@@ -80,18 +80,20 @@ class OrderController extends Controller
             $font->align('center');
             $font->valign('bottom');
         });
-        $fileName = 'Tiket_' . ucwords($transaction->name) . '_' . $transaction->tgl_wisata . '.jpg';
+        $fileName = 'Tiket_' . ucwords($transaction->name) . '_' . $transaction->tgl_wisata . '_' . time() . '.jpg';
         $path = public_path('image_tiket/' . $fileName);
         $img->save($path);
+        $url = config('app.url') . 'wisata-tiket/image_tiket/' . $fileName;
+
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . basename($path) . '"');
+        header('Content-Disposition: attachment; filename="' . basename($url) . '"');
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
-        header('Content-Length: ' . filesize($path));
+        header('Content-Length: ' . filesize($url));
         flush();
-        readfile($path);
+        readfile($url);
 
         return redirect()->back();
     }
