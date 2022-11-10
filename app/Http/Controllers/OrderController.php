@@ -57,7 +57,7 @@ class OrderController extends Controller
             ->first();
         $img = Image::make(public_path('image/e-tiket.png'));
         $img->text(ucwords($transaction->name), 100, 205, function ($font) {
-            $font->file('font/Poppins-Bold.ttf');
+            $font->file('./font/Poppins-Bold.ttf');
             $font->size(27);
             $font->color('#000000');
             $font->align('center');
@@ -65,7 +65,7 @@ class OrderController extends Controller
             // $font->angle(180);
         });
         $img->text('Rp. ' . $transaction->total_harga . '/org', 150, 330, function ($font) {
-            $font->file('font/Poppins-Medium.ttf');
+            $font->file('./font/Poppins-Medium.ttf');
             $font->size(24);
             $font->color('#000000');
             $font->align('center');
@@ -74,7 +74,7 @@ class OrderController extends Controller
         });
         // tanggal
         $img->text('Tanggal : ' . $transaction->tgl_wisata, 500, 330, function ($font) {
-            $font->file('font/Poppins-Medium.ttf');
+            $font->file('./font/Poppins-Medium.ttf');
             $font->size(18);
             $font->color('#000000');
             $font->align('center');
