@@ -76,4 +76,5 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard.pelanggan');
 
     Route::get('/pemesanan', [OrderController::class, 'get_pesanan'])->name('pelanggan.transaksi');
+    Route::get('/tiket-download/{id}', [OrderController::class, 'saveTiket'])->name('pelanggan.transaksi.download');
 });

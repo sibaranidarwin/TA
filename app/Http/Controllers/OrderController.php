@@ -8,6 +8,8 @@ use App\Models\TransactionDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Image;
+use Illuminate\Support\Str;
 
 
 class OrderController extends Controller
@@ -43,69 +45,36 @@ class OrderController extends Controller
 
         return view('admin.pelanggan_pesanan.index', compact('transaction'));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function saveTiket($id)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')
+            ->select('transactions.*', 'users.name')
+            ->where('transactions.id', $id)
+            ->orderBy('id', 'DESC')
+            ->first();
+        $img = Image::make(public_path('image/e-tiket.png'));
+        $img->text(ucwords($transaction->name), 100, 205, function ($font) {
+            $font->file('font/Poppins-Bold.ttf');
+            $font->size(27);
+            $font->color('#000000');
+            $font->align('center');
+            $font->valign('bottom');
+            // $font->angle(180);
+        });
+        $img->text('Rp. ' . $transaction->total_harga . '/org', 150, 330, function ($font) {
+            $font->file('font/Poppins-Medium.ttf');
+            $font->size(24);
+            $font->color('#000000');
+            $font->align('center');
+            $font->valign('bottom');
+            // $font->angle(180);
+        });
+        $string = 'E-tiket-' . ucwords($transaction->name) . '-' . Str::random(5);
+        $img->save(public_path('image_tiket/' . $string . '.jpg'));
+        $img->response();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        // dd($request->all());
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+        return redirect()->back();
     }
 }

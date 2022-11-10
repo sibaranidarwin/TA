@@ -41,6 +41,7 @@
                                         <th>Harga</th>
                                         <th>Status</th>
                                         <th>Tanggal Wisata</th>
+                                        <th>Tiket</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,6 +64,15 @@
                                                 @endif
                                             </td>
                                             <td>{{ $item->tgl_wisata }}</td>
+                                            <td>
+                                                @if ($item->status == 'SUCCESS')
+                                                    <a href="{{ route('pelanggan.transaksi.download', $item->id) }}"
+                                                        class="btn btn-danger btn-sm rounded"> Generate
+                                                        Tiket</a>
+                                                @else
+                                                    <p>Belum diproses</p>
+                                                @endif
+                                            </td>
 
                                         </tr>
                                     @endforeach
