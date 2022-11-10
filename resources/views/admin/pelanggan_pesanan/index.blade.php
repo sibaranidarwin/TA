@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('title')
+    <title>Pesanan Wisata</title>
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->

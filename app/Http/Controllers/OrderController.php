@@ -8,6 +8,7 @@ use App\Models\TransactionDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Image;
 use Illuminate\Support\Str;
 
@@ -71,9 +72,23 @@ class OrderController extends Controller
             $font->valign('bottom');
             // $font->angle(180);
         });
-        $string = 'E-tiket-' . ucwords($transaction->name) . '-' . Str::random(5);
-        $img->save(public_path('image_tiket/' . $string . '.jpg'));
-        $img->response();
+        // tanggal
+        $img->text('Tanggal : ' . $transaction->tgl_wisata, 500, 330, function ($font) {
+            $font->file('font/Poppins-Medium.ttf');
+            $font->size(18);
+            $font->color('#000000');
+            $font->align('center');
+            $font->valign('bottom');
+        });
+        $fileName = 'Tiket_' . ucwords($transaction->name) . '_' . $transaction->tgl_wisata . '.jpg';
+        $path = public_path('image_tiket/' . $fileName);
+        $img->save($path);
+
+        // header("Content-type:application/pdf");
+        header('Content-Disposition: attachment; filename=' . $fileName);
+        readfile(
+            $path
+        );
 
         return redirect()->back();
     }
