@@ -84,47 +84,19 @@ class OrderController extends Controller
         $fileName = 'Tiket_' . ucwords($transaction->name) . '_' . $transaction->tgl_wisata . '_' . time() . '.jpg';
         $path = 'image_tiket/' . $fileName;
         $img->save(public_path($path));
-
-        $url    = config('app.url') . $path;
-        $this->file_get_contents_curl($url);
-        header('Content-Description: File Transfer');
+        // header('Content-Description: File Transfer');
+        // header('Content-Type: application/octet-stream');
+        // header('Content-Disposition: attachment; filename="' . basename($url) . '"');
+        // header('Expires: 0');
+        // header('Cache-Control: must-revalidate');
+        // header('Pragma: public');
+        // header('Content-Length: ' . filesize($url));
+        // flush();
+        // readfile($url);
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . basename($url) . '"');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($url));
-        flush();
-        readfile($url);
-
+        header("Content-Transfer-Encoding: Binary");
+        header("Content-disposition: attachment; filename=\"" . basename($path) . "\"");
+        readfile($path);
         return redirect()->back();
-    }
-
-    function file_get_contents_curl($url)
-    {
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_URL, $url);
-
-        $data = curl_exec($ch);
-        curl_close($ch);
-
-        return $data;
-    }
-
-    public function getDownload($path, $fileName, $header)
-    {
-        $headers = array(
-            'Content-Type: ' . $header,
-        );
-
-        // $file = File::get($path);
-        // $type = File::mimeType($path);
-        // $response = Response::make($file, 200);
-        // $headers = $response->header("Content-Type", $type);
-
-        return Response::download($path, $fileName, $headers);
     }
 }
