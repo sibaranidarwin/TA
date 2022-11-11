@@ -93,9 +93,10 @@ class OrderController extends Controller
         // header('Content-Length: ' . filesize($url));
         // flush();
         // readfile($url);
-        header('Content-Type: application/octet-stream');
+        header('Content-Type: application/x-file-to-save');
         header("Content-Transfer-Encoding: Binary");
         header("Content-disposition: attachment; filename=\"" . basename($path) . "\"");
+        ob_end_clean();
         readfile($path);
         return redirect()->back();
     }
