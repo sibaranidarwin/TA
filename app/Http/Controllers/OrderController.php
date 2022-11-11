@@ -59,7 +59,7 @@ class OrderController extends Controller
         $img->text(ucwords($transaction->name), 100, 205, function ($font) {
             $font->file(public_path('font/Poppins-Bold.ttf'));
             $font->size(27);
-            $font->color('#000000');
+            $font->color('#620A29');
             $font->align('center');
             $font->valign('bottom');
             // $font->angle(180);
