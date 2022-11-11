@@ -85,7 +85,7 @@ class OrderController extends Controller
         $path = 'image_tiket/' . $fileName;
         $img->save(public_path($path));
 
-        $url    = config('app.url') . 'public/' . $path;
+        $url    = config('app.url') . $path;
         $this->file_get_contents_curl($url);
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
