@@ -85,8 +85,8 @@ class OrderController extends Controller
         $path = 'image_tiket/' . $fileName;
         $img->save(public_path($path));
 
-        $url    = public_path() . '/' . $path;
-
+        $url    = config('app.url') . 'public/' . $path;
+        $this->file_get_contents_curl($url);
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename="' . basename($url) . '"');
@@ -98,6 +98,20 @@ class OrderController extends Controller
         readfile($url);
 
         return redirect()->back();
+    }
+
+    function file_get_contents_curl($url)
+    {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        return $data;
     }
 
     public function getDownload($path, $fileName, $header)
