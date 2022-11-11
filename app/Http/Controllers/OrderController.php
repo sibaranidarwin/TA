@@ -10,6 +10,7 @@ use App\Models\TransactionDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 
@@ -81,27 +82,35 @@ class OrderController extends Controller
             $font->valign('bottom');
         });
         $fileName = 'Tiket_' . ucwords($transaction->name) . '_' . $transaction->tgl_wisata . '_' . time() . '.jpg';
-        $path = public_path('image_tiket/' . $fileName);
-        $img->save($path);
-        // $url = config('app.url') . 'wisata-tiket/image_tiket/' . $fileName;
+        $path = 'image_tiket/' . $fileName;
+        $img->save(public_path($path));
+
+        $url    = public_path() . '/' . $path;
+
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . basename($path) . '"');
+        header('Content-Disposition: attachment; filename="' . basename($url) . '"');
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
-        header('Content-Length: ' . filesize($path));
+        header('Content-Length: ' . filesize($url));
         flush();
-        readfile($path);
+        readfile($url);
 
         return redirect()->back();
     }
 
-    public function getDownload($path, $fileName)
+    public function getDownload($path, $fileName, $header)
     {
         $headers = array(
-            'Content-Type: application/png',
+            'Content-Type: ' . $header,
         );
+
+        // $file = File::get($path);
+        // $type = File::mimeType($path);
+        // $response = Response::make($file, 200);
+        // $headers = $response->header("Content-Type", $type);
+
         return Response::download($path, $fileName, $headers);
     }
 }
