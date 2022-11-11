@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
@@ -16,4 +17,13 @@ class Transaction extends Model
         'total_harga',
         'status', 'kode', 'tgl_wisata'
     ];
+
+    public function getTanggalWisataAttribute()
+    {
+        if ($this->attributes['tanggal_wisata'] != null) {
+            $value = Carbon::parse($this->attributes['tanggal_wisata']);
+            $parse = $value->locale('id');
+            return $parse->translatedFormat('l, d F Y');
+        }
+    }
 }

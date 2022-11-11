@@ -65,7 +65,7 @@
                                                         class="btn btn-danger btn-sm rounded">{{ $item->status }}</button>
                                                 @endif
                                             </td>
-                                            <td>{{ $item->tgl_wisata }}</td>
+                                            <td>{{ $item->tanggal_wisata }}</td>
                                             <td>
                                                 @if ($item->status == 'SUCCESS')
                                                     <a href="{{ route('pelanggan.transaksi.download', $item->id) }}"

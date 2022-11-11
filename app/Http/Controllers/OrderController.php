@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use App\Models\Transaction;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\TransactionDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Image;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Response;
 
 
 class OrderController extends Controller
@@ -39,11 +40,10 @@ class OrderController extends Controller
     public function get_pesanan()
     {
         $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')
-            ->select('transactions.*', 'users.name')
+            ->select('transactions.*', 'transactions.tgl_wisata as tanggal_wisata', 'users.name')
             ->where('users.id', Auth::user()->id)
             ->orderBy('id', 'DESC')
             ->get();
-
         return view('admin.pelanggan_pesanan.index', compact('transaction'));
     }
 
@@ -51,11 +51,11 @@ class OrderController extends Controller
     {
 
         $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')
-            ->select('transactions.*', 'users.name')
+            ->select('transactions.*', 'transactions.tgl_wisata as tanggal_wisata', 'users.name')
             ->where('transactions.id', $id)
             ->orderBy('id', 'DESC')
             ->first();
-        $img = Image::make(public_path('image/e-tiket.png'));
+        $img = Image::make(public_path('image/e-tiket-wisata.png'));
         $img->text(ucwords($transaction->name), 100, 205, function ($font) {
             $font->file(public_path('font/Poppins-Bold.ttf'));
             $font->size(27);
@@ -73,7 +73,7 @@ class OrderController extends Controller
             // $font->angle(180);
         });
         // tanggal
-        $img->text('Tanggal : ' . $transaction->tgl_wisata, 500, 330, function ($font) {
+        $img->text('Tanggal : ' . $transaction->tanggal_wisata, 480, 325, function ($font) {
             $font->file(public_path('font/Poppins-Medium.ttf'));
             $font->size(18);
             $font->color('#000000');
@@ -83,8 +83,7 @@ class OrderController extends Controller
         $fileName = 'Tiket_' . ucwords($transaction->name) . '_' . $transaction->tgl_wisata . '_' . time() . '.jpg';
         $path = public_path('image_tiket/' . $fileName);
         $img->save($path);
-        $url = config('app.url') . 'wisata-tiket/image_tiket/' . $fileName;
-
+        // $url = config('app.url') . 'wisata-tiket/image_tiket/' . $fileName;
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename="' . basename($path) . '"');
@@ -96,5 +95,13 @@ class OrderController extends Controller
         readfile($path);
 
         return redirect()->back();
+    }
+
+    public function getDownload($path, $fileName)
+    {
+        $headers = array(
+            'Content-Type: application/png',
+        );
+        return Response::download($path, $fileName, $headers);
     }
 }
