@@ -41,7 +41,7 @@ Route::DELETE('cart/{id}', [CartController::class, 'cancel_booking'])->name('car
 
 Route::get('/paket-wisata', [PacketDestinationController::class, 'get_wisata'])->name('get-wisata');
 Route::post('/paket-wisata/cart/{id}', [PacketDestinationController::class, 'add'])->name('detail-add')->middleware('auth');
-Route::get('/wisata', [PacketDestinationController::class, 'wisata'])->name('wisata');
+Route::get('/wisata', [PacketDestinationController::class, 'wisata'])->name('wisata')->middleware('auth');
 Route::get('/kegiatan-wisata', [PacketDestinationController::class, 'gallery_wisata'])->name('gallery-wisata');
 
 // midtrans route

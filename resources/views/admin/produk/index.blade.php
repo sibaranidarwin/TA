@@ -134,6 +134,15 @@
                             <label for="">Link Maps</label>
                             <input type="text" class="form-control" name="link_maps">
                         </div>
+                        <div class="form-group">
+                            <label for="">Type Product</label>
+                            <select name="type_product" class="form-control" required>
+                                <option value="">--Pilih--</option>
+                                @foreach ($type as $tipe)
+                                    <option value="{{ $tipe }}">{{ ucwords($tipe) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -237,6 +246,20 @@
                                 <label for="">Link Maps</label>
                                 <input type="text" value="{{ old('link_maps', $p->link_maps) }}" class="form-control"
                                     name="link_maps">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Type Product</label>
+                                <select name="type_product" class="form-control" required>
+                                    <option value="">--Pilih--</option>
+                                    @foreach ($type as $tipe)
+                                        @if ($p->type_product == $tipe)
+                                            <option value="{{ $tipe }}" selected>{{ ucwords($tipe) }}
+                                            </option>
+                                        @else
+                                            <option value="{{ $tipe }}">{{ ucwords($tipe) }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">

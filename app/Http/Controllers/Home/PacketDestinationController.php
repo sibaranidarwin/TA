@@ -34,7 +34,7 @@ class PacketDestinationController extends Controller
 
     public function wisata()
     {
-        $wisata = Product::all();
+        $wisata = Product::where('type_product', Auth::user()->role)->get();
         return view('wisata', compact('wisata'));
     }
 

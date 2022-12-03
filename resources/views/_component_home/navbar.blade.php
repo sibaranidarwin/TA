@@ -13,10 +13,20 @@
                     <li class="nav-item mx-md-2">
                         <a class="nav-link {{ set_active('home') }}" href="/">Home</a>
                     </li>
-                    <li class="nav-item mx-md-2 ">
-                        <a class="nav-link {{ set_active('wisata') }}" href="{{ route('wisata') }}">Tiket
-                            Wisata</a>
-                    </li>
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item mx-md-2 ">
+                                <a class="nav-link {{ set_active('wisata') }}" href="{{ route('wisata') }}">Tiket
+                                    Wisata</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item mx-md-2 ">
+                            <a class="nav-link {{ set_active('wisata') }}" href="{{ route('wisata') }}">Restribusi
+                                Wisata</a>
+                        </li>
+
+                    @endguest
                     <li class="nav-item mx-md-2 ">
                         <a class="nav-link {{ set_active('gallery-wisata') }}"
                             href="{{ route('gallery-wisata') }}">Gallery</a>
