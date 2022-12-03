@@ -55,7 +55,7 @@ class ProductController extends Controller
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
         $image = $request->file('file_gambar');
-        $image->storeAs('public/products', $image->hashName());
+        $image->storeAs('public/product', $image->hashName());
         Product::create([
             'nama_produk' => $request->input('nama_produk'),
             'harga' => $request->input('harga'),

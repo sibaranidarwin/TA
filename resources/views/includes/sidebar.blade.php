@@ -92,6 +92,16 @@
                              </p>
                          </a>
                      </li>
+                 @elseif (Auth::user()->role == 'umkm')
+                     <li class="nav-item">
+                         <a href="{{ route('pelanggan.transaksi') }}"
+                             class="nav-link {{ set_active('pelanggan.transaksi') }}">
+                             <i class="nav-icon fa fa-cart-plus"></i>
+                             <p>
+                                 Pesanan
+                             </p>
+                         </a>
+                     </li>
                  @else
                      <li class="nav-item">
                          <a href="{{ route('pelanggan.transaksi') }}"

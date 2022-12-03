@@ -71,7 +71,7 @@
                                         @forelse ($mobil as $item)
                                             <tr>
                                                 <td>
-                                                    <img src="{{ Storage::url('public/products/' . $item->gambar) }}"
+                                                    <img src="{{ Storage::url('public/product/' . $item->gambar) }}"
                                                         height="100">
                                                 </td>
                                                 <td class="align-middle">
@@ -81,18 +81,17 @@
                                                 <td class="align-middle">
                                                     <h2>IDR {{ number_format($item->harga, 2, ',', '.') }}
                                                     </h2>
-                                                    <form action="{{ route('detail-add', $item->id) }}"
-                                                        method="post">
+                                                    <form action="{{ route('detail-add', $item->id) }}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="tanggal"
                                                             value="{{ $tanggal }}">
-                                                       @if (!$item->stock == 1)
-                                                           <span>Sudah dibooking</span>
-                                                       @else
+                                                        @if (!$item->stock == 1)
+                                                            <span>Sudah dibooking</span>
+                                                        @else
                                                             <button type="submit" class="btn btn-add-now mb-2 px-4">
-                                                            Pilih
-                                                        </button>
-                                                       @endif
+                                                                Pilih
+                                                            </button>
+                                                        @endif
                                                     </form>
                                                 </td>
                                             </tr>

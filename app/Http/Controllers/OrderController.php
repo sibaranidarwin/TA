@@ -40,11 +40,18 @@ class OrderController extends Controller
 
     public function get_pesanan()
     {
-        $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')
-            ->select('transactions.*', 'transactions.tgl_wisata as tanggal_wisata', 'users.name')
-            ->where('users.id', Auth::user()->id)
-            ->orderBy('id', 'DESC')
-            ->get();
+        if (Auth::user()->role == 'wisatawan') {
+            $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')
+                ->select('transactions.*', 'transactions.tgl_wisata as tanggal_wisata', 'users.name')
+                ->where('users.id', Auth::user()->id)
+                ->orderBy('id', 'DESC')
+                ->get();
+        } else {
+            $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')
+                ->select('transactions.*', 'transactions.tgl_wisata as tanggal_wisata', 'users.name')
+                ->orderBy('id', 'DESC')
+                ->get();
+        }
         return view('admin.pelanggan_pesanan.index', compact('transaction'));
     }
 

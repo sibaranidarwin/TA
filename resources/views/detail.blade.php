@@ -26,9 +26,9 @@
                     <div class="col-lg-8 pl-lg-0">
                         <div class="card card-details">
                             <h1>{{ $article->judul }}</h1>
-                            <p>
+                            {{-- <p>
                                 Jogja, Republic of Indonesia Raya
-                            </p>
+                            </p> --}}
                             <div class="gallery">
                                 <div class="xzoom-container">
                                     @foreach ($gallery as $item)
@@ -36,7 +36,7 @@
                                             @if ($item->is_default == 1)
                                                 <img class="xzoom" id="xzoom-default"
                                                     src="{{ Storage::url('public/wisata/' . $item->file_gambar) }}"
-                                                    xoriginal="frontend/images/details-11.jpg" />
+                                                    xoriginal="{{ Storage::url('public/wisata/' . $item->file_gambar) }}" />
                                             @endif
                                             @if ($item->is_default == 1)
                                                 <div class="xzoom-thumbs">
