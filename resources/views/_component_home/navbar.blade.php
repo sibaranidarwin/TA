@@ -22,8 +22,8 @@
                         @endif
                     @else
                         <li class="nav-item mx-md-2 ">
-                            <a class="nav-link {{ set_active('wisata') }}" href="{{ route('wisata') }}">Restribusi
-                                Wisata</a>
+                            <a class="nav-link {{ set_active('wisata') }}"
+                                href="{{ route('wisata') }}">{{ ucwords('tiket & retribusi') }}</a>
                         </li>
 
                     @endguest
