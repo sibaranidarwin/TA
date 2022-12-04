@@ -71,7 +71,7 @@
                                         @forelse ($mobil as $item)
                                             <tr>
                                                 <td>
-                                                    <img src="{{ Storage::url('public/product/' . $item->gambar) }}"
+                                                    <img src="{{ Storage::url('public/products/' . $item->gambar) }}"
                                                         height="100">
                                                 </td>
                                                 <td class="align-middle">

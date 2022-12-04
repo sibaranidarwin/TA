@@ -59,7 +59,7 @@ class ProductController extends Controller
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
         $image = $request->file('file_gambar');
-        $image->storeAs('public/product', $image->hashName());
+        $image->storeAs('public/products', $image->hashName());
         Product::create([
             'nama_produk' => $request->input('nama_produk'),
             'harga' => $request->input('harga'),
@@ -114,7 +114,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         if (!empty($request->hasFile('file_gambar'))) {
             $image = $request->file('file_gambar');
-            $image->storeAs('public/product', $image->hashName());
+            $image->storeAs('public/products', $image->hashName());
             $product->update([
                 'nama_produk' => $request->input('nama_produk'),
                 'harga' => $request->input('harga'),

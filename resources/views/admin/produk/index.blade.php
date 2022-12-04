@@ -62,7 +62,7 @@
                                             <td>{{ $item->nama_produk }}</td>
                                             <td>Rp. {{ number_format($item->harga, 2, ',', '.') }}</td>
                                             {{-- <td>
-                                                <img src="{{ Storage::url('public/product/' . $item->gambar) }}"
+                                                <img src="{{ Storage::url('public/products/' . $item->gambar) }}"
                                                     height="100px" class="rounded" alt="" srcset="">
                                             </td> --}}
                                             <td>
@@ -186,7 +186,7 @@
                                     <td>Gambar</td>
                                     <td>:</td>
                                     <td>
-                                        <img src="{{ Storage::url('public/product/' . $p->gambar) }}" width="250px"
+                                        <img src="{{ Storage::url('public/products/' . $p->gambar) }}" width="250px"
                                             height="100%" alt="" srcset="">
                                     </td>
                                 </tr>

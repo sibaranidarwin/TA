@@ -115,7 +115,8 @@
                             </div>
                         </form>
                         <div class="text-center mt-3">
-                            <button type="submit" class="deleteRecord btn btn-danger btn-block" data-id="">Cancel
+                            <button type="submit" class="deleteRecord btn btn-danger btn-block"
+                                data-id="{{ $carts->id }}">Cancel
                                 Booking
                             </button>
                         </div>
