@@ -151,7 +151,7 @@
                 },
                 success: function() {
                     // console.log("it Works");
-                    window.location.assign("{{ route('get-wisata') }}");
+                    window.location.assign("{{ url('wisata') }}");
                 }
             });
 
