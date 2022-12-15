@@ -56,31 +56,63 @@ class OrderController extends Controller
             ->where('transactions.id', $id)
             ->orderBy('id', 'DESC')
             ->first();
-        $img = Image::make(public_path('image/e-tiket-wisata.png'));
-        $img->text(ucwords($transaction->name), 100, 205, function ($font) {
-            $font->file(public_path('font/Poppins-Bold.ttf'));
-            $font->size(27);
-            $font->color('#620A29');
-            $font->align('center');
-            $font->valign('bottom');
-            // $font->angle(180);
-        });
-        $img->text('Rp. ' . $transaction->total_harga . '/org', 150, 330, function ($font) {
-            $font->file(public_path('font/Poppins-Medium.ttf'));
-            $font->size(24);
-            $font->color('#000000');
-            $font->align('center');
-            $font->valign('bottom');
-            // $font->angle(180);
-        });
-        // tanggal
-        $img->text('Tanggal : ' . $transaction->tanggal_wisata, 480, 325, function ($font) {
-            $font->file(public_path('font/Poppins-Medium.ttf'));
-            $font->size(18);
-            $font->color('#000000');
-            $font->align('center');
-            $font->valign('bottom');
-        });
+        switch (auth()->user()->role) {
+            case 'wisatawan':
+                $img = Image::make(public_path('image/e-tiket-wisata.png'));
+                $img->text(ucwords($transaction->name), 100, 205, function ($font) {
+                    $font->file(public_path('font/Poppins-Bold.ttf'));
+                    $font->size(27);
+                    $font->color('#620A29');
+                    $font->align('center');
+                    $font->valign('bottom');
+                    // $font->angle(180);
+                });
+                $img->text('Rp. ' . $transaction->total_harga . '/org', 150, 330, function ($font) {
+                    $font->file(public_path('font/Poppins-Medium.ttf'));
+                    $font->size(24);
+                    $font->color('#000000');
+                    $font->align('center');
+                    $font->valign('bottom');
+                    // $font->angle(180);
+                });
+                // tanggal
+                $img->text('Tanggal : ' . $transaction->tanggal_wisata, 480, 325, function ($font) {
+                    $font->file(public_path('font/Poppins-Medium.ttf'));
+                    $font->size(18);
+                    $font->color('#000000');
+                    $font->align('center');
+                    $font->valign('bottom');
+                });
+                break;
+
+            default:
+                $img = Image::make(public_path('image/e-tiket-umkm.png'));
+                // $img->text(ucwords($transaction->name), 400, 205, function ($font) {
+                //     $font->file(public_path('font/Poppins-Bold.ttf'));
+                //     $font->size(27);
+                //     $font->color('#620A29');
+                //     $font->align('center');
+                //     $font->valign('bottom');
+                //     // $font->angle(180);
+                // });
+                $img->text('Rp. ' . $transaction->total_harga . '/Bulan', 400, 200, function ($font) {
+                    $font->file(public_path('font/Poppins-Bold.ttf'));
+                    $font->size(24);
+                    $font->color('#393653');
+                    $font->align('center');
+                    $font->valign('bottom');
+                    // $font->angle(180);
+                });
+                // tanggal
+                $img->text($transaction->tanggal_wisata, 400, 255, function ($font) {
+                    $font->file(public_path('font/Poppins-Medium.ttf'));
+                    $font->size(17);
+                    $font->color('#393653');
+                    $font->align('center');
+                    $font->valign('bottom');
+                });
+                break;
+        }
         $fileName = 'Tiket_' . ucwords($transaction->name) . '_' . $transaction->tgl_wisata . '_' . time() . '.jpg';
         $path = 'image_tiket/' . $fileName;
         $img->save(public_path($path));
