@@ -3,8 +3,9 @@
     <title>{{ $article->judul }}</title>
 @endsection
 @section('content')
+<hr>
     <main>
-        <section class="section-details-header"></section>
+        {{-- <section class="section-details-header"></section> --}}
         <section class="section-details-content">
             <div class="container">
                 <div class="row">
@@ -23,7 +24,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-8 pl-lg-0">
+                    <div class="col-lg-12 pl-lg-0">
                         <div class="card card-details">
                             <h1>{{ $article->judul }}</h1>
                             {{-- <p>

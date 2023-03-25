@@ -59,7 +59,7 @@ class OrderController extends Controller
         switch (auth()->user()->role) {
             case 'wisatawan':
                 $img = Image::make(public_path('image/e-tiket-wisata.png'));
-                $img->text(ucwords($transaction->name), 100, 205, function ($font) {
+                $img->text(ucwords($transaction->name), 150, 205, function ($font) {
                     $font->file(public_path('font/Poppins-Bold.ttf'));
                     $font->size(27);
                     $font->color('#620A29');
@@ -67,7 +67,7 @@ class OrderController extends Controller
                     $font->valign('bottom');
                     // $font->angle(180);
                 });
-                $img->text('Rp. ' . $transaction->total_harga . '/org', 150, 330, function ($font) {
+                $img->text('Rp. ' . $transaction->total_harga . '/org', 150, 280, function ($font) {
                     $font->file(public_path('font/Poppins-Medium.ttf'));
                     $font->size(24);
                     $font->color('#000000');
@@ -76,7 +76,7 @@ class OrderController extends Controller
                     // $font->angle(180);
                 });
                 // tanggal
-                $img->text('Tanggal : ' . $transaction->tanggal_wisata, 480, 325, function ($font) {
+                $img->text('Tanggal : ' . $transaction->tanggal_wisata, 480, 305, function ($font) {
                     $font->file(public_path('font/Poppins-Medium.ttf'));
                     $font->size(18);
                     $font->color('#000000');

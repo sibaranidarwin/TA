@@ -10,7 +10,7 @@
                     <img src="{{ asset('frontend/images/logo.png') }}" alt="" />
                 </a>
             </div>
-            <ul class="navbar-nav mr-auto d-none d-lg-block">
+            <ul class="navbar-nav mr-auto sd-none d-lg-block">
                 <li>
                     <span class="text-muted">| &nbsp; Beyond the explorer of the world</span>
                 </li>

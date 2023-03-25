@@ -6,14 +6,16 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Gallery;
+use App\Model\Product;
 
 class HomeController extends Controller
 {
     public function get_home()
     {
         $article = DB::table('articles')->get();
-
-        return view('welcome', compact('article'));
+        $product = DB::table('products')->get();
+        // dd($product);
+        return view('welcome', compact('article', 'product'));
     }
 
 

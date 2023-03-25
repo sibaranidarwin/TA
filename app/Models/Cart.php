@@ -11,5 +11,6 @@ class Cart extends Model
 
     protected $table = 'carts';
 
+    protected $fillable = ['product_id', 'user_id', 'tgl_wisata'];
     protected $guarded = [];
 }

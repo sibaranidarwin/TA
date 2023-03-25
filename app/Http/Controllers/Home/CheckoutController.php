@@ -33,11 +33,10 @@ class CheckoutController extends Controller
             'tgl_wisata' => $tgl_wisata,
         ]);
 
-
         foreach ($carts as  $item) {
             $trx = "TRS-" . mt_rand(000, 999);
 
-            TransactionDetail::create([
+          $coba = TransactionDetail::create([
                 'transaction_id' => $transaction->id,
                 'product_id' => $item->id,
                 'harga' => (int) $item->harga,
@@ -46,9 +45,10 @@ class CheckoutController extends Controller
             ]);
         }
 
+
         Cart::where('user_id', Auth::user()->id)->delete();
 
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-Zeiz9VL5aPnf9KIuqCTgvAQL';
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-jk6v6RjBITkkZR2Nisu3AV3h';
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
         // Set sanitization on (default)

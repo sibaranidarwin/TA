@@ -1,26 +1,26 @@
  <!-- Main Sidebar Container -->
- <aside class="main-sidebar sidebar-dark-primary elevation-4">
+ <aside class="main-sidebar sidebar-primary elevation-4" style="background-color: #000066; color: #fff;">
      <!-- Brand Logo -->
      <a href="/" class="brand-link">
-         <img src="{{ asset('frontend/images/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+         <img src="{{ asset('frontend/images/Logo_kaldera.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-         <span class="brand-text font-weight-light">Wisata Desa </span>
+         <span class="brand-text font-weight">Kaldera Toba </span>
      </a>
-
+<hr>
      <!-- Sidebar -->
      <div class="sidebar">
          <!-- Sidebar user panel (optional) -->
-         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+         {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
              <div class="image">
                  <img src="{{ asset('admin/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
              </div>
              <div class="info">
                  <a href="#" class="d-block">{{ Auth::user()->name }}</a>
              </div>
-         </div>
+         </div> --}}
 
          <!-- Sidebar Menu -->
-         <nav class="mt-2">
+         <nav class="mt-3">
              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                  data-accordion="false">
                  <!-- Add icons to the links using the .nav-icon class

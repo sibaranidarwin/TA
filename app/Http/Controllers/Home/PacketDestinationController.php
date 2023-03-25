@@ -28,13 +28,17 @@ class PacketDestinationController extends Controller
             'product_id' => $request->product_id,
             'user_id' => Auth::user()->id,
         ];
+
+        // dd($data);
         Cart::create($data);
+
         return redirect()->route('cart');
     }
 
     public function wisata()
     {
-        $wisata = Product::where('type_product', Auth::user()->role)->get();
+        $wisata = Product::all();
+        // where('category_id', Auth::user()->role)->get();
         return view('wisata', compact('wisata'));
     }
 

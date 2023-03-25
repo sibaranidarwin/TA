@@ -5,8 +5,9 @@ body {
 }
 
 .navbar-brand img {
-  max-height: 40px;
+  max-height: 70px;
 }
+
 
 .btn-navbar-right {
   margin-top: -10px !important;
@@ -35,13 +36,13 @@ body {
 }
 
 header {
-  margin-top: -68px;
+  /* margin-bottom: 9px; */
   padding: 180px 0 180px;
-  background-image: url("../images/header.jpg");
-  background-size: cover;
+  /* background-image: url("../images/header.jpg"); */
+  /* background-size: cover; */
 }
 
-header h1,
+header h1, h4,
 header p {
   color: #fff;
 }
@@ -216,8 +217,10 @@ header .btn-get-started:hover {
 }
 
 .section-footer a {
-  color: #071c4d;
+  color: #fff;
 }
+
+
 
 .section-details-header {
   min-height: 310px;
@@ -226,7 +229,7 @@ header .btn-get-started:hover {
 }
 
 .section-details-content {
-  margin-top: -210px;
+  margin-top: 20px;
   min-height: 100vh;
 }
 
@@ -442,7 +445,7 @@ header .btn-get-started:hover {
 @media (min-width: 992px) {
   .login-container {
     background: -webkit-gradient(linear, left top, right top, color-stop(60%, #ffffff), color-stop(40%, #E4E6EB));
-    background: linear-gradient(90deg, #ffffff 60%, #E4E6EB 40%);
+    background: linear-gradient(100deg, #ffffff 60%, #E4E6EB 40%);
     width: 100vw;
     height: 100vh;
   }

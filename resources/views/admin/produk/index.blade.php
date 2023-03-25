@@ -134,7 +134,7 @@
                             <label for="">Link Maps</label>
                             <input type="text" class="form-control" name="link_maps">
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="">Type Product</label>
                             <select name="type_product" class="form-control" required>
                                 <option value="">--Pilih--</option>
@@ -142,7 +142,7 @@
                                     <option value="{{ $tipe }}">{{ ucwords($tipe) }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -247,7 +247,7 @@
                                 <input type="text" value="{{ old('link_maps', $p->link_maps) }}" class="form-control"
                                     name="link_maps">
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="">Type Product</label>
                                 <select name="type_product" class="form-control" required>
                                     <option value="">--Pilih--</option>
@@ -260,7 +260,7 @@
                                         @endif
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -3,8 +3,12 @@
     <title>Wisata</title>
 @endsection
 @section('content')
+<br>
+<br>
+<br>
+<br><br>
     <section class="section-details-content">
-        <div class="container mt-5">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-12 pl-lg-0">
                     <div class="card card-details">
@@ -13,15 +17,19 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">
-                                        Pilihan Paket
+                                        Pilihan Paket Wisata
                                     </li>
                                 </ol>
                             </nav>
                         </div>
 
                         <div class="card-body">
-                            <h1>Pilih Paket Wisata</h1>
-                            <div class="attendee">
+                            {{-- <h1>Pilih Paket Wisata Kaldera Toba Nomadic Escape!</h1> --}}
+                            <div class="col text-left">
+                                <h5><strong>Ayo Liburan ke destinasi menarik wisata kaldera!</strong></h5>
+                                <p>Ada berbagai pilihan tiket dengan harga yang spesial, lho. jangan sampai kehabisan ya!</p>
+                            </div>
+                            <div class="attendee mt-3">
                                 <table class="table table-responsive-sm">
                                     <tbody>
                                         @forelse ($wisata as $item)

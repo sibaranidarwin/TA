@@ -3,6 +3,8 @@
     <title>Keranjang</title>
 @endsection
 @section('content')
+<br><br><br>
+<br><br>
     <main>
         <section class="section-details-content">
             <div class="container">
@@ -10,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-6 pl-lg-0">
                         <div class="card card-details mb-3">
-                            <div class="card-title">
+                            {{-- <div class="card-title">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item" aria-current="page">
@@ -24,28 +26,36 @@
                                         </li>
                                     </ol>
                                 </nav>
-                            </div>
-                            <h1>Detail Pemesan</h1>
+                            </div> --}}
+                            <h2><strong>Detail Pemesan</strong></h2>
 
                             <div class="member mt-3">
-                                <form class="form-inline">
-                                    <div class="form-group">
+                                <form class="form-inline col-md-12">
+                                    <div class="form-group col-md-3">
                                         <label class="sr-only" class="mr-2" for="inlineFormCustomSelectPref">Title</label>
 
-                                        <select class="custom-select mb-2 mr-sm-2" id="inlineFormCustomSelectPref">
+                                        <select class="custom-select mb-4 mr-sm-2" id="inlineFormCustomSelectPref">
                                             <option selected value="">Tuan</option>
                                             <option value="2">Nyonya</option>
                                             <option value="3">Nona</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-
+                                    <div class="form-group ">
                                         <label class="sr-only" for="inputUsername">Name</label>
-                                        <input type="text" class="form-control mb-2 mr-sm-2" value="{{ $name }}"
+                                        <input type="text" class="form-control mb-4 mr-sm-2 col-md-12" value="{{ $name }}"
                                             id="inputname" placeholder="Nama Lengkap" />
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group col-md-9">
+                                        <label class="sr-only" for="email">Email</label>
+                                        <div class="input-group mb-4 mr-sm-10">
+                                            <input type="text" value="{{ $email }}"
+                                                class="form-control datepicker" value="" id="email"
+                                                placeholder="Email" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-9">
                                         <label class="sr-only" for="whatsapp">No.WhatsApp</label>
                                         <div class="input-group mb-2 mr-sm-2">
                                             <input type="tel" value="{{ $no_hp }}"
@@ -54,14 +64,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class="sr-only" for="email">Email</label>
-                                        <div class="input-group mb-2 mr-sm-10">
-                                            <input type="text" value="{{ $email }}"
-                                                class="form-control datepicker" value="" id="email"
-                                                placeholder="Email" />
-                                        </div>
-                                    </div>
                                 </form>
 
                                 <!-- <h3 class="mt-2 mb-0">Note</h3> -->
@@ -72,36 +74,46 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-6">
                         <form action="{{ route('checkout') }}" enctype="multipart/form-data" method="post">
                             @csrf
 
                             <input type="hidden" name="total_harga" value="{{ $carts->harga }}">
-                            <div class="card card-details card-right">
-                                <h2>Checkout Information</h2>
-                                <table class="trip-informations">
+                            <div class="card card-details card-right">    
+                            <h2><strong>Detail Pemesananan</strong></h2>
+                                <table class="trip-informations mt-3">
                                     <tr>
-                                        <th width="50%">Wisata</th>
-                                        <td width="50%" class="text-right text-blue"><span>
+                                        <td width=""><span>
                                                 {{ $carts->nama_produk }}</span></td>
                                     </tr>
                                     <tr>
-                                        <th width="50%">Tanggal</th>
-                                        <td width="50%" class="text-right">
-                                            <input type="date" class="form-control" name="tgl_wisata"
+                                        <td width=""><span>Tiket Masuk 1 Hari</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="">Tanggal Dipilih</td>
+                                        <td width="" class="text-right">
+                                            <input type="" class="form-control" name="tgl_wisata"
                                                 value="{{ date('Y-m-d') }}" required>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th width="50%">Harga</th>
-                                        <td width="50%" class="text-right text-total">
-                                            <span class="text-blue">IDR {{ $carts->harga }}
+                                    {{-- <tr>
+                                        <td>Jumlah Tiket</td>
+                                        <td>
+                                           <div id="input_div">
+                                                <input type="text" size="25" value="1" id="count">
+                                                <input type="button" value="-" id="moins" onclick="minus()">
+                                                <input type="button" value="+" id="plus" onclick="plus()">
+                                            </div>
+                                        </td>
+                                    </tr> --}}
+                                    <tr class="mt-3">
+                                        <td width="">Total Harga</td>
+                                        <td width="" class="text-right text-total">
+                                            <span class="">IDR {{ $carts->harga }}
                                             </span>
                                         </td>
                                     </tr>
                                 </table>
-                                <hr />
                                 <hr />
                                 <h2>Payment Instructions</h2>
                                 <p class="payment-instructions">
@@ -130,6 +142,19 @@
 @endsection
 @push('after-script')
     <script>
+         var count = 1;
+        var countEl = document.getElementById("count");
+        function plus(){
+            count++;
+            countEl.value = count;
+        }
+        function minus(){
+        if (count > 1) {
+            count--;
+            countEl.value = count;
+        }  
+        }
+        
         $(document).ready(function() {
             $('.xzoom, .xzoom-gallery').xzoom({
                 zoomWidth: 500,

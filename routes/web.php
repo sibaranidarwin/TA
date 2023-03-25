@@ -33,11 +33,10 @@ Route::get('/gallery-wisata', function () {
 Route::get('/', [HomeController::class, 'get_home'])->name('home');
 Route::get('details/{slug}', [HomeController::class, 'get_detail'])->name('blog.detail');
 
-// Route::get('/rental-mobil', [RentalMobilController::class, 'get_mobil'])->name('paket.travel');
-// Route::get('/cari-mobil', [RentalMobilController::class, 'cari_mobil'])->name('cari.mobil')->middleware('auth');
-// Route::post('/rental-mobil/{id}', [RentalMobilController::class, 'add'])->name('detail-add')->middleware('auth');
+
 Route::get('cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
 Route::DELETE('cart/{id}', [CartController::class, 'cancel_booking'])->name('cart.delete')->middleware('auth');
+
 
 Route::get('/paket-wisata', [PacketDestinationController::class, 'get_wisata'])->name('get-wisata');
 Route::post('/paket-wisata/cart/{id}', [PacketDestinationController::class, 'add'])->name('detail-add')->middleware('auth');

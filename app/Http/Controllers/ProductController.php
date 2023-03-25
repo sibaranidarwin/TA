@@ -66,7 +66,7 @@ class ProductController extends Controller
             'gambar' => $image->hashName(),
             'category_id' => $request->input('category_id'),
             'link_maps' => $request->input('link_maps'),
-            'type_product' => $request->input('type_product'),
+            // 'type_product' => $request->input('type_product'),
         ]);
 
         return redirect()->route('product.index')->with('toast_success', 'Data berhasil disimpan!');
@@ -121,7 +121,7 @@ class ProductController extends Controller
                 'gambar' => $image->hashName(),
                 'category_id' => $request->input('category_id'),
                 'link_maps' => $request->input('link_maps'),
-                'type_product' => $request->input('type_product'),
+                // 'type_product' => $request->input('type_product'),
             ]);
         } else {
             $product->update([
@@ -129,7 +129,7 @@ class ProductController extends Controller
                 'harga' => $request->input('harga'),
                 'category_id' => $request->input('category_id'),
                 'link_maps' => $request->input('link_maps'),
-                'type_product' => $request->input('type_product'),
+                // 'type_product' => $request->input('type_product'),
             ]);
         }
 
