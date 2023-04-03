@@ -33,18 +33,18 @@ class CheckoutController extends Controller
             'tgl_wisata' => $tgl_wisata,
         ]);
 
+        // dd($transaction);
         foreach ($carts as  $item) {
             $trx = "TRS-" . mt_rand(000, 999);
 
-          $coba = TransactionDetail::create([
+            TransactionDetail::create([
                 'transaction_id' => $transaction->id,
                 'product_id' => $item->id,
-                'harga' => (int) $item->harga,
+                'price_id' => (int) $item->harga,
                 'kode_transaksi' => $trx,
-                'tgl_wisata' => $tgl_wisata,
+                // 'tgl_wisata' => $tgl_wisata,
             ]);
         }
-
 
         Cart::where('user_id', Auth::user()->id)->delete();
 
@@ -93,6 +93,7 @@ class CheckoutController extends Controller
         // Cari transaksi berdasarkan ID
         $transaction = Transaction::findOrfail($order_id);
 
+        // dd($transaction);
 
         // Handle notification status midtrans
         if ($status == 'capture') {

@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('nama_produk');
             $table->integer('harga');
+            $table->integer('harga_anak')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->string('gambar')->nullable();
             $table->text('link_maps')->nullable();

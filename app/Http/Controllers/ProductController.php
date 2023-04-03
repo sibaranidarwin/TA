@@ -49,8 +49,10 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_produk' => 'required',
             'harga' => 'required',
+            'harga_anak' => 'required',
             'file_gambar' => 'required',
             'category_id' => 'required|exists:categories,id',
+            'isi' => '',
             'link_maps' => 'required',
         ]);
 
@@ -63,7 +65,9 @@ class ProductController extends Controller
         Product::create([
             'nama_produk' => $request->input('nama_produk'),
             'harga' => $request->input('harga'),
+            'harga_anak' => $request->input('harga_anak'),
             'gambar' => $image->hashName(),
+            'isi' => $request->input('isi'),
             'category_id' => $request->input('category_id'),
             'link_maps' => $request->input('link_maps'),
             // 'type_product' => $request->input('type_product'),
@@ -105,8 +109,11 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_produk' => 'required',
             'harga' => 'required',
+            'harga_anak' => 'required',
             'category_id' => 'required',
+            'isi' => '',
             'link_maps' => 'required',
+
         ]);
         if ($validator->fails()) {
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
@@ -120,6 +127,7 @@ class ProductController extends Controller
                 'harga' => $request->input('harga'),
                 'gambar' => $image->hashName(),
                 'category_id' => $request->input('category_id'),
+                'isi' => $request->input('isi'),
                 'link_maps' => $request->input('link_maps'),
                 // 'type_product' => $request->input('type_product'),
             ]);
