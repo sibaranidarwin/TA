@@ -12,7 +12,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Paket Wisata</h1>
+                        <h1>Tiket Wisata Kaldera</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -30,8 +30,8 @@
                 <!-- SELECT2 EXAMPLE -->
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">Data Paket Wisata</h3>
-                        <div class="float-right">
+                        {{-- <h3 class="card-title">Data Paket Wisata</h3> --}}
+                        <div class="float-left">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                 data-target="#exampleModalLong">
@@ -46,10 +46,13 @@
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>No</th>
                                         <th>Kategori</th>
                                         <th>Wisata</th>
-                                        <th>Harga</th>
+                                        <th>Harga Tiket Dewasa</th>
+                                        <th>Harga Tiket Anak-anak</th>
+                                        <th>Deskripsi</th>
+
                                         {{-- <th>Gambar</th> --}}
                                         <th>Aksi</th>
                                     </tr>
@@ -60,7 +63,9 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->category->nama_kategori }}</td>
                                             <td>{{ $item->nama_produk }}</td>
-                                            <td>Rp. {{ number_format($item->harga, 2, ',', '.') }}</td>
+                                            <td>Rp. {{ number_format($item->harga, 0, ',', '.') }}</td>
+                                            <td>Rp. {{ number_format($item->harga_anak, 2, ',', '.') }}</td>
+                                            <td>{{ $item->isi }}</td>
                                             {{-- <td>
                                                 <img src="{{ Storage::url('public/products/' . $item->gambar) }}"
                                                     height="100px" class="rounded" alt="" srcset="">
@@ -123,8 +128,16 @@
                             <input type="text" class="form-control" name="nama_produk">
                         </div>
                         <div class="form-group">
-                            <label for="">Harga</label>
+                            <label for="">Harga Dewasa</label>
                             <input type="number" class="form-control" name="harga" placeholder="Rp.">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Harga Anak-anak</label>
+                            <input type="number" class="form-control" name="harga_anak" placeholder="Rp.">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Deksripsi</label>
+                            <input type="text" class="form-control" name="isi" placeholder="Masukkkan Deskripsi Tiket">
                         </div>
                         <div class="form-group">
                             <label for="">Gambar</label>
@@ -178,9 +191,14 @@
                                     <td>{{ $p->nama_produk }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Harga</td>
+                                    <td>Harga Tiket Dewasa</td>
                                     <td>:</td>
                                     <td>Rp. {{ $p->harga }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Harga Tiket Anak-anak</td>
+                                    <td>:</td>
+                                    <td>Rp. {{ $p->harga_anak }}</td>
                                 </tr>
                                 <tr>
                                     <td>Gambar</td>
@@ -189,6 +207,11 @@
                                         <img src="{{ Storage::url('public/products/' . $p->gambar) }}" width="250px"
                                             height="100%" alt="" srcset="">
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>Deksripsi</td>
+                                    <td>:</td>
+                                    <td>{{ $p->isi }}</td>
                                 </tr>
                                 <tr>
                                     <td>Link Maps</td>
@@ -234,9 +257,19 @@
                                     class="form-control" name="nama_produk">
                             </div>
                             <div class="form-group">
-                                <label for="">Harga</label>
+                                <label for="">Harga Tiket Dewasa</label>
                                 <input type="number" value="{{ old('harga', $p->harga) }}" class="form-control"
                                     name="harga" placeholder="Rp.">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Harga Tiket Anak-anak</label>
+                                <input type="number" value="{{ old('harga_anak', $p->harga_anak) }}" class="form-control"
+                                    name="harga_anak" placeholder="Rp.">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Deskripsi</label>
+                                <input type="text" value="{{ old('isi', $p->isi) }}" class="form-control"
+                                    name="isi" placeholder="">
                             </div>
                             <div class="form-group">
                                 <label for="">Gambar</label>

@@ -5,7 +5,7 @@
                 <div class="footer-col col-md-4">
                     <h4>Kaldera Toba Nomadic Escape</h4>
                     <ul>
-                        <li> <a target="_BLANK" href="https://goo.gl/maps/fh9i7x2ZFGjhLb5Z7"><i class="fa fa-map-marker"
+                        <li> <a target="_BLANK" href="https://goo.gl/maps/fh9i7x2ZFGjhLb5Z7"><i class="fas fa-map-marker-alt"
                                     style="font-size:35px;"></i> Jl. Raja Saul Lumbantobing, Hutatoruan VI,
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kec. Ajibata, Toba, Sumatera Utara.</a></li>
                     </ul>

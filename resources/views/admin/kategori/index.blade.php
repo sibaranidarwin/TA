@@ -30,8 +30,8 @@
                 <!-- SELECT2 EXAMPLE -->
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">Data Kategori Wisata</h3>
-                        <div class="float-right">
+                        {{-- <h3 class="card-title">Data Kategori Wisata</h3> --}}
+                        <div class="float-left">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                 data-target="#exampleModalLong">

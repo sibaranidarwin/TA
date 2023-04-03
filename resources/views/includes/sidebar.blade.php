@@ -2,13 +2,13 @@
  <aside class="main-sidebar sidebar-primary elevation-4" style="background-color: #000066; color: #fff;">
      <!-- Brand Logo -->
      <a href="/" class="brand-link">
+         <span class="brand-text font-weight">Kaldera Toba </span>
          <img src="{{ asset('frontend/images/Logo_kaldera.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-         <span class="brand-text font-weight">Kaldera Toba </span>
      </a>
 <hr>
      <!-- Sidebar -->
-     <div class="sidebar">
+     {{-- <div class="sidebar"> --}}
          <!-- Sidebar user panel (optional) -->
          {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
              <div class="image">
@@ -38,15 +38,15 @@
                          <a href="{{ route('category.index') }}" class="nav-link {{ set_active('category.*') }}">
                              <i class="nav-icon fas fa-th"></i>
                              <p>
-                                 Kategori
+                                 Kategori Tiket Wisata
                              </p>
                          </a>
                      </li>
                      <li class="nav-item">
                          <a href="{{ route('product.index') }}" class="nav-link {{ set_active('product.*') }}">
-                             <i class="nav-icon fas fa-car"></i>
+                             <i class="nav-icon fa fa-table"></i>
                              <p>
-                                 Paket Wisata
+                                 Tiket Wisata
                              </p>
                          </a>
                      </li>
@@ -62,25 +62,25 @@
                          <a href="{{ route('gallery.index') }}" class="nav-link {{ set_active('gallery.*') }}">
                              <i class="nav-icon fas fa-image"></i>
                              <p>
-                                 Gallery
+                                 Gallery Wisata
                              </p>
                          </a>
                      </li>
 
                      <li class="nav-item">
                          <a href="{{ route('order.index') }}" class="nav-link {{ set_active('order.*') }}">
-                             <i class="nav-icon fa fa-cart-plus"></i>
+                             <i class="nav-icon fa fa-file"></i>
                              <p>
-                                 Pesanan
+                                 Pemesanan Tiket Wisata
                              </p>
                          </a>
                      </li>
                      <li class="nav-item">
                          <a href="{{ route('transaction.index') }}"
                              class="nav-link {{ set_active('transaction.*') }}">
-                             <i class="nav-icon fa fa-cart-plus"></i>
+                             <i class="nav-icon fa fa-credit-card"></i>
                              <p>
-                                 Jumlah Transaksi
+                                 Pembayaran Tiket Wisata
                              </p>
                          </a>
                      </li>
@@ -98,7 +98,7 @@
                              class="nav-link {{ set_active('pelanggan.transaksi') }}">
                              <i class="nav-icon fa fa-cart-plus"></i>
                              <p>
-                                 Pesanan
+                                 Lihat Tiket
                              </p>
                          </a>
                      </li>
@@ -106,9 +106,9 @@
                      <li class="nav-item">
                          <a href="{{ route('pelanggan.transaksi') }}"
                              class="nav-link {{ set_active('pelanggan.transaksi') }}">
-                             <i class="nav-icon fa fa-cart-plus"></i>
+                             <i class="nav-icon fa fa-table"></i>
                              <p>
-                                 Pesanan
+                                 Lihat Tiket
                              </p>
                          </a>
                      </li>

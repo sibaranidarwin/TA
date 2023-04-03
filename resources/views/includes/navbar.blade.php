@@ -70,6 +70,10 @@
                 <div class="dropdown-menu">
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
+                        <a href="" type="submit" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            Profile
+                        </a>
                         <button type="submit" class="dropdown-item">
                             <i class="fas fa-sign-out-alt"></i>
                             Logout

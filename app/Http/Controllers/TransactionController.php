@@ -21,6 +21,8 @@ class TransactionController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
+        // dd($transaction);
+
         return view('admin.pembayaran.index', compact('transaction'));
     }
 

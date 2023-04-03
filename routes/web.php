@@ -8,6 +8,7 @@ use App\Http\Controllers\Home\CheckoutController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\PacketDestinationController;
 use App\Http\Controllers\Home\RentalMobilController;
+use App\Http\Controllers\HomeController as ControllersHomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
@@ -33,14 +34,16 @@ Route::get('/gallery-wisata', function () {
 Route::get('/', [HomeController::class, 'get_home'])->name('home');
 Route::get('details/{slug}', [HomeController::class, 'get_detail'])->name('blog.detail');
 
+Route::post('form-tiket/{id}', [CartController::class, 'formtiket'])->name('form-tiket')->middleware('auth');
+Route::post('form-tiket/cart/{id}', [CartController::class, 'add'])->name('add-form')->middleware('auth');
 
 Route::get('cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
 Route::DELETE('cart/{id}', [CartController::class, 'cancel_booking'])->name('cart.delete')->middleware('auth');
 
-
 Route::get('/paket-wisata', [PacketDestinationController::class, 'get_wisata'])->name('get-wisata');
 Route::post('/paket-wisata/cart/{id}', [PacketDestinationController::class, 'add'])->name('detail-add')->middleware('auth');
 Route::get('/wisata', [PacketDestinationController::class, 'wisata'])->name('wisata')->middleware('auth');
+Route::get('/event', [PacketDestinationController::class, 'event'])->name('event')->middleware('auth');
 Route::get('/kegiatan-wisata', [PacketDestinationController::class, 'gallery_wisata'])->name('gallery-wisata');
 
 // midtrans route
@@ -48,6 +51,8 @@ Route::post('checkout', [CheckoutController::class, 'proccess'])->name('checkout
 // Route::get('/success', [CheckoutController::class, 'success'])->name('success');
 Route::post('/checkout/callback', [CheckoutController::class, 'success'])->name('midtrans-callback');
 
+//testimonial
+Route::post('testimoni', [HomeController::class, 'testimoni'])->name('testimoni')->middleware('auth');
 
 Auth::routes();
 Route::middleware(['admin', 'auth'])->group(function () {
@@ -74,6 +79,7 @@ Route::middleware('auth')->group(function () {
         return view('admin.index');
     })->name('dashboard.pelanggan');
 
+    Route::get('/testimoni', [HomeController::class, 'testimoni'])->name('pelangggan.testimoni');
     Route::get('/pemesanan', [OrderController::class, 'get_pesanan'])->name('pelanggan.transaksi');
     Route::get('/tiket-download/{id}', [OrderController::class, 'saveTiket'])->name('pelanggan.transaksi.download');
 });

@@ -70,7 +70,7 @@
                                 <p class="disclaimer mb-0">
                                     Kami akan mengirimkan detail pemesanan ke WhatsApp & Email.
                                 </p>
-                                <hr />
+                                {{-- <hr /> --}}
                             </div>
                         </div>
                     </div>
@@ -81,44 +81,19 @@
                             <input type="hidden" name="total_harga" value="{{ $carts->harga }}">
                             <div class="card card-details card-right">    
                             <h2><strong>Detail Pemesananan</strong></h2>
-                                <table class="trip-informations mt-3">
-                                    <tr>
-                                        <td width=""><span>
-                                                {{ $carts->nama_produk }}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td width=""><span>Tiket Masuk 1 Hari</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td width="">Tanggal Dipilih</td>
-                                        <td width="" class="text-right">
-                                            <input type="" class="form-control" name="tgl_wisata"
-                                                value="{{ date('Y-m-d') }}" required>
-                                        </td>
-                                    </tr>
-                                    {{-- <tr>
-                                        <td>Jumlah Tiket</td>
-                                        <td>
-                                           <div id="input_div">
-                                                <input type="text" size="25" value="1" id="count">
-                                                <input type="button" value="-" id="moins" onclick="minus()">
-                                                <input type="button" value="+" id="plus" onclick="plus()">
-                                            </div>
-                                        </td>
-                                    </tr> --}}
-                                    <tr class="mt-3">
-                                        <td width="">Total Harga</td>
-                                        <td width="" class="text-right text-total">
-                                            <span class="">IDR {{ $carts->harga }}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <br>
+                               <p>{{ $carts->nama_produk }}</p>
+                            <br>
+                               <p>Tiket Masuk 1 Hari</p>
+                            <br>
+                            <p>Tanggal Dipilih : <input type="date" class="form-control" name="tgl_wisata"
+                                value="{{ date('Y-m-d') }}" required> </p>
+                            <br>
+                            <p><strong>Total Harga: Rp {{ $carts->harga }}</strong></p>
                                 <hr />
-                                <h2>Payment Instructions</h2>
+                                <h2>Instruksi Pembayaran</h2>
                                 <p class="payment-instructions">
-                                    Please complete your payment before to continue the wonderful
-                                    trip
+                                    Harap selesaikan pembayaran Anda sebelum melanjutkan perjalanan yang indah
                                 </p>
                             </div>
                             <div class="join-container">
