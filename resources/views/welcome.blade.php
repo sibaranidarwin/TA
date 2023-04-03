@@ -33,8 +33,9 @@
                     <div class="text-content">
                         <h3>Selamat Datang di Wisata Kaldera</h3>
                         <h5>Pemesanan Tiket Online Wisata Kaldera Toba Nomadic Escape</h5>
-                        <a href="#testimonials" class="main-filled-button">Pesan Tiket</a>
-                        <a href="{{ route('register') }}" class="main-stroked-button">Buat Akun</a>
+                        
+                            <a href="#testimonials" class="main-filled-button">Pesan Tiket</a>
+                            <a href="{{ route('register') }}" class="main-stroked-button">Buat Akun</a>
                     </div>
                 </div>
             </div>

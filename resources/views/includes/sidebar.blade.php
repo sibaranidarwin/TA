@@ -25,6 +25,7 @@
                  data-accordion="false">
                  <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               <h6 class="text-section">DASHBOARD</h6>
                  @if (Auth::user()->role == 'admin')
                      <li class="nav-item">
                          <a href="{{ route('dashboard') }}" class="nav-link {{ set_active('dashboard') }}">
@@ -34,22 +35,50 @@
                              </p>
                          </a>
                      </li>
+                     <br>
+                     <h6 class="text-section">DATA TIKET</h6>
                      <li class="nav-item">
                          <a href="{{ route('category.index') }}" class="nav-link {{ set_active('category.*') }}">
-                             <i class="nav-icon fas fa-th"></i>
+                             <i class="nav-icon fa fa-tags"></i>
                              <p>
+
                                  Kategori Tiket Wisata
                              </p>
                          </a>
                      </li>
                      <li class="nav-item">
                          <a href="{{ route('product.index') }}" class="nav-link {{ set_active('product.*') }}">
+
                              <i class="nav-icon fa fa-table"></i>
                              <p>
                                  Tiket Wisata
+
                              </p>
                          </a>
                      </li>
+
+                     <br>
+                     <h6 class="text-section">LAPORAN</h6>
+                     <li class="nav-item">
+                        <a href="{{ route('order.index') }}" class="nav-link {{ set_active('order.*') }}">
+                            <i class="nav-icon fa fa-shopping-cart"></i>
+                            <p>
+                                Pemesanan
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('transaction.index') }}"
+                            class="nav-link {{ set_active('transaction.*') }}">
+                            <i class="nav-icon fa fa-cart-plus"></i>
+                            <p>
+                                Pembayaran
+                            </p>
+                        </a>
+                    </li>
+
+                    <br>
+                    <h6 class="text-section">KELOLA GALERI</h6>
                      <li class="nav-item">
                          <a href="{{ route('article.index') }}" class="nav-link {{ set_active('article.*') }}">
                              <i class="nav-icon fas fa-image"></i>
@@ -60,30 +89,13 @@
                      </li>
                      <li class="nav-item">
                          <a href="{{ route('gallery.index') }}" class="nav-link {{ set_active('gallery.*') }}">
-                             <i class="nav-icon fas fa-image"></i>
+                             <i class="nav-icon fa fa-film"></i>
                              <p>
                                  Gallery Wisata
                              </p>
                          </a>
                      </li>
 
-                     <li class="nav-item">
-                         <a href="{{ route('order.index') }}" class="nav-link {{ set_active('order.*') }}">
-                             <i class="nav-icon fa fa-file"></i>
-                             <p>
-                                 Pemesanan Tiket Wisata
-                             </p>
-                         </a>
-                     </li>
-                     <li class="nav-item">
-                         <a href="{{ route('transaction.index') }}"
-                             class="nav-link {{ set_active('transaction.*') }}">
-                             <i class="nav-icon fa fa-credit-card"></i>
-                             <p>
-                                 Pembayaran Tiket Wisata
-                             </p>
-                         </a>
-                     </li>
                      <li class="nav-item">
                          <a href="{{ route('user.index') }}" class="nav-link" {{ set_active('user.*') }}>
                              <i class="nav-icon fa fa-user-circle"></i>

@@ -15,7 +15,12 @@
     <link rel="stylesheet" href="{{ asset('frontend/libraries/xzoom/dist/xzoom.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/libraries/gijgo/css/gijgo.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/styles/footer.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('pelanggan/assets/css/owl-carousel.css') }}">
+
+
     <link rel="stylesheet" href="{{ asset('frontend/styles/templatemo-breezed.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/styles/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
    
 </head>
