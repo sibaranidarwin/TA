@@ -14,8 +14,9 @@
                     <div class="text-content">
                         <h3>Selamat Datang di Wisata Kaldera</h3>
                         <h5>Pemesanan Tiket Online Wisata Kaldera Toba Nomadic Escape</h5>
-                        <a href="#testimonials" class="main-filled-button">Pesan Tiket</a>
-                        <a href="{{ route('register') }}" class="main-stroked-button">Buat Akun</a>
+                        
+                            <a href="#testimonials" class="main-filled-button">Pesan Tiket</a>
+                            <a href="{{ route('register') }}" class="main-stroked-button">Buat Akun</a>
                     </div>
                 </div>
             </div>
@@ -66,6 +67,28 @@
                     <h5><strong>Ayo Liburan ke destinasi menarik wisata kaldera!</strong></h5>
                     <p>Ada berbagai pilihan tiket dengan harga yang spesial, lho. jangan sampai kehabisan ya!</p>
                 </div>
+                <br>
+                <p><b>Kategori Tiket</b></p>
+                <ul class="nav nav-pills" role="tablist">
+                    
+                    <li class="nav-item">
+                        <a class="btn btn-outline-secondary nav-link active" href="#home">
+                            <i class="fa fa-newspaper-o"></i><br><span><b>Semua</b></span>
+                        </a>
+                    </li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <a class="btn btn-outline-secondary nav-link" href="#menu1">
+                            <i class="fa fa-calendar-o"></i><br><span><b>Event</b></span>
+                        </a>
+                    </li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <a class="btn btn-outline-secondary nav-link" href="#menu3">
+                            <i class="fa fa-credit-card"></i><br><span><b>Tiket</b></span>
+                        </a>
+                    </li>
+
                 <div class="section-popular-travel row justify-content-left mt-3">
                     @foreach ($product as $item)
                         <div class="col-sm-4 col-md-4 col-lg-4">
