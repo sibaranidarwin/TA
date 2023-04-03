@@ -125,7 +125,7 @@ body {
 }
 
 ::-moz-selection {
-  background: #5fb759;
+  background: #000066;
   color: #fff;
 }
 
@@ -163,7 +163,7 @@ a.main-stroked-button {
 
 a.main-stroked-button:hover {
   background-color: #fff;
-  color: #5fb759;
+  color: #000066;
 }
 
 a.main-filled-button {
@@ -172,7 +172,7 @@ a.main-filled-button {
   padding: 13px 25px;
   background-color: #fff;
   text-transform: uppercase;
-  color: #5fb759;
+  color: #000066;
   font-weight: 600;
   letter-spacing: 1px;
   -webkit-transition: all 0.3s ease 0s;
@@ -183,7 +183,7 @@ a.main-filled-button {
 
 a.main-filled-button:hover {
   color: #fff;
-  background-color: #5fb759;
+  background-color: #000066;
 }
 
 a.main-button-icon {

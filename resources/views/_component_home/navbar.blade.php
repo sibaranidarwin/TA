@@ -33,20 +33,28 @@
                                     @guest
                                     @if (Route::has('login'))
                                     <li class="nav-item mx-md-2 ">
-                                        <a class="nav-link {{ set_active('wisata') }}" href="{{ route('wisata') }}">Tiket
+                                        <a class="nav-link {{ set_active('wisata') }}" href="{{ route('wisata') }}">Tiket Masuk
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mx-md-2 ">
+                                        <a class="nav-link {{ set_active('wisata') }}" href="{{ route('wisata') }}">Tiket Event
                                         </a>
                                     </li>
                                     @endif
                                     @else
                                     <li class="nav-item mx-md-2 ">
                                         <a class="nav-link {{ set_active('wisata') }}"
-                                            href="{{ route('wisata') }}">{{ ucwords('Tiket') }}</a>
+                                            href="{{ route('wisata') }}">{{ ucwords('Tiket Masuk ') }}</a>
+                                    </li>
+                                    <li class="nav-item mx-md-2 ">
+                                        <a class="nav-link {{ set_active('event') }}"
+                                            href="{{ route('event') }}">{{ ucwords('Tiket Event') }}</a>
                                     </li>
                                     @endguest
-                                    <li class="nav-item mx-md-2 ">
+                                    {{-- <li class="nav-item mx-md-2 ">
                                         <a class="nav-link {{ set_active('gallery-wisata') }}"
                                             href="{{ route('gallery-wisata') }}">Galery</a>
-                                    </li>
+                                    </li> --}}
                                     <hr />
                                     <!-- Mobile button -->
                                     @guest
@@ -89,6 +97,7 @@
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </li>
+                                    
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

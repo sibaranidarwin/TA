@@ -55,7 +55,7 @@
                                             <td>{{ $item->kode_transaksi }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->nama_produk }}</td>
-                                            <td>Rp. {{ $item->harga }}</td>
+                                            <td>Rp. {{ $item->total_harga }}</td>
                                             <td>{{ TanggalID($item->tgl_wisata) }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
