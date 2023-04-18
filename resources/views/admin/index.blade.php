@@ -216,8 +216,7 @@
                             <div class="small-box bg-secondary">
                                 <div class="inner">
                                     <h3>Rp {{ number_format($total_minggu, 0, ',', '.') }}</h3>
-
-                                    <p>Penjualan Tiket Tanggal 12 sampai 16</p>
+                                    <p>Penjualan Tiket Tanggal {{$startweek}} sampai {{$endweek}}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
