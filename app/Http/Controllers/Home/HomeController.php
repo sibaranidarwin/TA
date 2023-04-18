@@ -81,8 +81,10 @@ class HomeController extends Controller
         $total_minggu =Transaction::whereBetween('tgl_wisata', [$start_week, $end_week])->sum('total_harga');
         // dd($total_minggu);
 
-        
-        return view('admin.index', compact('total_tahun', 'total_bulan', 'total_minggu'));
+        $startweek = $now->startOfWeek(Carbon::MONDAY)->format('d');
+        $endweek = $now->endOfWeek()->format('d');
+
+        return view('admin.index', compact('total_tahun', 'total_bulan', 'total_minggu', 'startweek', 'endweek'));
     }
 
     function filterdash(){
