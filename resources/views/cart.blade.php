@@ -75,21 +75,33 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
+                        {{-- {{ dd($carts) }} --}}
                         <form action="{{ route('checkout') }}" enctype="multipart/form-data" method="post">
                             @csrf
 
-                            <input type="hidden" name="total_harga" value="{{ $carts->harga }}">
+                            <input type="hidden" name="total_harga" value="{{ $carts->total_harga }}">
                             <div class="card card-details card-right">    
                             <h2><strong>Detail Pemesananan</strong></h2>
                             <br>
                                <p>{{ $carts->nama_produk }}</p>
+                               <p hidden><input type="hidden" class="form-control" name="nama_tiket"
+                                value="{{ $carts->nama_produk }}" required> </p>
                             <br>
                                <p>Tiket Masuk 1 Hari</p>
                             <br>
-                            <p>Tanggal Dipilih : <input type="date" class="form-control" name="tgl_wisata"
-                                value="{{ date('Y-m-d') }}" required> </p>
+                            <p>Tanggal Dipilih : {{ Carbon\Carbon::parse($carts->tgl_wisata)->format('d F Y') }}</p>
+                            <p hidden><input type="hidden" class="form-control" name="tgl_wisata"
+                                value="{{ $carts->tgl_wisata }}" required> </p>
                             <br>
-                            <p><strong>Total Harga: Rp {{ $carts->harga }}</strong></p>
+                            <p>Jumlah Tiket Dewasa : {{ ($carts->dewasa) }} Orang </p>
+                            <p hidden><input type="hidden" class="form-control" name="dewasa"
+                                value="{{ $carts->dewasa }}" required> </p>
+                            <br>
+                            <p>Jumlah Tiket Anak-anak : {{ ($carts->anak) }} Orang </p>
+                            <p hidden><input type="hidden" class="form-control" name="anak"
+                                value="{{ $carts->anak }}" required> </p>
+                            <br>
+                            <p><strong>Total Harga: Rp {{ number_format($carts->total_harga,  0, ',', '.') }}</strong></p>
                                 <hr />
                                 <h2>Instruksi Pembayaran</h2>
                                 <p class="payment-instructions">

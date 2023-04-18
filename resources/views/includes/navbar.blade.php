@@ -40,6 +40,7 @@
     }
     </style>
     
+    @if (Auth::user()->role == 'admin')
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #0079C2;">
         <!-- Left navbar links -->
@@ -70,7 +71,7 @@
                 <div class="dropdown-menu">
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <a href="" type="submit" class="dropdown-item">
+                        <a href="{{ url('profile', Auth::user()->id)}}" type="submit" class="dropdown-item">
                             <i class="fas fa-user"></i>
                             Profile
                         </a>
@@ -83,4 +84,49 @@
             </li>
         </ul>
     </nav>
+    @else
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #0079C2;">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" style="color: #fff" data-widget="pushmenu" href="#" role="button"><i
+                        class="fas fa-bars"></i></a>
+            </li>
+        </ul>
+    
+        <div class="searchInputWrapper">
+            <input class="searchInput" type="text" placeholder='Search'>
+            <i class="searchInputIcon fa fa-search"></i>
+            </input>
+        </div>
+    
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Navbar Search -->
+            <!-- Notifications Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <img height="30px" src="{{asset('admin/img/avatar.png')}}" class="img-circle elevation-2" alt="User Image">
+                <a class="dropdown-toggle" style="color: #fff;" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ Auth::user()->name }}
+                </a>
+                
+                <div class="dropdown-menu">
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <a href="{{ url('profilepengunjung', Auth::user()->id)}}" type="submit" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            Profile
+                        </a>
+                        <button type="submit" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    @endif
     <!-- /.navbar -->

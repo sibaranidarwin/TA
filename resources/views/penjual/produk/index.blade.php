@@ -50,7 +50,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Kategori</th>
-                                        <th>Nama Tiket</th>
+                                        <th>Wisata</th>
                                         <th>Harga Tiket Dewasa</th>
                                         <th>Harga Tiket Anak-anak</th>
                                         <th>Deskripsi</th>
@@ -67,7 +67,7 @@
                                             <td>{{ $item->nama_produk }}</td>
                                             <td>Rp {{ number_format($item->harga, 0, '.', '.') }}</td>
                                             <td>Rp {{ number_format($item->harga_anak, 0, '.', '.') }}</td>
-                                            <td>{{Str::limit($item->isi, 30) }} </td>
+                                            <td>{{ $item->isi }}</td>
                                             {{-- <td>
                                                 <img src="{{ Storage::url('public/products/' . $item->gambar) }}"
                                                     height="100px" class="rounded" alt="" srcset="">
@@ -76,13 +76,13 @@
                                                 <form action="{{ route('product.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="#" class="btn btn-info btn-xs" data-toggle="modal"
+                                                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
                                                         data-target="#show-product{{ $item->id }}"><i class="fa fa-eye"
                                                             aria-hidden="true"></i> Show</a>
-                                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
                                                         data-target="#edit-product{{ $item->id }}"><i
                                                             class="fas fa-edit"></i> Edit</a>
-                                                    <button type="submit" class="btn btn-danger btn-xs"><i
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
                                                             class="fa fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>

@@ -62,9 +62,10 @@ class ProductController extends Controller
         }
         $image = $request->file('file_gambar');
         $image->storeAs('public/products', $image->hashName());
-        Product::create([
+        $da = Product::create([
             'nama_produk' => $request->input('nama_produk'),
             'harga' => $request->input('harga'),
+            'tgl_event' => $request->input('tgl_event'),
             'harga_anak' => $request->input('harga_anak'),
             'gambar' => $image->hashName(),
             'isi' => $request->input('isi'),
@@ -73,6 +74,7 @@ class ProductController extends Controller
             // 'type_product' => $request->input('type_product'),
         ]);
 
+        // dd($da);
         return redirect()->route('product.index')->with('toast_success', 'Data berhasil disimpan!');
     }
 

@@ -14,6 +14,7 @@ use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller
 {
@@ -25,8 +26,13 @@ class CheckoutController extends Controller
             ->where('user_id', Auth::user()->id)
             ->get();
         $tgl_wisata = $request->tgl_wisata;
+        // $tgl_wisata = now();
+
         $transaction = Transaction::create([
             'user_id' => Auth::user()->id,
+            'nama_tiket' => $request->nama_tiket,
+            'anak' => $request->anak,
+            'dewasa' => $request->dewasa,
             'total_harga' => (int) $request->total_harga,
             'status' => 'PENDING',
             'kode' => $code,
@@ -66,8 +72,31 @@ class CheckoutController extends Controller
                 'first_name' => Auth::user()->name,
                 'email' => Auth::user()->email
             ],
-            'enabled_payments' => [
-                'gopay', 'bni_va', 'bank_transfer', 'bri_va'
+            // 'enabled_payments' => [
+            //     'gopay', 'bni_va', 'bank_transfer', 'bri_va', 'indomaret', 'alfamart', 
+            // ],
+            "enabled_payments" => [
+                "credit_card",
+                "gopay",
+                "shopeepay",
+                "permata_va",
+                "bca_va",
+                "bni_va",
+                "bri_va",
+                "echannel",
+                "other_va",
+                "danamon_online",
+                "mandiri_clickpay",
+                "cimb_clicks",
+                "bca_klikbca",
+                "bca_klikpay",
+                "bri_epay",
+                "xl_tunai",
+                "indosat_dompetku",
+                "kioson",
+                "Indomaret",
+                "alfamart",
+                "akulaku"
             ],
             'vtweb' => []
         ];

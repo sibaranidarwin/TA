@@ -17,9 +17,12 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('anak');
+            $table->unsignedBigInteger('dewasa');
             $table->date('tgl_wisata');
+            $table->unsignedBigInteger('total_harga');
             $table->timestamps();
-
+            
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });

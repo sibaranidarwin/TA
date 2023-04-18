@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Image;
+use App\Models\Cart;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -24,7 +25,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $detail = TransactionDetail::leftJoin('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
+       
+        $transaction = TransactionDetail::leftJoin('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
             ->leftJoin('products', 'transaction_details.product_id', '=', 'products.id')
             ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
             ->select(
@@ -35,9 +37,11 @@ class OrderController extends Controller
                 'products.nama_produk',
             )
             ->get();
+            $start_date = null;
+            $end_date = null;    
 
-            // dd($detail);
-        return view('admin.pesanan.index', compact('detail'));
+            // dd($transaction);
+        return view('admin.pesanan.index', compact('transaction', 'start_date', 'end_date'));
     }
 
     public function get_pesanan()
@@ -51,6 +55,29 @@ class OrderController extends Controller
     }
 
     public function saveTiket(Request $request, $id)
+    {
+        $detail = Transaction::find($id);
+        // dd($detail);
+        $carts = Transaction::select(
+            'transactions.id',
+            'transactions.user_id',
+            'transactions.nama_tiket',
+            'transactions.anak',
+            'transactions.dewasa',
+            'transactions.total_harga',
+            'transactions.status',
+            'transactions.kode',
+        )
+        ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
+        ->where("transactions.id", "=", "$detail->id")
+        ->where('user_id', Auth::user()->id)
+        ->get();
+        
+        // dd($carts);
+        return view('admin.pelanggan_pesanan.success', compact('carts'));
+    }
+
+    public function simpan_tiket(Request $request, $id)
     {
 
         $transaction = Transaction::leftJoin('users', 'transactions.user_id', '=', 'users.id')

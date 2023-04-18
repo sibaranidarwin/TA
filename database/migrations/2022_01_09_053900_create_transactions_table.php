@@ -16,6 +16,9 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('nama_tiket');
+            $table->integer('anak');
+            $table->integer('dewasa');
             $table->integer('total_harga');
             $table->string('status');
             $table->string('kode');

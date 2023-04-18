@@ -13,7 +13,7 @@ class Transaction extends Model
     protected $table = 'transactions';
 
     protected $fillable = [
-        'user_id',
+        'user_id', 'nama_tiket', 'anak', 'dewasa',
         'total_harga',
         'status', 'kode', 'tgl_wisata'
     ];

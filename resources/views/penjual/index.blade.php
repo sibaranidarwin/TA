@@ -57,58 +57,20 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <h1 class="m-0">Dashboard</h1>
                     </div><!-- /.col -->
-                    <div style="float: right;">
-                        <form action="{{ route('filterdash') }}" class="form-inline" method="GET">
-                        <select class="form-control form-control-sm form-select col-5-half" name="month">
-                            <option value="">Choose Month</option>
-                                    <option value='1'>January</option>
-                                    <option value="2">February</option>
-                                    <option value="3">Maret</option>
-                                    <option value="4">April</option>
-                                    <option value="5">May</option>
-                                    <option value="6">June</option>
-                                    <option value="7">July</option>
-                                    <option value="8">Agustus</option>
-                                    <option value="9">September</option>
-                                    <option value="10">Oktober</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                        </select>
-                        &nbsp;
-                        <select class="form-control form-control-sm form-select col-4-half" name="yer">
-                            <option value="">Choose Year</option>
-                            <option value='2018'>2018</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028</option>
-                            <option value="2029">2029</option>       
-                        </select>
-                        &nbsp;
-                        <button class="btn btn-secondary btn-sm" onclick="return confirm('Are you sure?')" type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                        </div>
-                        <div class="col-sm-2">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
-                            </ol>
-                        </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div><!-- /.col -->
                 </div><!-- /.row -->
-                
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        
+
         <!-- Main content -->
         @if (Auth::user()->role == 'admin')
             <section class="content">

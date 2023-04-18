@@ -39,6 +39,7 @@ Route::post('form-tiket/cart/{id}', [CartController::class, 'add'])->name('add-f
 
 Route::get('cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
 Route::DELETE('cart/{id}', [CartController::class, 'cancel_booking'])->name('cart.delete')->middleware('auth');
+Route::get('profilepengunjung/{id}', [HomeController::class, 'profilepengunjung'])->name('profilepengunjung')->middleware('auth');
 
 Route::get('/paket-wisata', [PacketDestinationController::class, 'get_wisata'])->name('get-wisata');
 Route::post('/paket-wisata/cart/{id}', [PacketDestinationController::class, 'add'])->name('detail-add')->middleware('auth');
@@ -57,9 +58,11 @@ Route::post('testimoni', [HomeController::class, 'testimoni'])->name('testimoni'
 Auth::routes();
 Route::middleware(['admin', 'auth'])->group(function () {
     // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('dashboard', function () {
-        return view('admin.index');
-    })->name('dashboard');
+    Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('profile/{id}', [HomeController::class, 'profile'])->name('profile');
+    Route::get('filterdashboard', [HomeController::class, 'filterdash'])->name('filterdash');
+    Route::get('filterpembayaran', [HomeController::class, 'filterpembayaran'])->name('filterpembayaran');
+    Route::get('filterpemesanan', [HomeController::class, 'filterpemesanan'])->name('filterpemesanan');
 
     Route::resource('gallery', GalleryController::class);
     Route::resource('article', ArticleController::class);
@@ -68,6 +71,7 @@ Route::middleware(['admin', 'auth'])->group(function () {
     // Route::resource('paket', PaketController::class);
     Route::resource('order', OrderController::class);
     Route::resource('transaction', TransactionController::class);
+    Route::resource('pembayaran', TransactionController::class);
     // Route::resource('wisatawan', WisatawanController::class);
 
     Route::resource('product', ProductController::class);

@@ -443,7 +443,7 @@ header
 
 .header-area .main-nav .nav li:hover a,
 .header-area .main-nav .nav li a.active {
-  color: #fff!important;
+  color: #1e1e1e!important;
   opacity: 0.5;
 }
 

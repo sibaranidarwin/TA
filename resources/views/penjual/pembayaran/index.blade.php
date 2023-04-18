@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.penjual')
 
 @section('title')
     <title>Transaksi</title>
@@ -39,15 +39,11 @@
                     </div> --}}
                     <!-- /.card-header -->
                     <div class="card-body">
-                        @if ($start_date != null || $end_date != null)
-                        <p class="title" style="text-align: center; background-color: #007bff; color: #fff;"></i><strong>Tanggal Kunjungan: {{ Carbon\Carbon::parse($start_date)->format('d F Y') }} Sampai: {{ Carbon\Carbon::parse($end_date)->format('d F Y') }} </strong></i></p>
-                        @endif
                         <div class="table-responsive">
-
-                            <form action="{{ route('filterpembayaran') }}" class="form-inline mb-3"
+                            <form action="" class="form-inline mb-3"
                             method="GET">
                             <div class="form-group ">
-                                <label for="">Tanggal Pembayaran : &nbsp;</label>
+                                <label for="">Tanggal Kunjungan : &nbsp;</label>
                                 <input type="date" class="form-control form-control-sm"
                                     name="start_date">
                             </div>
@@ -67,8 +63,8 @@
                                         <th>Order ID</th>
                                         <th>Nama</th>
                                         <th>Harga</th>
-                                        <th>Tanggal Kunjungan</th>
                                         <th>Status</th>
+                                        <th>Tanggal Kunjungan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -79,23 +75,19 @@
                                             <td>{{ $item->kode }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>Rp {{ number_format($item->total_harga, 0, '.', '.') }}</td>
-                                            <td>{{ $item->tgl_wisata }}</td>
                                             <td>
                                                 @if ($item->status == 'PENDING')
                                                     <button
                                                         class="btn btn-warning btn-sm rounded">{{ $item->status }}</button>
-                                                        <a data-toggle="tooltip" data-placement="bottom" href="" class="btn btn-success btn-sm" title="Cancel Disputed"
-                                                onclick="return confirm('Are you sure?')"><i class="fa fa-check"></i></a>
                                                 @elseif ($item->status == 'SUCCESS')
                                                     <button
                                                         class="btn btn-success btn-sm rounded">{{ $item->status }}</button>
-                                                        <a data-toggle="tooltip" data-placement="bottom" href="" class="btn btn-danger btn-sm" title="Cancel Disputed"
-                                                onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
                                                 @else
                                                     <button
                                                         class="btn btn-danger btn-sm rounded">{{ $item->status }}</button>
                                                 @endif
                                             </td>
+                                            <td>{{ $item->tgl_wisata }}</td>
                                             <td>
                                                 {{-- <form action="{{ route('gallery.destroy', $item->id) }}" method="post">
                                                     @csrf
