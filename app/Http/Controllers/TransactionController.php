@@ -20,10 +20,13 @@ class TransactionController extends Controller
             ->select('transactions.*', 'users.name')
             ->orderBy('id', 'DESC')
             ->get();
+        
+        $start_date = null;
+        $end_date = null;
 
         // dd($transaction);
 
-        return view('admin.pembayaran.index', compact('transaction'));
+        return view('admin.pembayaran.index', compact('transaction', 'start_date', 'end_date'));
     }
 
     /**

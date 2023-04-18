@@ -22,6 +22,9 @@
   display: block;
   align-items: center;
 }
+i{
+    font-family: 'Segoe UI';
+}
 </style>
     <!-- privilage woi travel -->
     <div class="main-banner" id="top">
@@ -56,128 +59,102 @@
     </div>
 
     <main>
-        {{-- <div class="container">
-            <section class="section-stats row justify-content-center" id="stats">
-                <div class="col-5 col-md-12 stats-detail">
-                    <p>Wisata Desa Trinsing merupakan salah satu Lokasi wisata Barito Utara yang
-                        terbaru dan terhits
-                        lainnya adalah bendungan Trinsing. Bendungan yang berada di desa Trinsing ini dapat dijadikan
-                        lokasi untuk berenang dan memainkan aktifitas air lainnya. Anda dapat menyewa sepeda bebek agar
-                        dapat mengelilingi bendungan Trinsing.</p>
-                </div>
-            </section>
-        </div> --}}
-
-        <!---- text & detail picture wisata populer ---->
-        {{-- <section class="section-popular" id="popular">
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center section-popular-heading">
-                        <h2> Wisata Desa Trinsing</h2>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-
         <section class="section-popular-content" id="popularContent">
             <div class="container mt-5">
                 <div class="col text-left">
-                    <h5><strong>Ayo Liburan ke destinasi menarik wisata kaldera!</strong></h5>
-                    <p>Ada berbagai pilihan tiket dengan harga yang spesial, lho. jangan sampai kehabisan ya!</p>
+                    <h5><strong>Tiket Masuk Kaldera Toba!</strong></h5>
+                    <p>Berikut form tiket masuk kaldera toba nomadic escape, lho. jangan sampai kehabisan ya!</p>
                 </div>
                 <div class="row mt-5">
                 @foreach ($products as $item)
                 @endforeach
                 <div class="form-group col-lg-6 col-md-6 col-xs-12"> 
-                    <h6><strong style="color: black;">{{$item->nama_produk}}</strong></h6>
-                    {{-- <p><strong> Tiket Masuk 1 Hari </strong></p> --}}
-                    <p class="" style="color: #F15C59; text-align: left; font-family: roboto;">Rp {{number_format($item->harga)}}&nbsp;&nbsp;&nbsp;<strong style="color: black;">(Dewasa)</strong></p>
-                    <p class="" style="color: #F15C59; text-align: left; font-family: roboto;">Rp {{number_format($item->harga_anak)}}&nbsp;&nbsp;&nbsp;<strong style="color: black;">(Anak-anak)</strong></p>
+                    {{-- <h6><strong style="color: black;">{{$item->nama_produk}}</strong></h6> --}}
+                    <p><strong> Tiket Masuk 1 Hari </strong></p>
+                    <p class="" style="color: #F15C59; text-align: left; font-family: roboto;">Rp {{number_format($item->harga, 0, ',', '.')}}&nbsp;&nbsp;&nbsp;<strong style="color: black;">(Dewasa)</strong></p>
+                    <p class="" style="color: #F15C59; text-align: left; font-family: roboto;">Rp {{number_format($item->harga_anak, 0, ',', '.') }}&nbsp;&nbsp;&nbsp;<strong style="color: black;">(Anak-anak)</strong></p>
                     <hr >
-                    <p><i class="fa fa-hourglass-end">&nbsp; Berlaku ditanggal yang terpilih</i></p>
-                    <p><i class="fa fa-calendar">&nbsp; Konfirmasi instan</i></p>
-                    <p><i class="fa fa-money">&nbsp; Tidak bisa refund</i></p>
+                    <i class="fa fa-hourglass-end" style="color: black;"><span style="font-family: roboto;">&nbsp; Berlaku ditanggal yang terpilih</span></i><br><br>
+                    <i class="fa fa-calendar" style="color: black;"><span style="font-family: roboto;">&nbsp; Konfirmasi instan</span></i><br><br>
+                    <i class="fa fa-money" style="color: black;"><span style="font-family: roboto;">&nbsp; Tidak bisa refund</span></i>
                     <hr >
                     <p>Lihat Informasi Penukaran tiket, tiket sudah termasuk <br> dan syarat ketentuan <strong>disini!</strong></p>
                 </div>
-                <div class="form-group col-lg-6 col-md-6 col-xs-12 mt-3 contact-form-area contact-page-form contact-form text-left">
-                       
-    
+                <div class="form-group col-lg-6 col-md-6 col-xs-12 mt-3 contact-form-area contact-page-form contact-form text-left"> 
+                    <form action="{{ route('add-form', $item->id) }}" method="post">
+                        @csrf
                     <label hidden><strong>Id Pemesanan : </strong></label>
                         <input hidden type="text" name="id" class="form-control" placeholder="Id Pemesanan" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Id Pemesanan'" value=" S-{{ rand() }}" readonly>
-                    {{-- <input type="text" name="id_wisata" value="{{$wisata->id}}" hidden> --}}
-                    
-                    {{-- @if(Session::get('loginPelanggan'))
-                        <input hidden type="text" name="id_pelanggan" value="{{Session::get('id_pelanggan')}}" hidden>
-                        <label hidden><strong>Nama Pemesan : </strong></label>
-                            <input hidden type="text" class="form-control" name="nama_pelanggan" placeholder="Masukkan Nama" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Masukkan Nama'" value="{{Session::get('nama_pelanggan')}}">
-                            @if ($errors->has('nama_pelanggan'))
-                            <span class="text-danger"><p class="text-right">* {{$errors->first('nama_pelanggan') }}</p></span>
-                            @endif
-                    @else
-                        <label><strong>Nama Pemesan : </strong></label>
-                        <input type="text" class="form-control" name="nama_pelanggan" placeholder="Masukkan Nama" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = 'Masukkan Nama'">
-                        @if ($errors->has('nama_pelanggan'))
-                        <span class="text-danger"><p class="text-right">* {{$errors->first('nama_pelanggan') }}</p></span>
-                        @endif
-                    @endif --}}
-
-                    <label><strong>Tanggal : </strong></label>
-                        <input type="date" class="form-control" name="tanggal_wisata" placeholder="Pilih Tanggal Wisata" onfocus="this.placeholder = ''"
-                                     onblur="this.placeholder = 'Pilih Tanggal Wisata'">
-                        @if ($errors->has('tanggal_wisata'))
-                          <span class="text-danger"><p class="text-right">* {{$errors->first('tanggal_wisata') }}</p></span>
+                        
+                        <label><strong>Tanggal : </strong></label>
+                        <input type="date" class="form-control" name="tgl_wisata" placeholder="Pilih Tanggal Wisata" onfocus="this.placeholder = ''"
+                                     onblur="this.placeholder = 'Pilih Tanggal Wisata'" required>
+                        @if ($errors->has('tgl_wisata'))
+                          <span class="text-danger"><p class="text-right">* {{$errors->first('tgl_wisata') }}</p></span>
                         @endif
 
                         <label><strong>Jumlah Tiket : </strong></label>
-                        <input type="number" min="0" max="1000" step="0.1" id="id-1" class="form-control" name="jumlah_tiket" placeholder="Dewasa" onfocus="this.placeholder = ''"
-                                     onblur="this.placeholder = 'Dewasa'">
-                        <input hidden type="number" min="0" max="1000" step="0.1" id="id-4" class="form-control" name="" value="15000" onfocus="this.placeholder = ''"
-                                     onblur="this.placeholder = 'Dewasa'">
-                        <input type="number" min="0" max="1000" step="0.1" id="id-2" class="form-control" name="jumlah_tiket" placeholder="Anak-anak" onfocus="this.placeholder = ''"
+                        <input type="number" min="0" max="1000" step="0.1" id="id-1" class="form-control" name="dewasa" placeholder="Dewasa" onfocus="this.placeholder = ''"
+                                     onblur="this.placeholder = 'Dewasa'" required>
+                        <input type="hidden" min="0" max="1000" step="0.1" id="id-4" class="form-control" name="" value="{{ ($item->harga)}}" onfocus="this.placeholder = ''"
+                                     onblur="this.placeholder = 'dewasa'">
+                        <input type="number" min="0" max="1000" step="0.1" id="id-2" class="form-control" name="anak" placeholder="Anak" onfocus="this.placeholder = ''"
                                      onblur="this.placeholder = 'Anak-anak'">
-                        <input hidden type="number" min="0" max="1000" step="0.1" id="id-5" class="form-control" name="" value="30000" onfocus="this.placeholder = ''"
-                                     onblur="this.placeholder = 'Anak-anak'">  
-                        @if ($errors->has('jumlah_tiket'))
-                          <span class="text-danger"><p class="text-right">* {{$errors->first('jumlah_tiket') }}</p></span>
-                        @endif
+                        <input type="hidden" min="0" max="1000" step="0.1" id="id-5" class="form-control" name="" value="{{ ($item->harga_anak)}}" onfocus="this.placeholder = ''"
+                                     onblur="this.placeholder = 'anak'">  
 
                         <label><strong>Total Harga : </strong></label>
-                        <input type="text" min="0" max="1000" step="0.1" id="id-3" class="form-control" name="jumlah_tiket" placeholder="" onfocus="this.placeholder = ''"
-                                     onblur="this.placeholder = 'Dewasa'" readonly>
+                        <input type="hidden" min="0" max="1000" step="0.1" class="id-3" class="form-control" name="total_harga" placeholder="" onfocus="this.placeholder = ''"
+                                     onblur="this.placeholder = 'total_harga'" readonly>
+                        <input type="text" min="0" max="1000" step="0.1" class="id-3" id="input_mask" class="form-control" name="" placeholder="" onfocus="this.placeholder = ''"
+                                     onblur="this.placeholder = 'total_harga'" readonly>              
 
                     <div class="join-container">
-                      {{-- <form action="{{ route('detail-add', $formtikets->id) }}" method="post">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $formtikets->id }}">
-                        <button type="submit" class="btn btn-danger col-lg-12">
-                            Pesan Tiket
-                        </button>
-                    </form> --}}
-                    <form action="{{ route('add-form', $item->id) }}" method="post">
-                        @csrf
                         <input type="hidden" name="product_id" value="{{ $item->id }}">
                         <button type="submit" class="btn btn-danger mb-2 px-4 col-lg-12">
                             Pesan Tiket
                         </button>
-                    </form>
-                      {{-- <form action="" method="post">
-                        @csrf
-                        <input type="hidden" name="product_id" value="">
-                        <a href="{{url('cart')}}" class="btn btn-danger col-lg-12 px-4">Pesan Tiket</a>
-                      </form> --}}
-                        {{-- <a href="{{url('cart')}}" class="btn btn-danger col-lg-12 mt-5 px-4">Pesan Tiket!</a> --}}
-                        {{-- <button type="submit" class="btn btn-danger col-lg-12 mb-2 px-8">
-                            Pesan Tiket
-                        </button> --}}
                     </div>
                     </form>
                 </div>
             </div>
         </section>
 
+        @if ($item->tgl_event <= now())
+        <section class="section-popular-content" id="popularContent">
+            <div class="container mt-5">
+                <div class="col text-left">
+                    <h5><strong>Berikut event terakhir yang ada di wisata kaldera!</strong></h5>
+                    <p>Berbagai pilihan tiket event terakhir dengan harga yang spesial, lho. sampai jumpa di event yang akan datang!</p>
+                </div>
+                <div class="section-popular-travel row justify-content-left mt-3">
+                    @foreach ($product as $item)
+                        <div class="col-sm-8 col-md-4 col-lg-4">
+                            <div class="container">
+                                <div class="row">
+                              &nbsp; &nbsp;
+                              <div class="card text-center" style="width: 180rem; height: 25rem;">
+                                <img src="{{ Storage::url('public/products/' . $item->gambar) }}" alt="" style="width: 22.5rem; height: 30rem;">
+                                <h6 class="mt-3" style="color: #333333; text-align: left;"><b>&nbsp; {{$item->nama_produk}}</b></h6>
+                                <p class="ml-2 mr-2" maxlength="10" style="text-align: justify ; ">"{{Str::limit($item->isi, 130) }}"</p>
+                                <p class="mt-3" style="color: #F15C59; text-align: left;">&nbsp; Rp {{number_format($item->harga, 0, ',', '.') }}</p>    
+                                {{-- {{dd($item->tgl_event >= now());}} --}}
+                                <form action="{{ route('form-tiket', $item->id) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                    <button class="btn btn-danger mb-2 px-4" disabled>Lihat Tiket</button>
+                                    {{-- <a href="{{url('form-tiket')}}" class="btn btn-danger mb-2 px-4">Lihat Tiket</a> --}}
+                                </form>
+                              </div>
+                                </div>
+                              </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
+        @else
         <section class="section-popular-content" id="popularContent">
             <div class="container mt-5">
                 <div class="col text-left">
@@ -193,16 +170,16 @@
                               <div class="card text-center" style="width: 180rem; height: 25rem;">
                                 <img src="{{ Storage::url('public/products/' . $item->gambar) }}" alt="" style="width: 22.5rem; height: 30rem;">
                                 <h6 class="mt-3" style="color: #333333; text-align: left;"><b>&nbsp; {{$item->nama_produk}}</b></h6>
-                                <p class="ml-2 mr-2" maxlength="10" style="text-align: justify ; ">"{{Str::limit($item->isi, 910) }}"</p>
-                                <p class="mt-3" style="color: #F15C59; text-align: left;">&nbsp; IDR {{number_format($item->harga)}}</p>    
+                                <p class="ml-2 mr-2" maxlength="10" style="text-align: justify ; ">"{{Str::limit($item->isi, 130) }}"</p>
+                                <p class="mt-3" style="color: #F15C59; text-align: left;">&nbsp; Rp {{number_format($item->harga, 0, ',', '.') }}</p>    
+                                {{-- {{dd($item->tgl_event >= now());}} --}}
                                 <form action="{{ route('form-tiket', $item->id) }}" method="post">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $item->id }}">
-                                    <button class="btn btn-danger mb-2 px-4" disabled>Lihat Tiket</button>
+                                    {{-- <button class="btn btn-danger mb-2 px-4" disabled>Lihat Tiket</button> --}}
                                     {{-- <a href="{{url('form-tiket')}}" class="btn btn-danger mb-2 px-4">Lihat Tiket</a> --}}
                                 </form>
                               </div>
-                             
                                 </div>
                               </div>
                         </div>
@@ -210,7 +187,8 @@
 
                 </div>
             </div>
-        </section>
+        </section>             
+        @endif
 
         <!-- testimoni wisatawan -->
         <section class="section-testimonials-heading" id="testimonialsHeading">
@@ -224,15 +202,15 @@
                             pengalaman terbaik
                         </p>
                     </div>
-                </div>
+                </div>  
             </div>
         </section>
         <section class="section-testimonials-content" id="testimonialsContent">
             <div class="container">
-                @foreach ($testimonis as $test)
-                <div class="section-popular-travel row justify-content-center match-height">
-                    <div class="col-sm-6 col-md-6 col-lg-4">
-                        <div class="card card-testimonial text-center">
+                <div class="section-popular-travel row justify-content-left mt-2">
+                    @foreach ($testimonis as $test)
+                    <div class="col-sm-8 col-md-4 col-lg-4">
+                        <div class="card card-testimonial text-center" style="height: 20rem;">
                             {{-- <div class="testimonial-content">
                                 <img src="{{asset ('admin/img/avatar.png') }}" alt="" class="rounded-circle" /> --}}
                                 <h3 class="mb-5">{{ $test->name }}</h3>
@@ -242,16 +220,23 @@
                             {{-- </div> --}}
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
                 <div class="row">
                     <div class="col-12 text-center">
                         <button id="theButton" class="btn btn-get-started px-4 mt-4 mx-1" onclick="clickMe()">Bagikan Pengalaman Anda</button>
                         {{-- <a href="{{url('testimoni')}}" class="btn btn-get-started px-4 mt-4 mx-1">Bagikan Pengalaman Anda!</a> --}}
                         <form action="{{ route('testimoni') }}" method="post">
                             @csrf
+                            @guest
+                            @if (Route::has('login'))
                             {{-- <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                             <input type="hidden" name="name" value="{{Auth::user()->name}}"> --}}
+                            @endif
+                            @else
+                            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                            <input type="hidden" name="name" value="{{Auth::user()->name}}">
+                            @endguest
                             <textarea cols="30" rows="10" name="isi" id="popup" class="hide form-control mt-3"></textarea>
                             <button class="btn btn-danger px-4 mt-4 mx-1 hide" id="submit">Submit</button>
                         </form>
@@ -278,7 +263,7 @@
      <script type="text/javascript">
         $(function() {
             $("#id-1, #id-2, #id-4, #id-5").keyup(function() {
-                 $("#id-3").val((+$("#id-1").val() * +$("#id-4").val()) + (+$("#id-2").val() * +$("#id-5").val()));
+                 $(".id-3").val((+$("#id-1").val() * +$("#id-4").val()) + (+$("#id-2").val() * +$("#id-5").val()));
                  var sum = +$("#id-1").val() + (+$("#id-2").val());
                console.log(sum);
                if(sum == 0) {
@@ -296,7 +281,7 @@
             $(this).val(result);
         });
         $('#input_mask').inputmask({
-            mask: '**.***.***.*-***.***',
+            mask: 'Rp **.***.***.*-***.***',
             definitions: {
                 A: {
                     validator: "[A-Za-z0-9 ]"

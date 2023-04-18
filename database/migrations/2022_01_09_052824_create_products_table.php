@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('harga');
             $table->integer('harga_anak')->nullable();
             $table->unsignedBigInteger('category_id');
+            $table->text('isi');
             $table->string('gambar')->nullable();
             $table->text('link_maps')->nullable();
             $table->timestamps();

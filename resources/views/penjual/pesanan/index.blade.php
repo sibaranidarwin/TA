@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.penjual')
 
 @section('title')
     <title>Transaksi</title>
@@ -38,11 +38,8 @@
                     </div> --}}
                     <!-- /.card-header -->
                     <div class="card-body">
-                        @if ($start_date != null || $end_date != null)
-                        <p class="title" style="text-align: center; background-color: #007bff; color: #fff;"></i><strong>Tanggal Kunjungan: {{ Carbon\Carbon::parse($start_date)->format('d F Y') }} Sampai: {{ Carbon\Carbon::parse($end_date)->format('d F Y') }} </strong></i></p>
-                        @endif
                         <div class="table-responsive">
-                            <form action="{{ route('filterpemesanan') }}" class="form-inline mb-3"
+                            <form action="" class="form-inline mb-3"
                             method="GET">
                             <div class="form-group ">
                                 <label for="">Tanggal Pesanan: &nbsp;</label>
@@ -71,7 +68,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($transaction as $item)
+                                    @foreach ($detail as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->kode_transaksi }}</td>
@@ -99,7 +96,7 @@
     </div>
 
     <!-- Edit Modal -->
-    @foreach ($transaction as $item)
+    @foreach ($detail as $item)
         <div class="modal fade" id="edit-pesan{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">

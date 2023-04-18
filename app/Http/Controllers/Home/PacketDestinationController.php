@@ -47,7 +47,8 @@ class PacketDestinationController extends Controller
 
     public function event()
     {
-        $wisata = Product::where("category_id", 2)->get();
+        $wisata = Product::where("category_id", 2)->where("tgl_event", ">=" , now())->get();
+
         // where('category_id', Auth::user()->role)->get();
         return view('event', compact('wisata'));
     }

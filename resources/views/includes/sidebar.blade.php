@@ -1,12 +1,12 @@
  <!-- Main Sidebar Container -->
  <aside class="main-sidebar sidebar-primary elevation-4" style="background-color: #000066; color: #fff;">
      <!-- Brand Logo -->
-     <a href="/" class="brand-link">
-         <span class="brand-text font-weight">Kaldera Toba </span>
-         <img src="{{ asset('frontend/images/Logo_kaldera.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             style="opacity: .8">
+     <a href="/" class="brand-link text-center">
+         <img src="{{ asset('frontend/images/Logo_kaldera.png') }}" alt="AdminLTE Logo"
+             style="opacity: .9; width:60%;">
      </a>
-<hr>
+     <h5 class="brand-text font-weight text-center">Kaldera Toba Nomadic Escape</h5>
+    <hr style="border-color: #fff;">
      <!-- Sidebar -->
      {{-- <div class="sidebar"> --}}
          <!-- Sidebar user panel (optional) -->
