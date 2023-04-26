@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PenjualController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,16 +65,34 @@ Route::middleware(['admin', 'auth'])->group(function () {
     Route::get('filterpembayaran', [HomeController::class, 'filterpembayaran'])->name('filterpembayaran');
     Route::get('filterpemesanan', [HomeController::class, 'filterpemesanan'])->name('filterpemesanan');
 
+    Route::resource('galleryy', GalleryController::class);
+    Route::resource('articlee', ArticleController::class);
+    // Route::resource('jadwal', JadwalController::class);
+    Route::resource('userr', UserController::class);
+    // Route::resource('paket', PaketController::class);
+    Route::resource('orderr', OrderController::class);
+    Route::resource('transactionn', TransactionController::class);
+    Route::resource('pembayarann', TransactionController::class);
+    // Route::resource('wisatawan', WisatawanController::class);
+
+    Route::resource('productt', ProductController::class);
+    Route::resource('categoryy', CategoryController::class);
+});
+
+Route::middleware(['penjual', 'auth'])->group(function () {
+    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('dashboardpenjual', [PenjualController::class, 'dashboard'])->name('dashboardpenjual');
+    Route::get('profile/{id}', [HomeController::class, 'profile'])->name('profile');
+    Route::get('filterdashboard', [HomeController::class, 'filterdash'])->name('filterdash');
+    Route::get('filterpembayaran', [HomeController::class, 'filterpembayaran'])->name('filterpembayaran');
+    Route::get('filterpemesanan', [HomeController::class, 'filterpemesanan'])->name('filterpemesanan');
+
     Route::resource('gallery', GalleryController::class);
     Route::resource('article', ArticleController::class);
-    // Route::resource('jadwal', JadwalController::class);
-    Route::resource('user', UserController::class);
-    // Route::resource('paket', PaketController::class);
     Route::resource('order', OrderController::class);
     Route::resource('transaction', TransactionController::class);
     Route::resource('pembayaran', TransactionController::class);
-    // Route::resource('wisatawan', WisatawanController::class);
-
+    
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
 });

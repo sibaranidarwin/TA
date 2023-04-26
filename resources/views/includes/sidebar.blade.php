@@ -35,7 +35,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ route('category.index') }}" class="nav-link {{ set_active('category.*') }}">
+                         <a href="{{ route('categoryy.index') }}" class="nav-link {{ set_active('category.*') }}">
                              <i class="nav-icon fas fa-th"></i>
                              <p>
                                  Kategori Tiket Wisata
@@ -43,7 +43,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ route('product.index') }}" class="nav-link {{ set_active('product.*') }}">
+                         <a href="{{ route('productt.index') }}" class="nav-link {{ set_active('product.*') }}">
                              <i class="nav-icon fa fa-table"></i>
                              <p>
                                  Tiket Wisata
@@ -51,7 +51,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ route('article.index') }}" class="nav-link {{ set_active('article.*') }}">
+                         <a href="{{ route('articlee.index') }}" class="nav-link {{ set_active('article.*') }}">
                              <i class="nav-icon fas fa-image"></i>
                              <p>
                                  Blog Wisata
@@ -59,7 +59,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ route('gallery.index') }}" class="nav-link {{ set_active('gallery.*') }}">
+                         <a href="{{ route('galleryy.index') }}" class="nav-link {{ set_active('gallery.*') }}">
                              <i class="nav-icon fas fa-image"></i>
                              <p>
                                  Gallery Wisata
@@ -68,15 +68,15 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ route('order.index') }}" class="nav-link {{ set_active('order.*') }}">
-                             <i class="nav-icon fa fa-file"></i>
+                         <a href="{{ route('orderr.index') }}" class="nav-link {{ set_active('order.*') }}">
+                             <i class="nav-icon fa fa-shopping-cart"></i>
                              <p>
                                  Pemesanan Tiket Wisata
                              </p>
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ route('transaction.index') }}"
+                         <a href="{{ route('transactionn.index') }}"
                              class="nav-link {{ set_active('transaction.*') }}">
                              <i class="nav-icon fa fa-credit-card"></i>
                              <p>
@@ -85,23 +85,72 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ route('user.index') }}" class="nav-link" {{ set_active('user.*') }}>
+                         <a href="{{ route('userr.index') }}" class="nav-link" {{ set_active('user.*') }}>
                              <i class="nav-icon fa fa-user-circle"></i>
                              <p>
                                  User
                              </p>
                          </a>
                      </li>
-                 @elseif (Auth::user()->role == 'umkm')
-                     <li class="nav-item">
-                         <a href="{{ route('pelanggan.transaksi') }}"
-                             class="nav-link {{ set_active('pelanggan.transaksi') }}">
-                             <i class="nav-icon fa fa-cart-plus"></i>
-                             <p>
-                                 Lihat Tiket
-                             </p>
-                         </a>
-                     </li>
+                 @elseif (Auth::user()->role == 'penjual')
+                 <li class="nav-item">
+                    <a href="{{ route('dashboardpenjual') }}" class="nav-link {{ set_active('dashboardpenjual') }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('category.index') }}" class="nav-link {{ set_active('category.*') }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Kategori Tiket Wisata
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('product.index') }}" class="nav-link {{ set_active('product.*') }}">
+                        <i class="nav-icon fa fa-table"></i>
+                        <p>
+                            Tiket Wisata
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('article.index') }}" class="nav-link {{ set_active('article.*') }}">
+                        <i class="nav-icon fas fa-image"></i>
+                        <p>
+                            Blog Wisata
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('gallery.index') }}" class="nav-link {{ set_active('gallery.*') }}">
+                        <i class="nav-icon fas fa-image"></i>
+                        <p>
+                            Gallery Wisata
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('order.index') }}" class="nav-link {{ set_active('order.*') }}">
+                        <i class="nav-icon fa fa-shopping-cart"></i>
+                        <p>
+                            Pemesanan Tiket Wisata
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('transaction.index') }}"
+                        class="nav-link {{ set_active('transaction.*') }}">
+                        <i class="nav-icon fa fa-credit-card"></i>
+                        <p>
+                            Pembayaran Tiket Wisata
+                        </p>
+                    </a>
+                </li>
                  @else
                      <li class="nav-item">
                          <a href="{{ route('pelanggan.transaksi') }}"

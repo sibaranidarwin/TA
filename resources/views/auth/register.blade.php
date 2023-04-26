@@ -36,7 +36,7 @@
                                         <label class="form-check-label" for="inlineRadio1">Pengunjung</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="role" id="role2" value="umkm">
+                                        <input class="form-check-input" type="radio" name="role" id="role2" value="penjual">
                                         <label class="form-check-label" for="inlineRadio2">Penjual</label>
                                     </div>
                                 </div>

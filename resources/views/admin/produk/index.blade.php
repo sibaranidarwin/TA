@@ -48,12 +48,12 @@
                             <table id="table" class="table table-striped table-row-bordered gy-5 gs-7">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Kategori</th>
-                                        <th>Nama Tiket</th>
-                                        <th>Harga Tiket Dewasa</th>
-                                        <th>Harga Tiket Anak-anak</th>
-                                        <th>Deskripsi</th>
+                                        <th style="text-align: center;">No</th>
+                                        <th style="text-align: center;">Kategori</th>
+                                        <th style="text-align: center;">Nama Tiket</th>
+                                        <th style="text-align: center;">Harga Tiket Dewasa</th>
+                                        <th style="text-align: center;">Harga Tiket Anak</th>
+                                        <th style="text-align: center;">Deskripsi</th>
 
                                         {{-- <th>Gambar</th> --}}
                                         <th>Aksi</th>
@@ -62,17 +62,17 @@
                                 <tbody>
                                     @foreach ($product as $item)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->category->nama_kategori }}</td>
-                                            <td>{{ $item->nama_produk }}</td>
-                                            <td>Rp {{ number_format($item->harga, 0, '.', '.') }}</td>
-                                            <td>Rp {{ number_format($item->harga_anak, 0, '.', '.') }}</td>
-                                            <td>{{Str::limit($item->isi, 30) }} </td>
+                                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                                            <td style="text-align: center;">{{ $item->category->nama_kategori }}</td>
+                                            <td style="text-align: center;">{{ $item->nama_produk }}</td>
+                                            <td style="text-align: center;">Rp {{ number_format($item->harga, 0, '.', '.') }}</td>
+                                            <td style="text-align: center;">Rp {{ number_format($item->harga_anak, 0, '.', '.') }}</td>
+                                            <td style="text-align: center;">{{Str::limit($item->isi, 30) }} </td>
                                             {{-- <td>
                                                 <img src="{{ Storage::url('public/products/' . $item->gambar) }}"
                                                     height="100px" class="rounded" alt="" srcset="">
                                             </td> --}}
-                                            <td>
+                                            <td style="text-align: center;">
                                                 <form action="{{ route('product.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
@@ -312,6 +312,16 @@
     @endforeach
 <script>
   $("#table").DataTable({
+    columnDefs: [{
+                orderable: true,
+                className: 'reorder',
+                targets: 0
+            },
+            {
+                orderable: false,
+                targets: '_all'
+            }
+        ],
 });
 </script>
 @endsection
