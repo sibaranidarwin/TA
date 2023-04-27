@@ -182,6 +182,16 @@
 
 <script>
   $("#table").DataTable({
+    columnDefs: [{
+                orderable: true,
+                className: 'reorder',
+                targets: 0
+            },
+            {
+                orderable: false,
+                targets: '_all'
+            }
+        ],
 });
 </script>
 @endsection

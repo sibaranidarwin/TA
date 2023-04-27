@@ -90,6 +90,8 @@
                                      <ul>
                                     @if (Auth::user()->role == 'admin')
                                     <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                    @elseif (Auth::user()->role == 'penjual')
+                                    <li><a href="{{ route('dashboardpenjual') }}">Dashboard</a></li>
                                     @else
                                     <li><a href="{{ route('dashboard.pelanggan') }}">Dashboard</a></li>
                                     @endif
@@ -97,9 +99,8 @@
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </li>
-                                    
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form hidden id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </ul>

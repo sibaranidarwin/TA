@@ -66,7 +66,7 @@
                                             </td>
 
                                             <td>
-                                                <form action="{{ route('user.destroy', $item->id) }}" method="post">
+                                                <form action="{{ route('userr.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
@@ -102,7 +102,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('user.update', $p->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('userr.update', $p->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">

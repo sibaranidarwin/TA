@@ -79,12 +79,15 @@ class HomeController extends Controller
         $total_tahun =Transaction::whereBetween('tgl_wisata', [$start, $end])->sum('total_harga');
         $total_bulan =Transaction::whereBetween('tgl_wisata', [$startmonth, $endmonth])->sum('total_harga');
         $total_minggu =Transaction::whereBetween('tgl_wisata', [$start_week, $end_week])->sum('total_harga');
-        // dd($total_minggu);
+        // dd($total_bulan);
+
+        $total_bulan_wisata =Transaction::whereBetween('tgl_wisata', [$startmonth, $endmonth])->where('status', 'success')->sum('total_harga');
+        $total_bulan_event =Transaction::whereBetween('tgl_wisata', [$startmonth, $endmonth])->where('status', 'success')->sum('total_harga');
 
         $startweek = $now->startOfWeek(Carbon::MONDAY)->format('d');
         $endweek = $now->endOfWeek()->format('d');
 
-        return view('admin.index', compact('total_tahun', 'total_bulan', 'total_minggu', 'startweek', 'endweek'));
+        return view('admin.index', compact('total_tahun', 'total_bulan', 'total_minggu', 'startweek', 'endweek', 'total_bulan_wisata', 'total_bulan_event'));
     }
 
     function filterdash(){
