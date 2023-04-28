@@ -15,6 +15,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PenjualController;
+use App\Http\Controllers\PelangganController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,10 +99,7 @@ Route::middleware(['penjual', 'auth'])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('dashboard-pelanggan', function () {
-        return view('admin.index');
-    })->name('dashboard.pelanggan');
-
+    Route::get('dashboard-pelanggan', [PelangganController::class, 'dashboard'])->name('dashboard.pelanggan');
     Route::get('/testimoni', [HomeController::class, 'testimoni'])->name('pelangggan.testimoni');
     Route::get('/pemesanan', [OrderController::class, 'get_pesanan'])->name('pelanggan.transaksi');
     Route::get('/tiket-download/{id}', [OrderController::class, 'saveTiket'])->name('pelanggan.transaksi.download');
