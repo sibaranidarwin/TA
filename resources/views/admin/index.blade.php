@@ -469,7 +469,7 @@ Highcharts.chart('jumlah', {
   
     }, {
       name: 'Tiket Event Wisata',
-      data: [0,0,0,0],
+      data: [0,0,0,{{($total_bulan_event)}}],
   
     }]
   });
@@ -554,12 +554,12 @@ Highcharts.chart('jumlah', {
          colorByPoint: true,
          data: [{
          name: 'Tiket Masuk Wisata',
-         y: {{($total_bulan)}},
+         y: {{($total_bulan_wisata)}},
          sliced: true,
          selected: true
          }, {
          name: 'Tiket Event Wisata',
-         y: 0
+         y: {{($total_bulan_wisata)}},
          }]
      }]
      });
@@ -609,4 +609,6 @@ Highcharts.chart('jumlah', {
     }]
     });
 </script>
+
+
 @endsection
