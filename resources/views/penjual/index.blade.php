@@ -369,6 +369,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
+
 <script>
     Highcharts.chart('jumlah', {
         chart: {
@@ -420,11 +421,11 @@
               },
         series: [{
           name: 'Tiket Masuk Wisata',
-          data: [0,0,0,{{($total_bulan_wisata)}}],
+          data: [0,0,0,{{($total_bulan_wisata4)}}, {{($total_bulan_wisata5)}}],
       
         }, {
           name: 'Tiket Event Wisata',
-          data: [0,0,0,0],
+          data: [0,0,0,{{($total_bulan_event4)}}, {{($total_bulan_event5)}}],
       
         }]
       });
@@ -442,7 +443,7 @@
             text: '',
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>point.y:.3f</b>'
+            pointFormat: '{series.name}: <b>Rp {point.y}</b>'
         },
         accessibility: {
             point: {
@@ -464,12 +465,12 @@
             colorByPoint: true,
             data: [{
             name: 'Tiket Masuk Wisata',
-            y: {{($total_tahun)}},
+            y: {{($total_tahun_wisata)}},
             sliced: true,
             selected: true
             }, {
             name: 'Tiket Event Wisata',
-            y: 0
+            y: {{($total_tahun_event)}},
             }]
         }]
         });
@@ -487,7 +488,7 @@
              text: '',
          },
          tooltip: {
-             pointFormat: '{series.name}: <b>point.y:.1f</b>'
+             pointFormat: '{series.name}: <b>Rp {point.y:.0f}</b>'
          },
          accessibility: {
              point: {
@@ -505,16 +506,16 @@
              }
          },
          series: [{
-             name: 'Brands',
+             name: '',
              colorByPoint: true,
              data: [{
              name: 'Tiket Masuk Wisata',
-             y: {{($total_bulan)}},
+             y: {{($total_bulan_wisata5)}},
              sliced: true,
              selected: true
              }, {
              name: 'Tiket Event Wisata',
-             y: 0
+             y: {{($total_bulan_event5)}},
              }]
          }]
          });
@@ -532,7 +533,7 @@
             text: '',
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>point.y:.1f</b>'
+            pointFormat: '{series.name}: <b>Rp {point.y:.0f}</b>'
         },
         accessibility: {
             point: {
@@ -545,23 +546,24 @@
             cursor: 'pointer',
             dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: Rp {point.y:.3f}'
+                format: '<b>{point.name}</b>: Rp {point.y:.0f}'
             }
             }
         },
         series: [{
-            name: 'Brands',
+            name: '',
             colorByPoint: true,
             data: [{
             name: 'Tiket Masuk Wisata',
-            y: 0,
+            y: {{($total_minggu_wisata)}},
             sliced: true,
             selected: true
             }, {
             name: 'Tiket Event Wisata',
-            y: 0
+            y: {{($total_minggu_event)}},
             }]
         }]
         });
     </script>
+    
 @endsection

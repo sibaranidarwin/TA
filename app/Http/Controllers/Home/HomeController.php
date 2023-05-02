@@ -82,9 +82,9 @@ class HomeController extends Controller
         $end_week = $now->endOfWeek()->format('Y-m-d H:i:s');
 
 
-        $total_tahun =Transaction::whereBetween('tgl_wisata', [$start, $end])->sum('total_harga');
-        $total_bulan =Transaction::whereBetween('tgl_wisata', [$startmonth5, $endmonth5])->sum('total_harga');
-        $total_minggu =Transaction::whereBetween('created_at', [$start_week, $end_week])->sum('total_harga');
+        $total_tahun =Transaction::whereBetween('tgl_wisata', [$start, $end])->where('status', 'success')->sum('total_harga');
+        $total_bulan =Transaction::whereBetween('tgl_wisata', [$startmonth5, $endmonth5])->where('status', 'success')->sum('total_harga');
+        $total_minggu =Transaction::whereBetween('created_at', [$start_week, $end_week])->where('status', 'success')->sum('total_harga');
         // dd($total_minggu);
 
         $total_tahun_wisata =Transaction::whereBetween('tgl_wisata', [$start, $end])->where('nama_tiket', 'Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');

@@ -590,7 +590,7 @@ Highcharts.chart('jumlah', {
         cursor: 'pointer',
         dataLabels: {
             enabled: true,
-            format: '<b>{point.name}</b>: Rp {point.y:.3f}'
+            format: '<b>{point.name}</b>: Rp {point.y:.0f}'
         }
         }
     },
