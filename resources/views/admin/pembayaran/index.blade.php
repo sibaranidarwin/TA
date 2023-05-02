@@ -44,7 +44,7 @@
                         @endif
                         <div class="table-responsive">
 
-                            <form action="{{ route('filterpembayaran') }}" class="form-inline mb-3"
+                            <form action="{{ route('filterpembayaranadmin') }}" class="form-inline mb-3"
                             method="GET">
                             <div class="form-group ">
                                 <label for="">Tanggal Pembayaran : &nbsp;</label>
@@ -66,6 +66,8 @@
                                         <th>#</th>
                                         <th>Order ID</th>
                                         <th>Nama</th>
+                                        <th>Anak-Anak</th>
+                                        <th>Dewasa</th>
                                         <th>Harga</th>
                                         <th>Tanggal Kunjungan</th>
                                         <th>Status</th>
@@ -78,6 +80,8 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->kode }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td>{{ $item->anak }} Orang</td>
+                                            <td>{{ $item->dewasa }} Orang</td>
                                             <td>Rp {{ number_format($item->total_harga, 0, '.', '.') }}</td>
                                             <td>{{ $item->tgl_wisata }}</td>
                                             <td>
@@ -134,7 +138,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('transaction.update', $item->id) }}" method="post"
+                    <form action="{{ route('transactionn.update', $item->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

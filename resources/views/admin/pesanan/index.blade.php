@@ -42,7 +42,7 @@
                         <p class="title" style="text-align: center; background-color: #007bff; color: #fff;"></i><strong>Tanggal Kunjungan: {{ Carbon\Carbon::parse($start_date)->format('d F Y') }} Sampai: {{ Carbon\Carbon::parse($end_date)->format('d F Y') }} </strong></i></p>
                         @endif
                         <div class="table-responsive">
-                            <form action="{{ route('filterpemesanan') }}" class="form-inline mb-3"
+                            <form action="{{ route('filterpemesananadmin') }}" class="form-inline mb-3"
                             method="GET">
                             <div class="form-group ">
                                 <label for="">Tanggal Pesanan: &nbsp;</label>

@@ -92,29 +92,17 @@ i{
                         @if ($errors->has('tgl_wisata'))
                           <span class="text-danger"><p class="text-right">* {{$errors->first('tgl_wisata') }}</p></span>
                         @endif
+                        
                         <label><strong>Jumlah Tiket : </strong></label>
-                        {{-- <input type="button" value="-"  data-for="quantity1"> --}}
                         <input type="number" min="0" max="1000" step="0.1" id="id-1" class="form-control" name="dewasa" placeholder="Dewasa" onfocus="this.placeholder = ''"
                                      onblur="this.placeholder = 'Dewasa'" required>
                         <input type="hidden" min="0" max="1000" step="0.1" id="id-4" class="form-control" name="" value="{{ ($item->harga)}}" onfocus="this.placeholder = ''"
                                      onblur="this.placeholder = 'dewasa'">
-                        {{-- <input type="button" value="+" data-for="quantity1"> --}}
                         
-                        {{-- <input type="button" value="-" data-for="quantity2"> --}}
                         <input type="number" min="0" max="1000" step="0.1" id="id-2" class="form-control" name="anak" placeholder="Anak" onfocus="this.placeholder = ''"
                                      onblur="this.placeholder = 'Anak-anak'">
                         <input type="hidden" min="0" max="1000" step="0.1" id="id-5" class="form-control" name="" value="{{ ($item->harga_anak)}}" onfocus="this.placeholder = ''"
                                      onblur="this.placeholder = 'anak'">  
-                        {{-- <input type="button" value="+" data-for="quantity2"> --}}
-
-                            {{-- <input type="button" value="-"  data-for="quantity1">
-                            <input type="number" id="quantity1" value="1" min="0">
-                            <input type="button" value="+" data-for="quantity1">
-            
-                            <input type="button" value="-" data-for="quantity2">
-                            <input type="number" id="quantity2" value="5" min="2">
-                            <input type="button" value="+" data-for="quantity2"> --}}
-                        
 
                         <label><strong>Total Harga : </strong></label>
                         <input type="hidden" min="0" max="1000" step="0.1" class="id-3" class="form-control" name="total_harga" placeholder="" onfocus="this.placeholder = ''"
@@ -128,7 +116,6 @@ i{
                             Pesan Tiket
                         </button>
                     </div>
-
                     </form>
                 </div>
             </div>
@@ -274,27 +261,19 @@ i{
         
         }
           // membuat plus minus item
-          var cart = document.querySelector('.cart-totals');
+        document.addEventListener("click", handle);
 
-        cart.addEventListener('click', function(ev) {
-
-        var tgt = ev.target;
-        if (tgt.matches('input[type="button"]')) {
-
-            var input = document.getElementById(tgt.dataset.for);
-            var currentValue = +input.value;
-            var minValue = +input.min;
-            
-            
-            if (tgt.value === '+') {
-                input.value = currentValue + 1;
+            function handle(evt) {
+            if (evt.target.type === "button") {
+                return handleBtn(evt.target);
             }
-            else if (currentValue > minValue) {
-                input.value = currentValue - 1;
             }
-            
-        }
-        });
+
+            function handleBtn(btn) {
+            const elem = document.querySelector(`#${btn.dataset.for}`);
+            const nwValue = +elem.value + (btn.value === "-" ? -1 : 1);
+            elem.value = nwValue >= +elem.min ? nwValue : elem.min;
+            }
     </script>
      <script type="text/javascript">
         $(function() {

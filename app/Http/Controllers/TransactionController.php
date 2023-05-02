@@ -96,7 +96,7 @@ class TransactionController extends Controller
             'start_date' => $request->input('start_date'),
         ]);
 
-        return redirect()->route('transaction.index')->with('toast_success', 'Data berhasil diupdate');
+        return redirect()->back()->with('toast_success', 'Data berhasil diupdate');
     }
 
     /**
