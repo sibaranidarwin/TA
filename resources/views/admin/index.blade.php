@@ -156,7 +156,7 @@
                                     <p>Jumlah Pengunjung Wisata</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    <i class="ion ion-person"></i>
                                 </div>
                                 <a href="{{ route('userr.index') }}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
@@ -293,7 +293,7 @@
                                 <p>Jumlah Pengunjung Wisata</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="ion ion-person"></i>
                             </div>
                             <a href="{{ route('user.index') }}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
@@ -465,11 +465,11 @@ Highcharts.chart('jumlah', {
           },
     series: [{
       name: 'Tiket Masuk Wisata',
-      data: [0,0,0,{{($total_bulan_wisata)}}],
+      data: [0,0,0,{{($total_bulan_wisata4)}}, {{($total_bulan_wisata5)}}],
   
     }, {
       name: 'Tiket Event Wisata',
-      data: [0,0,0,{{($total_bulan_event)}}],
+      data: [0,0,0,{{($total_bulan_event4)}}, {{($total_bulan_event5)}}],
   
     }]
   });
@@ -487,7 +487,7 @@ Highcharts.chart('jumlah', {
         text: '',
     },
     tooltip: {
-        pointFormat: '{series.name}: <b>point.y:.3f</b>'
+        pointFormat: '{series.name}: <b>{point.y}</b>'
     },
     accessibility: {
         point: {
@@ -509,12 +509,12 @@ Highcharts.chart('jumlah', {
         colorByPoint: true,
         data: [{
         name: 'Tiket Masuk Wisata',
-        y: {{($total_tahun)}},
+        y: {{($total_tahun_wisata)}},
         sliced: true,
         selected: true
         }, {
         name: 'Tiket Event Wisata',
-        y: 0
+        y: {{($total_tahun_event)}},
         }]
     }]
     });
@@ -532,7 +532,7 @@ Highcharts.chart('jumlah', {
          text: '',
      },
      tooltip: {
-         pointFormat: '{series.name}: <b>point.y:.1f</b>'
+         pointFormat: '{series.name}: <b>{point.y:.0f}</b>'
      },
      accessibility: {
          point: {
@@ -550,16 +550,16 @@ Highcharts.chart('jumlah', {
          }
      },
      series: [{
-         name: 'Brands',
+         name: '',
          colorByPoint: true,
          data: [{
          name: 'Tiket Masuk Wisata',
-         y: {{($total_bulan_wisata)}},
+         y: {{($total_bulan_wisata5)}},
          sliced: true,
          selected: true
          }, {
          name: 'Tiket Event Wisata',
-         y: {{($total_bulan_wisata)}},
+         y: {{($total_bulan_event5)}},
          }]
      }]
      });
@@ -599,12 +599,12 @@ Highcharts.chart('jumlah', {
         colorByPoint: true,
         data: [{
         name: 'Tiket Masuk Wisata',
-        y: 0,
+        y: {{($total_minggu_wisata)}},
         sliced: true,
         selected: true
         }, {
         name: 'Tiket Event Wisata',
-        y: 0
+        y: {{($total_minggu_event)}},
         }]
     }]
     });
