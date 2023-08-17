@@ -71,7 +71,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <form action="{{ route('article.destroy', $item->id) }}" method="post">
+                                                <form action="{{ route('articlee.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
@@ -109,7 +109,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('article.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('articlee.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -157,7 +157,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('article.update', $item->id) }}" method="post"
+                    <form action="{{ route('articlee.update', $item->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

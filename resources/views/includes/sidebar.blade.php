@@ -50,7 +50,7 @@
                              </p>
                          </a>
                      </li>
-                     <li class="nav-item">
+                     {{-- <li class="nav-item">
                          <a href="{{ route('articlee.index') }}" class="nav-link {{ set_active('article.*') }}">
                              <i class="nav-icon fas fa-image"></i>
                              <p>
@@ -65,7 +65,7 @@
                                  Gallery Wisata
                              </p>
                          </a>
-                     </li>
+                     </li> --}}
 
                      <li class="nav-item">
                          <a href="{{ route('orderr.index') }}" class="nav-link {{ set_active('order.*') }}">
@@ -88,7 +88,7 @@
                          <a href="{{ route('userr.index') }}" class="nav-link" {{ set_active('user.*') }}>
                              <i class="nav-icon fa fa-user-circle"></i>
                              <p>
-                                 User
+                                 Pengguna
                              </p>
                          </a>
                      </li>
@@ -117,7 +117,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('article.index') }}" class="nav-link {{ set_active('article.*') }}">
                         <i class="nav-icon fas fa-image"></i>
                         <p>
@@ -132,7 +132,7 @@
                             Gallery Wisata
                         </p>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a href="{{ route('order.index') }}" class="nav-link {{ set_active('order.*') }}">
@@ -152,6 +152,15 @@
                     </a>
                 </li>
                  @else
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard.pelanggan') }}" class="nav-link {{ set_active('dashboard.pelanggan') }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    
                      <li class="nav-item">
                          <a href="{{ route('pelanggan.transaksi') }}"
                              class="nav-link {{ set_active('pelanggan.transaksi') }}">

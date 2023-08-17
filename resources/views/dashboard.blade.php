@@ -61,7 +61,7 @@
                         <h1 class="m-0">Dashboard</h1>
                     </div><!-- /.col -->
                     <div style="float: right;">
-                        <form action="{{ route('filterdash') }}" class="form-inline" method="GET">
+                        <form action="{{ route('filterdash') }}" class="form-inline" method="GET" hidden>
                         <select class="form-control form-control-sm form-select col-5-half" name="month">
                             <option value="">Choose Month</option>
                                     <option value='1'>January</option>
@@ -97,7 +97,7 @@
                         <button class="btn btn-secondary btn-sm" onclick="return confirm('Are you sure?')" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-5 right">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Dashboard</li>

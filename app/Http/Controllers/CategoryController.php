@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -16,6 +17,8 @@ class CategoryController extends Controller
     public function index()
     {
         $category = DB::table('categories')->orderBy('nama_kategori', 'ASC')->get();
+        // dd($category);
+
         return view('admin.kategori.index', compact('category'));
     }
 
@@ -37,10 +40,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('categories')->insert([
+        $da = DB::table('categories')->insert([
             'nama_kategori' => $request->input('nama_kategori')
         ]);
-        return redirect()->route('category.index')->with('toast_success', 'Data berhasil disimpan');
+
+        // dd($da);
+        return redirect()->back()->with('toast_success', 'Data berhasil disimpan');
     }
 
     /**
@@ -88,4 +93,5 @@ class CategoryController extends Controller
         DB::table('categories')->where('id', $id)->delete();
         return back()->with('toast_success', 'Data berhasil disimpan');
     }
+
 }

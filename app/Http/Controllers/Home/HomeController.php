@@ -9,6 +9,7 @@ use App\Models\Gallery;
 use App\Models\Testimoni;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use App\Models\User;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Request;
 use Carbon\CarbonImmutable;
@@ -77,13 +78,18 @@ class HomeController extends Controller
         $startmonth5 = $date->startOfMonth()->format('Y-m-d H:i:s'); // 2000-02-01 00:00:00
         $endmonth5 = $date->endOfMonth()->format('Y-m-d H:i:s');
 
+        $month6 = 6;
+        $date = \Carbon\Carbon::parse($year."-".$month6."-01"); // universal truth month's first day is 1
+        $startmonth6 = $date->startOfMonth()->format('Y-m-d H:i:s'); // 2000-02-01 00:00:00
+        $endmonth6 = $date->endOfMonth()->format('Y-m-d H:i:s');
+
         $now = CarbonImmutable::now()->locale('id_ID');
         $start_week = $now->startOfWeek(Carbon::MONDAY)->format('Y-m-d H:i:s');
         $end_week = $now->endOfWeek()->format('Y-m-d H:i:s');
 
 
         $total_tahun =Transaction::whereBetween('tgl_wisata', [$start, $end])->where('status', 'success')->sum('total_harga');
-        $total_bulan =Transaction::whereBetween('tgl_wisata', [$startmonth5, $endmonth5])->where('status', 'success')->sum('total_harga');
+        $total_bulan =Transaction::whereBetween('tgl_wisata', [$startmonth6, $endmonth6])->where('status', 'success')->sum('total_harga');
         $total_minggu =Transaction::whereBetween('created_at', [$start_week, $end_week])->where('status', 'success')->sum('total_harga');
         // dd($total_minggu);
 
@@ -95,7 +101,10 @@ class HomeController extends Controller
         $total_bulan_event4 =Transaction::whereBetween('tgl_wisata', [$startmonth4, $endmonth4])->where('nama_tiket', '!=','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
         $total_bulan_wisata5 =Transaction::whereBetween('tgl_wisata', [$startmonth5, $endmonth5])->where('nama_tiket','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
         $total_bulan_event5 =Transaction::whereBetween('tgl_wisata', [$startmonth5, $endmonth5])->where('nama_tiket', '!=','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
-
+        $total_bulan_wisata6 =Transaction::whereBetween('tgl_wisata', [$startmonth6, $endmonth6])->where('nama_tiket','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
+        $total_bulan_event6 =Transaction::whereBetween('tgl_wisata', [$startmonth6, $endmonth6])->where('nama_tiket', '!=','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
+        
+        
         $total_minggu_wisata =Transaction::whereBetween('created_at', [$start_week, $end_week])->where('nama_tiket', 'Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
         $total_minggu_event =Transaction::whereBetween('created_at', [$start_week, $end_week])->where('nama_tiket', '!=','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
         // dd($total_minggu_event);
@@ -103,7 +112,7 @@ class HomeController extends Controller
         $startweek = $now->startOfWeek(Carbon::MONDAY)->format('d');
         $endweek = $now->endOfWeek()->format('d');
 
-        return view('admin.index', compact('total_tahun', 'total_bulan', 'total_minggu', 'startweek', 'endweek', 'total_bulan_wisata4', 'total_bulan_event4', 'total_bulan_wisata5', 'total_bulan_event5', 'total_tahun_wisata', 'total_tahun_event', 'total_minggu_wisata', 'total_minggu_event'));
+        return view('admin.index', compact('total_tahun', 'total_bulan', 'total_minggu', 'startweek', 'endweek', 'total_bulan_wisata4', 'total_bulan_event4', 'total_bulan_wisata5', 'total_bulan_event5', 'total_bulan_wisata6', 'total_bulan_event6', 'total_tahun_wisata', 'total_tahun_event', 'total_minggu_wisata', 'total_minggu_event'));
     }
 
     function filterdash(){
@@ -197,6 +206,21 @@ class HomeController extends Controller
             
             return view('admin.pesanan.index', compact('transaction', 'start_date', 'end_date'));
         }
+
+        public function filterpenggunaadmin(){
+
+             // You can add additional conditions for address and gender filtering here
+                if (request()->alamat) {
+                  
+                  $alamat =  User::where("role", "wisatawan")->where('alamat', 'LIKE', '%' . request()->alamat . '%');
+                
+                }
+
+                $users = $alamat->get();
+                $alamats = request()->alamat;
+
+                return view('admin.user.index', compact('users', 'alamats'));
+            }
 
         public function profile($id){
             

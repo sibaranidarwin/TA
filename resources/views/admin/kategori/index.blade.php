@@ -60,7 +60,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->nama_kategori }}</td>
                                             <td>
-                                                <form action="{{ route('product.destroy', $item->id) }}" method="post">
+                                                <form action="{{ route('categoryy.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i
@@ -95,7 +95,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('categoryy.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">

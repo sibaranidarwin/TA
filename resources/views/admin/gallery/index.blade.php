@@ -102,7 +102,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('galleryy.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -155,7 +155,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('gallery.update', $item->id) }}" method="post"
+                    <form action="{{ route('galleryy.update', $item->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

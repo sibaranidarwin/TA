@@ -836,8 +836,15 @@ banner
   outline: none;
 }
 
-.Modern-Slider .NextArrow:before{
-  content:'>';
+.Modern-Slider .NextArrow:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid #FFF;
+  border-top: 2px solid #FFF;
+  transform: rotate(45deg);
+  margin-right: 5px;
 }
 
 .Modern-Slider .PrevArrow {
@@ -855,7 +862,14 @@ banner
 }
 
 .Modern-Slider .PrevArrow:before{
-  content:'<';
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid #FFF;
+  border-top: 2px solid #FFF;
+  transform: rotate(225deg);
+  margin-right: 5px;
 }
 
 .scroll-down {
@@ -1118,6 +1132,8 @@ subscribe
 testimonials
 --------------------------------------------
 */
+
+
 #testimonials {
   padding: 120px 0px;
 }
@@ -1144,7 +1160,6 @@ testimonials
 #testimonials .item span {
   color: #fff;
   font-weight: 500;
-  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }

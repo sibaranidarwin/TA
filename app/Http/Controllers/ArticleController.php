@@ -73,7 +73,7 @@ class ArticleController extends Controller
                 'slug' => Str::slug($request->input('judul'), '-'),
             ]);
         }
-        return redirect()->route('article.index')->with('toast_success', 'Data berhasil disimpan!');
+        return redirect()->back()->with('toast_success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -136,7 +136,7 @@ class ArticleController extends Controller
             ]);
         }
 
-        return redirect()->route('article.index')->with('toast_success', 'Data berhasil diupdate!');
+        return redirect()->back()->with('toast_success', 'Data berhasil diupdate!');
     }
 
     /**

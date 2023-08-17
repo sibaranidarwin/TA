@@ -13,10 +13,12 @@
     <link href="https://fonts.googleapis.com/css?family=Assistant:200,400,700&&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('frontend/libraries/xzoom/dist/xzoom.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/libraries/gijgo/css/gijgo.min.css') }}" />
+    <link rel="stylesheet" hresf="{{ asset('frontend/libraries/gijgo/css/gijgo.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/styles/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/styles/templatemo-breezed.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
+
+    <link rel="shortcut icon" href="{{ asset('frontend/images/favicon.ico') }}">
    
 </head>
 
@@ -50,7 +52,7 @@
      
      <!-- Global Init -->
      <script src="{{ asset('pelanggan/assets/js/custom.js') }}"></script>
- 
+    
      <script>
  
          $(function() {

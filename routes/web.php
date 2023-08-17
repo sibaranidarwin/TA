@@ -65,6 +65,7 @@ Route::middleware(['admin', 'auth'])->group(function () {
     Route::get('filterdashboardadmin', [HomeController::class, 'filterdash'])->name('filterdashadmin');
     Route::get('filterpembayaranadmin', [HomeController::class, 'filterpembayaran'])->name('filterpembayaranadmin');
     Route::get('filterpemesananadmin', [HomeController::class, 'filterpemesanan'])->name('filterpemesananadmin');
+    Route::get('filterpenggunaadmin', [HomeController::class, 'filterpenggunaadmin'])->name('filterpenggunaadmin');
 
     Route::resource('galleryy', GalleryController::class);
     Route::resource('articlee', ArticleController::class);

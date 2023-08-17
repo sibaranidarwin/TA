@@ -57,10 +57,11 @@ i{
             <!-- // Item -->
         </div>
     </div>
+    <div class="scroll-down scroll-to-section"><a href="#testimonials"><i class="fa fa-arrow-down"></i></a></div>
 
     <main>
-        <section class="section-popular-content" id="popularContent">
-            <div class="container mt-5">
+        <section class="section-popular-content" id="testimonials">
+            <div class="container mt-2">
                 <div class="col text-left">
                     <h5><strong>Tiket Masuk Kaldera Toba!</strong></h5>
                     <p>Berikut form tiket masuk kaldera toba nomadic escape, lho. jangan sampai kehabisan ya!</p>
@@ -87,7 +88,7 @@ i{
                         <input hidden type="text" name="id" class="form-control" placeholder="Id Pemesanan" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Id Pemesanan'" value=" S-{{ rand() }}" readonly>
                         
                         <label><strong>Tanggal : </strong></label>
-                        <input type="date" class="form-control" name="tgl_wisata" placeholder="Pilih Tanggal Wisata" onfocus="this.placeholder = ''"
+                        <input type="date" id="datefield" class="form-control" name="tgl_wisata" placeholder="Pilih Tanggal Wisata" onfocus="this.placeholder = ''"
                                      onblur="this.placeholder = 'Pilih Tanggal Wisata'" required>
                         @if ($errors->has('tgl_wisata'))
                           <span class="text-danger"><p class="text-right">* {{$errors->first('tgl_wisata') }}</p></span>
@@ -296,7 +297,7 @@ i{
             $(this).val(result);
         });
         $('#input_mask').inputmask({
-            mask: 'Rp **.***.***.*-***.***',
+            mask: 'Rp ***.***.***',
             definitions: {
                 A: {
                     validator: "[A-Za-z0-9 ]"
@@ -320,6 +321,7 @@ i{
             autoGroup: true,
             digits: 0
         });
+
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth() + 1; //January is 0!
@@ -331,7 +333,6 @@ i{
             mm = '0' + mm
         }
         today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById("datefield").setAttribute("max", today);
-
+        document.getElementById("datefield").setAttribute("min", today);
         </script>
 @endsection

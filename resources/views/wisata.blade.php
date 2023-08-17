@@ -42,7 +42,7 @@
                 <input hidden type="text" name="id" class="form-control" placeholder="Id Pemesanan" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Id Pemesanan'" value=" S-{{ rand() }}" readonly>
                 
                 <label><strong>Tanggal : </strong></label>
-                <input type="date" class="form-control" name="tgl_wisata" placeholder="Pilih Tanggal Wisata" onfocus="this.placeholder = ''"
+                <input type='date' id="datefield" class="form-control" name="tgl_wisata" placeholder="Pilih Tanggal Wisata" onfocus="this.placeholder = ''"
                              onblur="this.placeholder = 'Pilih Tanggal Wisata'">
                 @if ($errors->has('tgl_wisata'))
                   <span class="text-danger"><p class="text-right">* {{$errors->first('tgl_wisata') }}</p></span>
@@ -59,7 +59,7 @@
                              onblur="this.placeholder = 'anak'">  
 
                 <label><strong>Total Harga : </strong></label>
-                <input type="hidden" min="0" max="1000" step="0.1" class="id-3" class="form-control" name="" placeholder="total_harga" onfocus="this.placeholder = ''"
+                <input type="hidden" min="0" max="1000" step="0.1" class="id-3" class="form-control" name="total_harga" placeholder="total_harga" onfocus="this.placeholder = ''"
                              onblur="this.placeholder = 'total_harga'" readonly>
                 <input type="text" min="0" max="1000" step="0.1" class="id-3" id="input_mask" class="form-control" name="" placeholder="" onfocus="this.placeholder = ''"
                                      onblur="this.placeholder = 'total_harga'" readonly>              
@@ -86,6 +86,7 @@
     submit.classList.toggle("show");
     
     }
+    
 </script>
  <script type="text/javascript">
     $(function() {
@@ -108,7 +109,7 @@
         $(this).val(result);
     });
     $('#input_mask').inputmask({
-        mask: 'Rp **.***.***.*-***.***',
+        mask: 'Rp ***.***.***',
         definitions: {
             A: {
                 validator: "[A-Za-z0-9 ]"
@@ -132,17 +133,19 @@
         autoGroup: true,
         digits: 0
     });
+
+
     var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd
-    }
-    if (mm < 10) {
-        mm = '0' + mm
-    }
-    today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("datefield").setAttribute("max", today);
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("datefield").setAttribute("min", today);
     </script>
 @endsection

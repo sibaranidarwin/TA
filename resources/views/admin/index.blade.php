@@ -51,66 +51,65 @@
 .highcharts-data-table tr:hover {
   background: #f1f7ff;
 }
-</style>
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-7">
-                        <h1 class="m-0">Dashboard</h1>
-                    </div><!-- /.col -->
-                    <div style="float: right;">
-                        <form action="{{ route('filterdash') }}" class="form-inline" method="GET">
-                        <select class="form-control form-control-sm form-select col-5-half" name="month">
-                            <option value="">Choose Month</option>
-                                    <option value='1'>January</option>
-                                    <option value="2">February</option>
-                                    <option value="3">Maret</option>
-                                    <option value="4">April</option>
-                                    <option value="5">May</option>
-                                    <option value="6">June</option>
-                                    <option value="7">July</option>
-                                    <option value="8">Agustus</option>
-                                    <option value="9">September</option>
-                                    <option value="10">Oktober</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                        </select>
-                        &nbsp;
-                        <select class="form-control form-control-sm form-select col-4-half" name="yer">
-                            <option value="">Choose Year</option>
-                            <option value='2018'>2018</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028</option>
-                            <option value="2029">2029</option>       
-                        </select>
-                        &nbsp;
-                        <button class="btn btn-secondary btn-sm" onclick="return confirm('Are you sure?')" type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                        </div>
-                        <div class="col-sm-2">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
-                            </ol>
-                        </div><!-- /.col -->
-                </div><!-- /.row -->
-                
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-        
+</style>  
         <!-- Main content -->
         @if (Auth::user()->role == 'admin')
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-7">
+                            <h1 class="m-0">Dashboard</h1>
+                        </div><!-- /.col -->
+                        <div style="float: right;">
+                            <form action="{{ route('filterdash') }}" class="form-inline" method="GET">
+                            <select class="form-control form-control-sm form-select col-5-half" name="month">
+                                <option value="">Choose Month</option>
+                                        <option value='1'>January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                            </select>
+                            &nbsp;
+                            <select class="form-control form-control-sm form-select col-4-half" name="yer">
+                                <option value="">Choose Year</option>
+                                <option value='2018'>2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>       
+                            </select>
+                            &nbsp;
+                            <button class="btn btn-secondary btn-sm" onclick="return confirm('Are you sure?')" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                            </div>
+                            <div class="col-sm-2">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                </ol>
+                            </div><!-- /.col -->
+                    </div><!-- /.row -->
+                    
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
             <section class="content">
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
@@ -126,7 +125,7 @@
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="{{ route('order.index') }}" class="small-box-footer">More info <i
+                                <a href="{{ route('orderr.index') }}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -142,7 +141,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="{{ route('pembayaran.index') }}" class="small-box-footer">More info <i
+                                <a href="{{ route('pembayarann.index') }}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -174,11 +173,104 @@
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
-                                <a href="{{ route('product.index') }}" class="small-box-footer">More info <i
+                                <a href="{{ route('productt.index') }}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
+
+                         <!-- ./col -->
+
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-purple">
+                            <div class="inner">
+                                <h3>{{ Auth::user()->where('jenis_kelamin', 'L')->count() }}</h3>
+
+                                <p>Jumlah Pengunjung Wisata Laki-laki</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-pink">
+                            <div class="inner">
+                                <h3>{{ Auth::user()->where('jenis_kelamin', 'P')->count() }}</h3>
+
+                                <p>Jumlah Pengunjung Wisata Perempuan</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person"></i>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-red">
+                            <div class="inner">
+                                <h3>
+                                    {{ \App\Models\User::whereNotIn('alamat', ['Porsea', 'Medan', 'Jakarta', 'Balige'])->count() }}
+                                  </h3>
+
+                                <p>Jumlah Pengunjung Wisata WNA</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-blue">
+                            <div class="inner">
+                                <h3>
+                                    {{ \App\Models\User::where('alamat', ['Porsea', 'Medan', 'Jakarta', 'Balige'])->count() }}
+                                  </h3>
+                                <p>Jumlah Pengunjung Wisata WNI</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-lg-6 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-red">
+                            <div class="inner">
+                                <h3>
+                                    {{ \App\Models\User::where('alamat', 'Porsea')->count() }}
+                                  </h3>
+
+                                <p>Jumlah Pengunjung Wisata Daerah Porsea</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-blue">
+                            <div class="inner">
+                                <h3>
+                                    {{ \App\Models\User::where('alamat', 'Balige')->count() }}
+                                  </h3>
+                                <p>Jumlah Pengunjung Wisata Daerah Balige</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person"></i>
+                            </div>
+                        </div>
+                    </div>
 
                         <div class="col-lg-4 col-6">
                             <!-- small box -->
@@ -196,13 +288,15 @@
                                 </div>
                             </div>
                         </div>
+
+                        
                         <!-- ./col -->
                         <div class="col-lg-4 col-6">
                             <!-- small box -->
                             <div class="small-box bg-primary">
                                 <div class="inner">
                                     <h3>Rp {{ number_format($total_bulan, 0, ',', '.') }}</h3>
-                                    <p>Penjualan Tiket Bulan {{ now()->format('F') }}</p>
+                                    <p>Penjualan Tiket Bulan {{ now()->format('F Y') }}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion-stats-bars"></i>
@@ -218,7 +312,7 @@
                             <div class="small-box bg-secondary">
                                 <div class="inner">
                                     <h3>Rp {{ number_format($total_minggu, 0, ',', '.') }}</h3>
-                                    <p>Penjualan Tiket Tanggal {{$startweek}} sampai {{$endweek}}</p>
+                                    <p>Penjualan Tiket Tanggal {{$startweek}} - {{$endweek}} {{ now()->format('F Y') }}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
@@ -248,6 +342,62 @@
                 </div><!-- /.container-fluid -->
             </section>
         @elseif (Auth::user()->role == 'penjual')
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-7">
+                            <h1 class="m-0">Dashboard</h1>
+                        </div><!-- /.col -->
+                        <div style="float: right;">
+                            <form action="{{ route('filterdash') }}" class="form-inline" method="GET">
+                            <select class="form-control form-control-sm form-select col-5-half" name="month">
+                                <option value="">Choose Month</option>
+                                        <option value='1'>January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                            </select>
+                            &nbsp;
+                            <select class="form-control form-control-sm form-select col-4-half" name="yer">
+                                <option value="">Choose Year</option>
+                                <option value='2018'>2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>       
+                            </select>
+                            &nbsp;
+                            <button class="btn btn-secondary btn-sm" onclick="return confirm('Are you sure?')" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                            </div>
+                            <div class="col-sm-2">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                </ol>
+                            </div><!-- /.col -->
+                    </div><!-- /.row -->
+                    
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
         <section class="content">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
@@ -315,8 +465,6 @@
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- ./col -->
-
                     <div class="col-lg-4 col-6">
                         <!-- small box -->
                         <div class="small-box bg-dark">
@@ -388,6 +536,25 @@
             </div><!-- /.container-fluid -->
         </section>
         @else
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-7">
+                            <h1 class="m-0">Dashboard</h1>
+                        </div><!-- /.col -->
+                            <div class="col-sm-2">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                </ol>
+                            </div><!-- /.col -->
+                    </div><!-- /.row -->
+                    
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
             <section class="content">
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
@@ -465,11 +632,11 @@ Highcharts.chart('jumlah', {
           },
     series: [{
       name: 'Tiket Masuk Wisata',
-      data: [0,0,0,{{($total_bulan_wisata4)}}, {{($total_bulan_wisata5)}}],
+      data: [0,0,0,{{($total_bulan_wisata4)}}, {{($total_bulan_wisata5)}}, {{($total_bulan_wisata6)}}, {{($total_bulan_wisata6)}}, {{($total_bulan_wisata6)}}],
   
     }, {
       name: 'Tiket Event Wisata',
-      data: [0,0,0,{{($total_bulan_event4)}}, {{($total_bulan_event5)}}],
+      data: [0,0,0,{{($total_bulan_event4)}}, {{($total_bulan_event5)}},  {{($total_bulan_event6)}}, {{($total_bulan_event6)}}, {{($total_bulan_event6)}}],
   
     }]
   });
@@ -554,12 +721,12 @@ Highcharts.chart('jumlah', {
          colorByPoint: true,
          data: [{
          name: 'Tiket Masuk Wisata',
-         y: {{($total_bulan_wisata5)}},
+         y: {{($total_bulan_wisata6)}},
          sliced: true,
          selected: true
          }, {
          name: 'Tiket Event Wisata',
-         y: {{($total_bulan_event5)}},
+         y: {{($total_bulan_event6)}},
          }]
      }]
      });
@@ -577,7 +744,7 @@ Highcharts.chart('jumlah', {
         text: '',
     },
     tooltip: {
-        pointFormat: '{series.name}: <b>point.y:.1f</b>'
+        pointFormat: '{series.name}: <b>{point.y:.0f}</b>'
     },
     accessibility: {
         point: {
@@ -595,7 +762,7 @@ Highcharts.chart('jumlah', {
         }
     },
     series: [{
-        name: 'Brands',
+        name: '',
         colorByPoint: true,
         data: [{
         name: 'Tiket Masuk Wisata',

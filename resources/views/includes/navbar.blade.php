@@ -1,3 +1,4 @@
+
 <style>
     .searchInputWrapper {
         position: relative;
@@ -38,6 +39,19 @@
     .container:focus-within>.searchInputWrapper>.searchInputIcon {
         right: 0.2rem;
     }
+
+    /* CSS untuk tampilan mobile */
+    @media only screen and (max-width: 768px) {
+        .searchInputWrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .searchInput {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
     </style>
     
     @if (Auth::user()->role == 'admin')
@@ -54,8 +68,8 @@
         <div class="searchInputWrapper">
             <input class="searchInput" type="text" placeholder='Search'>
             <i class="searchInputIcon fa fa-search"></i>
-            </input>
         </div>
+        
     
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">

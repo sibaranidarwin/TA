@@ -3,6 +3,10 @@
     <title>Form Tiket</title>
 @endsection
 @section('content')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -42,7 +46,7 @@
                             <input hidden type="text" name="id" class="form-control" placeholder="Id Pemesanan" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Id Pemesanan'" value=" S-{{ rand() }}" readonly>
                             
                             <label><strong>Tanggal : </strong></label>
-                            <input type="date" class="form-control" name="tgl_wisata" placeholder="Pilih Tanggal Wisata" onfocus="this.placeholder = ''"
+                            <input type="text" id="chkI" class="form-control" name="tgl_wisata" placeholder="Pilih Tanggal Wisata" onfocus="this.placeholder = ''"
                                          onblur="this.placeholder = 'Pilih Tanggal Wisata'" value="{{ ($item->tgl_event)}}" readonly>
                             @if ($errors->has('tgl_wisata'))
                               <span class="text-danger"><p class="text-right">* {{$errors->first('tgl_wisata') }}</p></span>
@@ -111,7 +115,7 @@
                 $(this).val(result);
             });
             $('#input_mask').inputmask({
-                mask: 'Rp ***.***',
+                mask: 'Rp ***.***.***',
                 definitions: {
                     A: {
                         validator: "[A-Za-z0-9 ]"
@@ -147,5 +151,27 @@
             }
             today = yyyy + '-' + mm + '-' + dd;
             document.getElementById("datefield").setAttribute("max", today);
+
+            // Membuat choose not before now
+            $(function () {
+                $("#chkI").datepicker({
+                    minDate: new Date(), // start date should be today's date
+                    dateFormat: "yy-mm-dd", showAnim: "slideDown", 
+                    onClose: function (selectedDate) {
+                        var minDate = $(this).datepicker('getDate');
+                        var newMin = new Date(minDate.setDate(minDate.getDate() + 1));
+                        $("#chkO").datepicker("option", "minDate", newMin);
+                    }
+                }).datepicker("setDate", new Date()); // select today's date by default
+                //var currentDate = new Date();
+                //$("#chkI").datepicker("setDate", currentDate);
+                $("#chkO").datepicker({ dateFormat: "yy-mm-dd", showAnim: "slideDown",
+                    onClose: function (selectedDate) {
+                        var maxDate = $(this).datepicker('getDate');
+                        var newMax = new Date(maxDate.setDate(maxDate.getDate() - 1));
+                        $("#chkI").datepicker("option", "maxDate", newMax);
+                    }
+                });
+            });
             </script>
     @endsection

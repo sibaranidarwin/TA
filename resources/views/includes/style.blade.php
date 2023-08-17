@@ -19,3 +19,4 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('css/argon-dashboard.css') }}" /> --}}
+  <link rel="shortcut icon" href="{{ asset('frontend/images/favicon.ico') }}">

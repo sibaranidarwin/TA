@@ -118,7 +118,7 @@
                                 data-id="{{ $carts->id }}">Cancel
                                 Booking
                             </button>
-                        </div>
+                        </div> 
                     </div>
 
                 </div>
@@ -128,45 +128,71 @@
     </main>
 @endsection
 @push('after-script')
-    <script>
-         var count = 1;
-        var countEl = document.getElementById("count");
-        function plus(){
-            count++;
-            countEl.value = count;
-        }
-        function minus(){
+  
+<script>
+    var count = 1;
+    var countEl = document.getElementById("count");
+    
+    function plus() {
+        count++;
+        countEl.value = count;
+    }
+    
+    function minus() {
         if (count > 1) {
             count--;
             countEl.value = count;
         }  
-        }
-        
-        $(document).ready(function() {
-            $('.xzoom, .xzoom-gallery').xzoom({
-                zoomWidth: 500,
-                title: false,
-                tint: '#333',
-                Xoffset: 15
-            });
-        });
-        $(".deleteRecord").click(function() {
-            var id = $(this).data("id");
-            var token = $("meta[name='csrf-token']").attr("content");
+    }
 
-            $.ajax({
-                url: "cart/" + id,
-                type: 'DELETE',
-                data: {
-                    "id": id,
-                    "_token": token,
-                },
-                success: function() {
-                    // console.log("it Works");
-                    window.location.assign("{{ url('wisata') }}");
-                }
-            });
-
+    $(document).ready(function() {
+        $('.xzoom, .xzoom-gallery').xzoom({
+            zoomWidth: 500,
+            title: false,
+            tint: '#333',
+            Xoffset: 15
         });
-    </script>
+    });
+
+    $(".deleteRecord").click(function() {
+        var id = $(this).data("id");
+        var token = $("meta[name='csrf-token']").attr("content");
+
+        $.ajax({
+            url: "cart/" + id,
+            type: 'DELETE',
+            data: {
+                "id": id,
+                "_token": token,
+            },
+            success: function() {
+                // console.log("it Works");
+                window.location.assign("{{ url('wisata') }}");
+            }
+        });
+    });
+
+    function redirectBack() {
+        window.location.href = document.referrer;
+    }
+    
+   function snapTokenHandler(response) {
+    // Jika mendapatkan token dari Snap
+    if (response.token) {
+        // Redirect ke halaman Snap
+        snap.pay(response.token, {
+            onSuccess: function(result){
+                // Redirect ke halaman sebelumnya
+                redirectBack();
+            },
+            onError: function(result){
+                console.log(result);
+            }
+        });
+    }
+}
+
+
+</script>
+
 @endpush

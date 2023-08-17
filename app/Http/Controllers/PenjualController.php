@@ -40,6 +40,7 @@ class PenjualController extends Controller
         $start_week = $now->startOfWeek(Carbon::MONDAY)->format('Y-m-d H:i:s');
         $end_week = $now->endOfWeek()->format('Y-m-d H:i:s');
 
+
         $total_tahun =Transaction::whereBetween('tgl_wisata', [$start, $end])->where('status', 'success')->sum('total_harga');
         $total_bulan =Transaction::whereBetween('tgl_wisata', [$startmonth5, $endmonth5])->where('status', 'success')->sum('total_harga');
         $total_minggu =Transaction::whereBetween('created_at', [$start_week, $end_week])->where('status', 'success')->sum('total_harga');
@@ -47,15 +48,17 @@ class PenjualController extends Controller
 
         $total_tahun_wisata =Transaction::whereBetween('tgl_wisata', [$start, $end])->where('nama_tiket', 'Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
         $total_tahun_event =Transaction::whereBetween('tgl_wisata', [$start, $end])->where('nama_tiket', '!=','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
+        // dd($total_tahun_event);
 
         $total_bulan_wisata4 =Transaction::whereBetween('tgl_wisata', [$startmonth4, $endmonth4])->where('nama_tiket','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
         $total_bulan_event4 =Transaction::whereBetween('tgl_wisata', [$startmonth4, $endmonth4])->where('nama_tiket', '!=','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
         $total_bulan_wisata5 =Transaction::whereBetween('tgl_wisata', [$startmonth5, $endmonth5])->where('nama_tiket','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
         $total_bulan_event5 =Transaction::whereBetween('tgl_wisata', [$startmonth5, $endmonth5])->where('nama_tiket', '!=','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
-
+        
         $total_minggu_wisata =Transaction::whereBetween('created_at', [$start_week, $end_week])->where('nama_tiket', 'Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
         $total_minggu_event =Transaction::whereBetween('created_at', [$start_week, $end_week])->where('nama_tiket', '!=','Tiket Masuk kaldera')->where('status', 'success')->sum('total_harga');
-       
+        // dd($total_minggu_event);
+
         $startweek = $now->startOfWeek(Carbon::MONDAY)->format('d');
         $endweek = $now->endOfWeek()->format('d');
 

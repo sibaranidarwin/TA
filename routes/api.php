@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +23,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get(
     '/payment-notification',
     function (Request $request) {
-        error_log('payment-notification');
+        if ($request->status_code == "200") {
+            $transaction = Transaction::where("kode", $request->order_id)->first();
+        
+            if ($transaction) {
+                $transaction->status = $request->transaction_status;
+                $transaction->save();
+            } else {
+                // handle transaction not found error
+            }
+        } else {
+            // handle error response from Midtrans
+        }
+        // Log::info('payment-notification');
     //    print($request->all());
     }
 );
